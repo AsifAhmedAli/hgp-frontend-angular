@@ -369,6 +369,42 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-sm-12 text-center">
+                  <div class="form-group create-account">
+                    <div class="ps-checkbox">
+                      <input
+                        class="form-control"
+                        type="checkbox"
+                        id="follow"
+                        formControlName="follow"
+                      />
+                      <label for="follow"
+                        >To Complete registration don’t forget to follow us
+                        instagram
+                        <a
+                          class="link"
+                          href="https://www.instagram.com/homegrownpros.io/"
+                          target="__blank"
+                          >Click here to follow</a
+                        >
+                      </label>
+                    </div>
+                  </div>
+                  <ng-template
+                    [ngIf]="
+                      form.get('follow').dirty || form.get('follow').touched
+                    "
+                  >
+                    <div
+                      class="error-fld"
+                      *ngIf="form.get('follow').hasError('required')"
+                    >
+                      Don’t forget to follow us instagram.
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
               <div class="form-group submit text-center">
                 <button
                   (keydown.enter)="onSubmit()"

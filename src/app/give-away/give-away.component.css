@@ -1,3 +1,8 @@
 label {
   font-size: 12px;
 }
+.link {
+  text-decoration: underline;
+  margin-left: 2px;
+  color: #84bc2c;
+}

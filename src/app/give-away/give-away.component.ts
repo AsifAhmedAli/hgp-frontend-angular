@@ -50,6 +50,7 @@ export class GiveAwayComponent implements OnInit {
       age: ["", [Validators.required, Validators.min(21)]],
       interest: ["", [Validators.required]],
       describe: ["", [Validators.required]],
+      follow: ["", [Validators.required, Validators.requiredTrue]],
     });
   }
 
@@ -70,7 +71,7 @@ export class GiveAwayComponent implements OnInit {
             this.submitted = true;
             setTimeout(() => {
               location.reload();
-            }, 5000);
+            }, 7000);
           },
           (error) => {
             this.submitted = false;
