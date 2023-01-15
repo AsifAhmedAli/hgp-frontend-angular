@@ -68,6 +68,9 @@ export class GiveAwayComponent implements OnInit {
               "Thank You!"
             );
             this.submitted = true;
+            setTimeout(() => {
+              location.reload();
+            }, 5000);
           },
           (error) => {
             this.submitted = false;
