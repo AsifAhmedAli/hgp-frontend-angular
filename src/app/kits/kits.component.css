@@ -1,0 +1,7 @@
+.pointer {
+  cursor: pointer;
+}
+.select-variant a {
+  text-decoration: underline;
+  cursor: pointer;
+}

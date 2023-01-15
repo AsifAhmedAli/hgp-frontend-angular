@@ -1,0 +1,17 @@
+<div class="ps-page--default">
+  <div class="container">
+    <div class="ps-page__header">
+      <h3>{{ title }}</h3>
+      <ul class="ps-breadcrumb">
+        <li><a routerLink="/">Home</a></li>
+        <li>{{ title }}</li>
+      </ul>
+    </div>
+
+
+    <!-- Content Page Starts -->
+    <div class="ps-page__content ps-contentPage" [innerHTML]="content | sanitizer"></div>
+    <!-- Content Page Ends -->
+
+  </div>
+</div>

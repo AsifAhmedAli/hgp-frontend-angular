@@ -1,0 +1,242 @@
+.custm-mega-menu {
+  width: auto;
+  position: absolute;
+  left: 47%;
+  height: 444px;
+  top: 85px;
+  -webkit-box-shadow: 4px 4px 10px 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 4px 4px 10px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 10px 3px rgba(0, 0, 0, 0.25);
+  background-color: #FFFFFF;
+  display: none;
+  z-index: 9;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.custm-mega-menu-innr {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 19px 27px 2px;
+}
+
+.mega-menu-lft {
+  max-width: 758px;
+  height: auto;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  padding: 10px 0 0 0;
+}
+
+.mega-menu-lft h3 {
+  margin: 0 47px 13px 0;
+  width: 206px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  padding: 0px 0 12px;
+}
+
+
+/* .mega-menu-lft h3 + h3{
+    padding-top: 13px;
+} */
+
+.mega-menu-lft h3 a {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.mega-menu-lft h2 {
+  width: 206px;
+  font-size: 14px;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-bottom: 0;
+  padding-bottom: 11px;
+}
+
+.mega-menu-lft h2 a {
+  font-size: 14px;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+
+/* .tit-lnk{
+    font-size: 13px;
+    font-family: 'Roobert';
+    font-weight: 600;
+    color: #FFFFFF;
+    padding-bottom: 12px;
+    display: inline-flex;
+} */
+
+.mbtm {
+  border-bottom: 1px solid #FFFFFF;
+}
+
+/* .tit-lnk a:hover,
+.tit-lnk:hover {
+    color: #FFFFFF;
+} */
+
+.mega-menulnks {
+  display: flex;
+  flex-flow: column wrap;
+  /* width: 29%; */
+  width: 100%;
+  height: 415px;
+}
+
+.mega-ul {
+  width: 206px;
+  margin: 7px 47px 22px 0;
+  padding-left: 0;
+}
+
+.mega-ul li {
+  padding-bottom: 3px;
+}
+
+.mega-ul li a {
+  font-size: 13px;
+  font-family: 'Roobert';
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.mega-menu-rgt {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  max-width: 454px;
+  padding: 9px 0 0 0;
+}
+
+.mega-menu-rgt h2 {
+
+  font-size: 20px;
+  font-weight: 600;
+  color: #1B1B1B;
+  left: 32%;
+}
+
+.mega-menu-rgt h2 a {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1B1B1B;
+}
+
+.mega-menu-rgt .tit-lnk {
+  font-size: 20px;
+}
+
+.brand-bx-inpt {
+  display: flex;
+  flex-flow: column;
+}
+
+.brand-bx-inpt select {
+  width: 100%;
+  height: 47px;
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  -webkit-box-shadow: inset 0px -3px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0px -3px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px -3px 0px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.1);
+  color: #A3A3A3;
+  font-size: 13px;
+  font-weight: normal;
+  padding: 0 30px 0 18px;
+  background-image: url('../_img/select-icon.svg');
+  -webkit-appearance: none;
+  background-repeat: no-repeat;
+  background-position: 96% 50%;
+}
+
+.megamnu-larg-btn {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.megamnu-larg-btn a {
+  background-color: #FBE598;
+  font-size: 18px;
+  font-family: 'Roobert';
+  font-weight: 700;
+  color: #955C1A;
+  width: 100%;
+  height: 45px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.shop-kits-sec {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  height: 239px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.mm-image-link {
+  margin-top: 16px;
+}
+.mm-image-link .shop-kits-sec {
+  margin-top: 0;
+}
+
+.shop-kits-sec .tab-innr-cont-rgt-innr:after {
+  background-image: url(../_img/brands-yellodot.svg);
+  width: 55px;
+  height: 51px;
+  bottom: 22px;
+  left: 4px;
+}
+
+.shop-kits-sec .tab-innr-cont-rgt-innr:before {
+  background-image: url(../_img/brands-blackdot.svg);
+  width: 57px;
+  height: 37px;
+  right: 14px;
+  top: 3px;
+}
+
+.shp-dropdn:after {
+  position: absolute;
+  left: 50%;
+  bottom: -32px;
+  background-image: url('../_img/drop-down-arrowbtm.svg');
+  content: '';
+  width: 21px;
+  height: 21px;
+  transform: translateX(-50%);
+}
+
+.mega_menu_a{
+
+  margin-left: 24%;
+  margin-top: 5%;
+  font-size: 17px;
+  text-decoration: underline;
+
+}

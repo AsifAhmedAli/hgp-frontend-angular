@@ -1,0 +1,235 @@
+<div class="ps-page--default ps-page--blog">
+  <div class="ps-blog">
+    <app-loader *ngIf="!isPageProcessingComplete"></app-loader>
+    <div class="container" *ngIf="isPageProcessingComplete">
+      <div class="ps-post--detail" style="border-bottom: none">
+        <!-- data-aos="fade-up" data-aos-duration="1000" -->
+        <div class="ps-post__header">
+          <small style="display: none">DIY</small>
+          <h2 *ngIf="blog.name" class="text-center">{{ blog.name }}</h2>
+
+          <div class="ps-post__meta">
+            <span *ngIf="blog.author"
+              >Author:
+              <!--              <a href="javascript:void(0)"> {{blog.author}}</a>-->
+              <span class="blog-smplr-clr">{{ blog.author }}</span>
+            </span>
+            <span *ngIf="blog.published_at"
+              >Published in:
+              <!--              <a href="javascript:void(0)"> {{blog.published_at | date}}</a>-->
+              <span class="blog-smplr-clr">{{ blog.published_at | date }}</span>
+            </span>
+          </div>
+        </div>
+        <div class="ps-post__content ps-document">
+          <div
+            class="ps-post__text"
+            *ngIf="blog.short_description"
+            [innerHTML]="blog.short_description | sanitizer"
+          ></div>
+
+          <div class="mb-100 text-center">
+            <!-- data-aos="zoom-in" data-aos-duration="1000" -->
+            <img
+              *ngIf="blog.featured_image"
+              [src]="blog.featured_image | imageUrl"
+            />
+          </div>
+
+          <!-- blog description start -->
+          <div
+            class="ps-post__text"
+            *ngIf="blog.description"
+            [innerHTML]="blog.description | sanitizer"
+          >
+            <!-- data-aos="fade-up" data-aos-duration="1000" -->
+          </div>
+          <!--  blog description end-->
+          <div class="ps-post__text mb-0">
+            <!-- data-aos="fade-up" data-aos-duration="1000" -->
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="mb-100" *ngIf="blog.additional_image_1">
+                  <!-- data-aos="fade-right" data-aos-duration="1000"  -->
+                  <img [src]="blog.additional_image_1 | imageUrl" />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="mb-100" *ngIf="blog.additional_image_2">
+                  <!-- data-aos="fade-left" data-aos-duration="1000" -->
+                  <img
+                    [src]="blog.additional_image_2 | imageUrl"
+                    [alt]="blog?.alt_text_for_additional_image_2"
+                  />
+                </div>
+              </div>
+            </div>
+            <!--            blog section start-->
+            <ng-template [ngIf]="blog.sections">
+              <ng-template ngFor [ngForOf]="blog.sections" let-section>
+                <p
+                  *ngIf="section.description"
+                  [innerHTML]="section.description | sanitizer"
+                ></p>
+              </ng-template>
+            </ng-template>
+            <!--            blog section end-->
+          </div>
+          <div class="ps-post__footer ps-post__text pt-60">
+            <p class="ps-post__tags" *ngIf="tags">
+              <!--  data-aos="fade-right" data-aos-duration="1000" -->
+              Tags:
+              <a
+                *ngFor="let tag of tags"
+                href="javascript:void(0)"
+                [routerLink]="'/blog/'"
+                queryParamsHandling="merge"
+                [queryParams]="{ tag: tag.slug, page: 1 }"
+                >{{ tag.name }}</a
+              >
+            </p>
+            <p class="ps-post__sharing">
+              <!--  data-aos="fade-left" data-aos-duration="1000" -->Share on:
+              <a
+                [href]="
+                  'https://www.facebook.com/sharer/sharer.php?u=' + shareURL
+                "
+                target="_blank"
+                title="Facebook"
+                ><i class="fa fa-facebook"></i
+              ></a>
+              <a
+                [href]="'https://twitter.com/intent/tweet?text=' + shareURL"
+                target="_blank"
+                title="Twitter"
+                ><i class="fa fa-twitter"></i
+              ></a>
+              <a
+                [href]="
+                  'https://www.linkedin.com/shareArticle?mini=true&url=' +
+                  shareURL +
+                  '&title=' +
+                  this.blog.name +
+                  ''
+                "
+                target="_blank"
+                title="LinkedIn"
+                ><i class="fa fa-linkedin"></i
+              ></a>
+            </p>
+          </div>
+        </div>
+        <div class="ps-blog__related-post" style="border-bottom: none">
+          <!-- data-aos="fade-up" data-aos-duration="1000" -->
+          <h3 *ngIf="!relatedBlogsNotFound">You may also like</h3>
+          <div class="row" *ngIf="relatedBlog">
+            <div
+              class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12"
+              *ngFor="let relatedBlog of relatedBlog"
+            >
+              <div class="ps-post">
+                <!-- data-aos="fade-right" data-aos-duration="1000" -->
+                <div class="ps-post__thumbnail">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <img
+                            *ngIf="
+                              relatedBlog.thumbnail_image;
+                              else other_content
+                            "
+                            [src]="relatedBlog.thumbnail_image | imageUrl"
+                            alt=""
+                          />
+                          <ng-template #other_content>
+                            <img
+                              src="https://via.placeholder.com/342x277.png?text=Thumbnail Image Not Found"
+                              [alt]="relatedBlog.alt_text_for_thumbnail_image"
+                            />
+                          </ng-template>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <a
+                    class="ps-post__overlay"
+                    [routerLink]="'/blog/' + relatedBlog?.slug"
+                  ></a>
+                </div>
+                <div class="ps-post__content">
+                  <a
+                    *ngIf="relatedBlog.name"
+                    class="ps-post__title"
+                    [routerLink]="'/blog/' + relatedBlog?.slug"
+                  >
+                    {{
+                      relatedBlog.name
+                        | shortString : CONSTANTS.blogExcerptTitle
+                    }}
+                  </a>
+                  <p *ngIf="relatedBlog.published_at" class="ps-post__meta">
+                    <a
+                      [routerLink]="'/blog/' + relatedBlog?.slug"
+                      style="display: none"
+                      >DIY</a
+                    >
+                    {{ relatedBlog.published_at | date }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ps-form--post-comment" style="display: none">
+          <!-- data-aos="fade-up" data-aos-duration="1000" -->
+
+          <h3>Leave a Reply</h3>
+          <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                rows="5"
+                placeholder="Your messages"
+                formControlName="message"
+              ></textarea>
+            </div>
+            <ng-template
+              [ngIf]="
+                commentForm.get('message').dirty ||
+                commentForm.get('message').touched
+              "
+            >
+              <div
+                class="error-fld"
+                *ngIf="commentForm.get('message').hasError('required')"
+              >
+                {{ MESSAGES.required }}
+              </div>
+            </ng-template>
+            <div class="form-group">
+              <input
+                class="form-control"
+                type="text"
+                placeholder="Website"
+                formControlName="website"
+              />
+            </div>
+            <div class="form-group">
+              <button
+                type="submit"
+                (keydown.enter)="onSubmit()"
+                class="ps-btn ps-btn--black"
+                [disabled]="isSubmitting"
+              >
+                {{ isSubmitting ? "Processing..." : "Post comment" }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

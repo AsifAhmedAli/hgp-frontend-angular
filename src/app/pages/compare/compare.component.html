@@ -1,0 +1,106 @@
+<div class="ps-page--default ps-page--compare" *ngIf="kitCompare">
+  <!-- Heading Section Starts -->
+  <div class="ps-page__header bg--top">
+    <div class="container">
+      <h3>{{ kitCompare?.title }}</h3>
+      <div class="text-left">
+        <p [innerHTML]="kitCompare?.short_description"></p>
+      </div>
+    </div>
+  </div>
+  <!-- Heading Section Ends -->
+
+  <!-- Bottom Section Starts -->
+  <div class="ps-page__content">
+    <div class="container">
+      <div class="compare-btm-sec div-float">
+        <div class="row">
+          <!-- Box Section Starts -->
+          <div class="col-sm-6 col-md-4 compare-col">
+            <div class="compare-box">
+              <!-- Image Section Starts -->
+              <div class="cbox-img-wrap div-float">
+                <div class="cbox-img-cir">
+                  <img
+                    [src]="kitCompare.image_1 | imageUrl"
+                    alt="{{ kitCompare.kit_name_1 }}"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+              <!-- Image Section Ends -->
+
+              <!-- Kit Content Starts -->
+              <div class="cbox-btm-sec div-float">
+                <h3>{{ kitCompare.kit_name_1 }}</h3>
+                <h4>
+                  Starting from $<strong>{{ kitCompare.price_1 }}</strong>
+                </h4>
+                <div [innerHTML]="kitCompare?.content_1"></div>
+              </div>
+              <!-- Kit Content Ends -->
+            </div>
+          </div>
+          <!-- Box Section Ends -->
+
+          <!-- Box Section Starts -->
+          <div class="col-sm-6 col-md-4 compare-col">
+            <div class="compare-box">
+              <!-- Image Section Starts -->
+              <div class="cbox-img-wrap div-float">
+                <div class="cbox-img-cir">
+                  <img
+                    [src]="kitCompare.image_2 | imageUrl"
+                    alt="{{ kitCompare.kit_name_2 }}"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+              <!-- Image Section Ends -->
+
+              <!-- Kit Content Starts -->
+              <div class="cbox-btm-sec div-float">
+                <h3>{{ kitCompare.kit_name_2 }}</h3>
+                <h4>
+                  Starting from $<strong>{{ kitCompare.price_2 }}</strong>
+                </h4>
+                <div [innerHTML]="kitCompare?.content_2"></div>
+              </div>
+              <!-- Kit Content Ends -->
+            </div>
+          </div>
+          <!-- Box Section Ends -->
+
+          <!-- Box Section Starts -->
+          <div class="col-sm-6 col-md-4 compare-col">
+            <div class="compare-box">
+              <!-- Image Section Starts -->
+              <div class="cbox-img-wrap div-float">
+                <div class="cbox-img-cir">
+                  <img
+                    [src]="kitCompare.image_3 | imageUrl"
+                    alt="{{ kitCompare.kit_name_3 }}"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+              <!-- Image Section Ends -->
+
+              <!-- Kit Content Starts -->
+              <div class="cbox-btm-sec div-float">
+                <h3>{{ kitCompare.kit_name_3 }}</h3>
+                <h4>
+                  Starting from $<strong>{{ kitCompare.price_3 }}</strong>
+                </h4>
+                <div [innerHTML]="kitCompare?.content_3"></div>
+              </div>
+              <!-- Kit Content Ends -->
+            </div>
+          </div>
+          <!-- Box Section Ends -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bottom Section Ends -->
+</div>

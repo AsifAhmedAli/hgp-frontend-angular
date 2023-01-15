@@ -1,0 +1,36 @@
+<div class="ps-site-overlay" id="ps-site-overlay-ui"></div>
+<div class="ps-panel--sidebar" id="cart" style="webkit-transform: translateX(100%); -ms-transform: translateX(100%); transform: translateX(100%);">
+  <div class="ps-panel__header"><a class="ps-panel__close" appSidebar href="javascript:"><i class="icon-cross"></i></a></div>
+  <div class="ps-panel__content">
+    <div class="ps-cart--mini">
+      <div class="empty-crt" *ngIf="!cartFound">
+        <div class="crt-img">
+          <img src="assets/_img/empty-cart.png" class="img-fluid" />
+        </div>
+        <div class="crt-txt">
+          <h3>Your cart is empty, but it doesn’t have to be.</h3>
+          <p><a appSidebar routerLink="/">Click here</a> to fill it up!</p>
+          <!-- <a appSidebar routerLink="/" class="black-btn" style="margin: 30px auto 0;">Go to homepage</a> -->
+        </div>
+      </div>
+      <div class="ps-cart__content" *ngIf="cartFound">
+        <div class="ps-cart__items">
+          <div *ngFor="let cartProduct of cart?.products" class="ps-product--mini-cart">
+            <div class="ps-product__thumbnail">
+              <a *ngIf="cartProduct?.product" (click)="closeCartSidebar()" [routerLink]="'/product/' + cartProduct?.product?.sku"><img appHideBrokerImage [src]="cartProduct?.product?.image.url" alt=""></a>
+              <a *ngIf="cartProduct?.kit" (click)="closeCartSidebar()" [routerLink]="'/kit/' + cartProduct?.kit?.id"><img appHideBrokerImage [src]="cartProduct?.kit?.image | imageUrl" alt=""></a>
+            </div>
+            <app-cart-right-sidebar-item [cartProduct]="cartProduct"></app-cart-right-sidebar-item>
+          </div>
+        </div>
+        <div class="ps-cart__footer">
+          <h3>Sub Total:<strong>{{ cart?.sub_total | currency }}</strong></h3>
+          <figure>
+            <a class="ps-btn ps-btn--outline" (click)="closeCartSidebar()" routerLink="/cart">View Cart</a>
+            <a class="ps-btn ps-btn--black" (click)="closeCartSidebar()" routerLink="/cart/checkout">Checkout</a>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<!-- <div *ngIf="dataNotFound"  class="col-md-12"><h3 class="text-center">{{text}}</h3></div> -->
+<div *ngIf="dataNotFound" class="col-md-12">
+  <div class="nt-fnd">
+    <div class="alert alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert">X</button>
+      <div class="nt-fnd-txt-img">
+        <div class="nt-fnd-img">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.99998 0C3.58001 0 0 3.58001 0 7.99998C0 12.42 3.58001 16 7.99998 16C12.42 16 16 12.42 16 7.99998C16 3.57997 12.42 0 7.99998 0ZM8.80001 12H7.19999V7.19999H8.80001V12ZM8.80001 5.59998H7.19999V3.99997H8.80001V5.59998Z" fill="#585858"/>
+          </svg>
+        </div>
+        <div class="nt-fnd-txt">
+          <h3>{{text}}</h3>
+          <p *ngIf="description"> {{ description }} <a routerLink="{{ link }}" *ngIf="link">{{ linkText }}.</a> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

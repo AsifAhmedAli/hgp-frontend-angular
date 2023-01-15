@@ -1,0 +1,66 @@
+<div class="ps-page">
+  <div class="ps-shop">
+    <div class="container">
+      <div class="ps-shop__header" >
+        <div class="ps-page__header">
+          <h1>{{ title }}</h1>
+          <app-breadcrumb page="manuals"></app-breadcrumb>
+        </div>
+      </div>
+
+      <div class="div-float pdf-tabs">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <ng-template ngFor let-category [ngForOf]="categories" let-i="index">
+          <li class="nav-item" (click)="getDocumentsByCategory(category.id)" >
+<!--            <a [class.active]="fragment == category.id" *ngIf="!category?.parent_id"  [routerLink]="currentPath" fragment="{{category.id}}"  class="nav-link" >{{ category?.name }}</a>-->
+          </li>
+          </ng-template>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div id="home" class="container tab-pane active"><br>
+            <div class="ps-shop__content">
+              <app-loader *ngIf="!isPageProcessingComplete"></app-loader>
+              <p *ngIf="dataNotFound" class="text-center" style="font-size: 20px;">No Document found</p>
+              <div class="row" *ngIf="!dataNotFound">
+                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-6 col-6 " *ngFor="let document of documents">
+                  <div class="ps-product" >
+                    <div class="ps-product__thumbnail">
+                      <table>
+                        <tbody>
+                          <tr>
+                            <td>
+                                <img class="ps-product__image" src="assets/_img/pdf-Icon.jpg" alt="pdf"/>
+                                <img class="ps-product__image-alt" src="assets/_img/PDF Icon-diff.jpg" alt="pdf"/>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <a class="ps-product__overlay" [href]="document.path" target="_blank" ></a>
+                      <div class="ps-product__actions"><a  [href]="document.path" target="_blank"> View pdf</a>
+                      </div>
+                    </div>
+                    <div class="ps-product__content text-center"><a class="ps-product__title" [href]="document.path" target="_blank">{{document.name}}</a>
+
+                      <p class="ps-product__price"><span>$</span> 9.90</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template [ngIf]="isPageProcessingComplete">
+        <div *ngIf="!dataNotFound && paginatedDocuments?.last_page > paginatedDocuments?.current_page" class="ps-shop__footer">
+          <a *ngIf="!discovering" class="ps-link--under" (click)="next()">Discover more</a>
+          <a *ngIf="discovering" class="ps-link--under"><app-spinner></app-spinner></a>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

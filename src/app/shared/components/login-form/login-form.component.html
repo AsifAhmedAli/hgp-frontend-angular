@@ -1,0 +1,84 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <!-- Floating Label Structure Starts -->
+    <!-- <div class="input-field-wrap">
+    <span>
+      <div class="input-field">
+          <label for="em">Email Address</label>
+          <input type="text" id="em" name="uemail" value="" data-placeholder="Email Address" class="frmEle" />
+      </div>
+    </span>
+  </div> -->
+    <!-- Floating Label Structure Ends -->
+    <div class="detl-srchflds-bx w-100 mr-0">
+        <div class="form-group floating">
+            <div class="input-field-wrap">
+                <span>
+                      <div class="input-field">
+                          
+                          <label for="lognEmail">Email Address *</label>
+                          <input class="form-control frmEle" id="lognEmail" type="email" formControlName="email" data-placeholder="Email Address *">
+                      </div>
+                  </span>
+            </div>
+
+
+        </div>
+        <ng-template [ngIf]="loginForm.get('email').dirty || loginForm.get('email').touched">
+            <div class="error-fld" *ngIf="loginForm.get('email').hasError('required')">{{ MESSAGES.required }}</div>
+            <div class="error-fld" *ngIf="loginForm.get('email').hasError('email')">{{ MESSAGES.email }}</div>
+        </ng-template>
+
+    </div>
+
+
+    <div class="detl-srchflds-bx w-100 mr-0">
+        <div class="form-group floating">
+            <div class="input-field-wrap">
+                <span>
+                    <div class="input-field">
+                        
+                        <label for="lognpaswrd">Password *</label>
+                        <input class="form-control frmEle password-field passShow" id="lognpaswrd" type="password" formControlName="password" data-placeholder="Password *">
+                        <!-- <input class="form-control password-field passShow" type="password" formControlName="password" placeholder="Password *"> -->
+                        <span toggle=".password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            </div>
+            </span>
+        </div>
+
+
+    </div>
+    <ng-template [ngIf]="loginForm.get('password').dirty || loginForm.get('password').touched">
+        <div class="error-fld" *ngIf="loginForm.get('password').hasError('required')">{{ MESSAGES.required }}</div>
+    </ng-template>
+
+    </div>
+    <!-- <div class="form-group">
+        <input class="form-control" type="email" formControlName="email" placeholder="Email Address *">
+    </div>
+    <ng-template [ngIf]="loginForm.get('email').dirty || loginForm.get('email').touched">
+        <div class="error-fld" *ngIf="loginForm.get('email').hasError('required')">{{ MESSAGES.required }}</div>
+        <div class="error-fld" *ngIf="loginForm.get('email').hasError('email')">{{ MESSAGES.email }}</div>
+    </ng-template> -->
+    <div class="clearfix"></div>
+
+    <!-- <div class="form-group position-relative">
+        <input class="form-control password-field passShow" type="password" formControlName="password" placeholder="Password *">
+        <span toggle=".password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+    </div>
+    <ng-template [ngIf]="loginForm.get('password').dirty || loginForm.get('password').touched">
+        <div class="error-fld" *ngIf="loginForm.get('password').hasError('required')">{{ MESSAGES.required }}</div>
+    </ng-template> -->
+    <div class="form-group text-center">
+        <a routerLink="/forgot-password">Forgot Password?</a>
+    </div>
+    <div class="form-group submit text-center wth-out-lg">
+        <app-submit-button [isSubmitting]="isSubmitting" *ngIf="!stopRedirect" submit="Login"></app-submit-button>
+        <app-submit-button [isSubmitting]="isSubmitting" *ngIf="stopRedirect" submit="Submit"></app-submit-button>
+        <div class="reg-sec" *ngIf="stopRedirect">
+            <p>
+                Don't have an account? <a *ngIf="stopRedirect" [routerLink]="['/login']" [fragment]="'tab-2'" class="reg-text">Register Here</a>
+            </p>
+        </div>
+    </div>
+</form>

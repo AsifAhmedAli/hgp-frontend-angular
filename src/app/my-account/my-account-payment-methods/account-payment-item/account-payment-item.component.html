@@ -1,0 +1,83 @@
+<ng-template [ngIf]="card">
+  <!--  name start -->
+  <div class="row" *ngIf="helpersService.exists(card?.cardholderName)">
+
+    <div class="col-md-4">
+      <label class="smi-bold fnt-15">Name on Card:</label>
+    </div>
+
+    <div class="col-md-8">
+      <p class="regul fnt-15">{{ card?.cardholderName }}</p>
+    </div>
+
+  </div>
+  <!--  name end -->
+
+  <!--  card number start -->
+  <div class="row" *ngIf="helpersService.exists(card?.maskedNumber)">
+
+    <div class="col-md-4">
+      <label class="smi-bold fnt-15">Card Number:</label>
+    </div>
+
+    <div class="col-md-8">
+      <p class="regul fnt-15">{{card?.maskedNumber}}</p>
+    </div>
+
+  </div>
+  <!--card number end-->
+
+  <!--  name on card start-->
+<!--  <div class="row">-->
+
+<!--    <div class="col-md-4">-->
+<!--      <label class="smi-bold fnt-15">Name on Card:</label>-->
+<!--    </div>-->
+
+<!--    <div class="col-md-8">-->
+<!--      <p class="regul fnt-15">Name Here</p>-->
+<!--    </div>-->
+
+<!--  </div>-->
+
+  <!--  name on card end-->
+
+  <!-- exp date start -->
+  <div class="row" *ngIf="helpersService.exists(card?.expirationDate)">
+
+    <div class="col-md-4">
+      <label class="smi-bold fnt-15">Exp Date:</label>
+    </div>
+
+    <div class="col-md-8">
+      <!--      <p class="regul fnt-15 ">06-22-2020</p>-->
+      <p class="regul fnt-15 ">{{card?.expirationDate}}</p>
+    </div>
+
+  </div>
+  <!--  exp date end -->
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="smi-bold fnt-15">Make Default:</label>
+    </div>
+    <div class="col-md-8">
+      <div class="ps-checkbox">
+        <input class="form-control" type="checkbox" id="default{{card?.token}}" name="default" (change)="onDefaultChange($event)" [checked]="card?.default">
+        <label class="fnt-15 " for="default{{card?.token}}"><span style="visibility: hidden;">-</span></label>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-md-12">
+      <a class="smi-bold fnt-15 edtbtn mt-4" href="javascript:" *ngIf="!isDeleting" (click)="onDeletePaymentMethod()"><strong>Delete</strong></a>
+      <a href="javascript:" disabled *ngIf="isDeleting"><app-spinner></app-spinner></a>
+<!--      <a href="#" class="smi-bold fnt-15 edtbtn mt-4">Delete</a>-->
+    </div>
+
+
+  </div>
+</ng-template>

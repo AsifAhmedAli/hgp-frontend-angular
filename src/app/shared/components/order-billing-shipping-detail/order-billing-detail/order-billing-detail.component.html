@@ -1,0 +1,10 @@
+<div class="order-dtl">
+  <app-order-bill-ship-detail-item title="Name" [content]="item?.billing_address_first_name  + ' ' + item?.billing_address_last_name"></app-order-bill-ship-detail-item>
+  <!-- <app-order-bill-ship-detail-item title="Last Name" [content]="item?.billing_address_last_name"></app-order-bill-ship-detail-item> -->
+  <app-order-bill-ship-detail-item title="Street Address" [content]="item?.billing_address_address1 + ', ' + item?.billing_address_city  + ', ' + state + ' ' +  item?.billing_address_zip"></app-order-bill-ship-detail-item>
+  <!-- <app-order-bill-ship-detail-item title="City" [content]="item?.billing_address_city"></app-order-bill-ship-detail-item>
+  <app-order-bill-ship-detail-item title="State" [content]="state"></app-order-bill-ship-detail-item>
+  <app-order-bill-ship-detail-item title="Zip Code" [content]="item?.billing_address_zip"></app-order-bill-ship-detail-item> -->
+  <app-order-bill-ship-detail-item title="Email" [content]="item?.billing_address_email"></app-order-bill-ship-detail-item>
+  <app-order-bill-ship-detail-item title="Phone" [content]="item?.billing_address_phone"></app-order-bill-ship-detail-item>
+</div>

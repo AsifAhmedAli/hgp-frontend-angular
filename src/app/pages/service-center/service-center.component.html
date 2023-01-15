@@ -1,0 +1,213 @@
+<div class="new-servic">
+  <app-loader *ngIf="!serviceCenter"></app-loader>
+  <ng-template [ngIf]="serviceCenter">
+    <app-clearfix></app-clearfix>
+    <ng-template [ngIf]="serviceCenter?.banner_text || serviceCenter?.banner_image?.path">
+      <!-- hero section starts -->
+      <section class="hero-mian">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="hero-vertical-item div-float">
+                <div class="hero-right-img div-float mb-show" *ngIf="serviceCenter?.banner_image?.path">
+                  <img [src]="serviceCenter?.banner_image?.path" [alt]="serviceCenter?.alt_text_for_banner_image" class="img-fluid">
+                </div>
+                <div class="hero-left-txt div-float animate__animated animate__fadeInLeft animate__delay-1s">
+                  <span [innerHTML]="serviceCenter?.banner_text | sanitizer"></span>
+                  <a target="_blank" *ngIf="serviceCenter?.banner_cta" class="ml-0" [href]="serviceCenter?.banner_cta">
+                    <button type="button" class="btn-shop">CONTACT US</button>
+                  </a>
+                </div>
+                <div class="hero-right-img div-float mb-hide" *ngIf="serviceCenter?.banner_image?.path">
+                  <div class="large-crl animate__animated animate__fadeInRight animate__delay-1s"></div>
+                  <img [src]="serviceCenter?.banner_image?.path" [alt]="serviceCenter?.alt_text_for_banner_image" class="img-fluid animate__animated animate__fadeInRight animate__delay-1s">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- hero section ends -->
+      <app-clearfix></app-clearfix>
+    </ng-template>
+    <div class="container-fluid" *ngIf="brands.length">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="newser-row">
+              <img *ngFor="let brand of brands" [src]="brand?.logo?.path" data-aos="fade-zoom-in" data-aos-offset="0" data-aos-easing="ease-in-back" data-aos-duration="300"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    <ng-template [ngIf]="
+      serviceCenter?.content ||
+      serviceCenter?.process_title_1  ||
+      serviceCenter?.process_title_2 ||
+      serviceCenter?.process_title_3
+    ">
+      <!-- standards new section starts -->
+      <section>
+        <div class="container-fluid">
+          <div class="row" *ngIf="serviceCenter?.content">
+            <div class="col-md-12">
+              <div class="newlne"></div>
+              <div class="category-head div-float text-center" data-aos="fade-up" data-aos-duration="2000" [innerHTML]="serviceCenter?.content | sanitizer"></div>
+            </div>
+          </div>
+          <div class="standard-main text-center">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="standard-types div-float" data-aos="fade-left" data-aos-duration="1000" *ngIf="serviceCenter?.process_title_1 && serviceCenter?.alt_text_for_process_image_1">
+                  <span>01</span>
+                  <div class="standard-items div-float" *ngIf="serviceCenter?.process_image_1">
+                    <img [src]="serviceCenter?.process_image_1?.path" [alt]="serviceCenter?.alt_text_for_process_image_1" class="img-fluid" />
+                  </div>
+                  <p *ngIf="serviceCenter?.process_title_1">{{ serviceCenter?.process_title_1 }}</p>
+                </div>
+
+                <div class="standard-types div-float" data-aos="fade-up" data-aos-duration="1000">
+                  <span>02</span>
+                  <div class="standard-items div-float" *ngIf="serviceCenter?.process_image_2">
+                    <img [src]="serviceCenter?.process_image_2?.path" [alt]="serviceCenter?.alt_text_for_process_image_2" class="img-fluid" />
+                  </div>
+                  <p *ngIf="serviceCenter?.process_title_2">{{ serviceCenter?.process_title_2 }}</p>
+                </div>
+
+                <div class="standard-types div-float" data-aos="fade-right" data-aos-duration="1000">
+                  <span>03</span>
+                  <div class="standard-items div-float" *ngIf="serviceCenter?.process_image_3">
+                    <img [src]="serviceCenter?.process_image_3?.path" [alt]="serviceCenter?.alt_text_for_process_image_3" class="img-fluid" />
+                  </div>
+                  <p *ngIf="serviceCenter?.process_title_3">{{ serviceCenter?.process_title_3 }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- standards section ends -->
+      <app-clearfix></app-clearfix>
+    </ng-template>
+    <ng-template [ngIf]="serviceCenter?.bottom_banner_text || serviceCenter?.bottom_banner_text">
+    <section class="div-float ser-bluesec">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="hero-vertical-item div-float">
+              <div class="hero-right-img div-float mb-show" *ngIf="serviceCenter?.bottom_banner_image">
+                <img [src]="serviceCenter?.bottom_banner_image?.path" [alt]="serviceCenter?.alt_text_for_bottom_banner_image" class="img-fluid">
+              </div>
+              <div class="hero-left-txt div-float" data-aos="fade-right" data-aos-duration="1500" *ngIf="serviceCenter?.bottom_banner_text">
+                <span [innerHTML]="serviceCenter?.bottom_banner_text | sanitizer"></span>
+                <a *ngIf="serviceCenter?.bottom_banner_cta" class="ml-0" target="_blank" [href]="serviceCenter?.bottom_banner_cta"><button type="button" class="btn-shop">Read More</button></a>
+              </div>
+
+              <div class="hero-right-img div-float mb-hide" data-aos="fade-left" data-aos-duration="1500" *ngIf="serviceCenter?.bottom_banner_image">
+                <img [src]="serviceCenter?.bottom_banner_image?.path" [alt]="serviceCenter?.alt_text_for_bottom_banner_image" class="img-fluid">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <app-clearfix></app-clearfix>
+  </ng-template>
+  </ng-template>
+  <!-- service form starts -->
+  <section class="service-form-main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="service-form">
+            <form class="ps-form--checkout" [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+              <div class="ps-form__billings">
+                <h4 class="ps-form__heading text-center">If you are in need of assistance, don’t hesitate to fill out the form below.</h4>
+
+                <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input class="form-control" type="text" formControlName="name" />
+                    </div>
+                    <ng-template [ngIf]="serviceForm.get('name').touched || serviceForm.get('name').dirty">
+                      <div class="error-fld" *ngIf="serviceForm.get('name').hasError('required')">{{ MESSAGES.required }}</div>
+                      <div class="error-fld" *ngIf="serviceForm.get('name').hasError('maxlength')">{{ MESSAGES.varcharMaxLength }}</div>
+                    </ng-template>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label>Phone #</label>
+                      <input class="form-control" type="text" formControlName="phone" />
+                    </div>
+                    <ng-template [ngIf]="serviceForm.get('phone').touched || serviceForm.get('phone').dirty">
+                      <div class="error-fld" *ngIf="serviceForm.get('phone').hasError('required')">{{ MESSAGES.required }}</div>
+                      <div class="error-fld" *ngIf="serviceForm.get('phone').hasError('maxlength')">{{ MESSAGES.varcharMaxLength }}</div>
+                    </ng-template>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input class="form-control" type="email" formControlName="email" />
+                    </div>
+                    <ng-template [ngIf]="serviceForm.get('email').dirty || serviceForm.get('email').touched">
+                      <div class="error-fld" *ngIf="serviceForm.get('email').hasError('required')">{{ MESSAGES.required }}</div>
+                      <div class="error-fld" *ngIf="serviceForm.get('email').hasError('email')">{{ MESSAGES.email }}</div>
+                      <div class="error-fld" *ngIf="!serviceForm.get('email').hasError('email') && serviceForm.get('email').hasError('maxlength')">{{ MESSAGES.varcharMaxLength }}</div>
+                    </ng-template>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label>Product Model #</label>
+                      <input class="form-control" type="text" formControlName="productModel"/>
+                    </div>
+                    <ng-template [ngIf]="serviceForm.get('productModel').touched || serviceForm.get('productModel').dirty">
+                      <div class="error-fld" *ngIf="serviceForm.get('productModel').hasError('required')">{{ MESSAGES.required }}</div>
+                      <div class="error-fld" *ngIf="serviceForm.get('productModel').hasError('maxlength')">{{ MESSAGES.varcharMaxLength }}</div>
+                    </ng-template>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label>Serial #</label>
+                      <input class="form-control" type="text" formControlName="serialNumber"/>
+                    </div>
+                    <ng-template [ngIf]="serviceForm.get('serialNumber').touched || serviceForm.get('serialNumber').dirty">
+                      <div class="error-fld" *ngIf="serviceForm.get('serialNumber').hasError('required')">{{ MESSAGES.required }}</div>
+                      <div class="error-fld" *ngIf="serviceForm.get('serialNumber').hasError('maxlength')">{{ MESSAGES.varcharMaxLength }}</div>
+                    </ng-template>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                      <label>Purchased From</label>
+                      <input class="form-control" type="text" formControlName="purchasedFrom"/>
+                    </div>
+                    <ng-template [ngIf]="serviceForm.get('purchasedFrom').touched || serviceForm.get('purchasedFrom').dirty">
+                      <div class="error-fld" *ngIf="serviceForm.get('purchasedFrom').hasError('required')">{{ MESSAGES.required }}</div>
+                      <div class="error-fld" *ngIf="serviceForm.get('purchasedFrom').hasError('maxlength')">{{ MESSAGES.varcharMaxLength }}</div>
+                    </ng-template>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label>Summary</label>
+                      <textarea class="form-control" formControlName="summary"></textarea>
+                    </div>
+                    <ng-template [ngIf]="serviceForm.get('summary').touched || serviceForm.get('summary').dirty">
+                      <div class="error-fld" *ngIf="serviceForm.get('summary').hasError('required')">{{ MESSAGES.required }}</div>
+                    </ng-template>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group submit text-right">
+                      <app-submit-button [isSubmitting]="isSubmitting" [fullWidth]="false"></app-submit-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- service form ends -->
+  <app-clearfix></app-clearfix>
+</div>

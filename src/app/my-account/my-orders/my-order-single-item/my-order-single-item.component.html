@@ -1,0 +1,6 @@
+<td>{{ order?.created_at | myDate }}</td>
+<td>{{ order?.order_number }}</td>
+<td>{{ order?.tracking_number }}</td>
+<td>{{ order?.total | currency }}</td>
+<td>{{ order?.status | titlecase }}</td>
+<td class="text-center"><a [routerLink]="order?.order_number" class="note-btn"></a></td>

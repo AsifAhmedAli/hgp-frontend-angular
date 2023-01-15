@@ -1,0 +1,55 @@
+
+<div class="div-floatfull">
+  <div class="order-wrap">
+    <div class="div-floatfull accnt-ord">
+      <app-loader *ngIf="!isPageProcessingDone"></app-loader>
+      <div class="div-floatfull accrd-up">
+
+        <!-- Not found starts -->
+        <div class="row" *ngIf="dataNotFound">
+          <div class="col-md-12">
+            <h4 class="ps-form__heading">{{ title }}</h4>
+            <app-data-not-found text="{{MESSAGES.noItemFound}}" description="If you would like to add new item" link="/products" linkText="click here"></app-data-not-found>
+          </div>
+        </div>
+        <!-- Not found ends -->
+
+        <div class="row" *ngIf="!dataNotFound">
+          <div class="col-md-12" *ngIf="isPageProcessingDone">
+            <h4 class="ps-form__heading">{{ title }}</h4>
+            <div class="div-floatfull ord-tbl wishlist">
+              <table class="table table-hover" > <!-- data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" -->
+                <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Product Name</th>
+                  <th>Price</th>
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of wishlist">
+                  <td><a [routerLink]="['/product', item.product.sku]" ><img [src]="item.product.image.url" class="img-fluid" style="width: 50px; height: 50px;" /></a></td>
+                  <td><a [routerLink]="['/product', item.product.sku]">{{ item.product.name}}</a></td>
+                  <td>{{ item.product.price.retailPrice | currency }}</td>
+                  <td class="text-center"><a style="font-size: 24px; margin-left: 5px;" href="javascript:void(0)" (click)="delete(item.hydro_product_id, item.id)" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a style="font-size: 24px; margin-left: 5px;"
+                       *ngIf="item.product.is_in_stock"
+                       appAddToCart
+                       [product]="item.product"
+                       [qty]="1"
+                       title="Add to cart">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                    </a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <app-pagination *ngIf="!dataNotFound" [from]="wishlistPagination?.from" [to]="wishlistPagination?.to" [total]="wishlistPagination?.total" (goTo)="goToPage($event)" [pageSize]="wishlistPagination?.per_page"></app-pagination>
+      </div>
+    </div>
+  </div>
+</div>

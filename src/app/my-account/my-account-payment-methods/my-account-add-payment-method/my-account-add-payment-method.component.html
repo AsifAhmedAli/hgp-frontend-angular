@@ -1,0 +1,93 @@
+<div class="frm-wrap"> <!-- data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" -->
+  <div class="div-floatfull accnt-profl">
+    <!--    <form class="ps-form&#45;&#45;checkout" action="" method="get">-->
+    <app-loader *ngIf="!isPageProcessingDone"></app-loader>
+    <div class="row">
+      <div class="col-md-12" *ngIf="token">
+        <div class="ps-form__billings">
+          <h4 class="ps-form__heading">{{ title }}</h4>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Name On Card <sup>*</sup></label>
+                <input maxlength="150" [(ngModel)]="cardholdersName" class="form-control cname" type="text"
+                       placeholder="Name On Card *">
+              </div>
+              <div class="error-fld" *ngIf="cardNameIsRequired">{{ MESSAGES.required }}</div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>Card Number <sup>*</sup></label>
+                <div id="card-number" class="hosted-field form-control"></div>
+                <!--                  <label>Card Number <sup>*</sup></label>-->
+                <!--                  <input class="form-control" type="text" placeholder="">-->
+              </div>
+              <div class="error-fld" *ngIf="cardNumberIsRequired">
+                {{ MESSAGES.required }}
+              </div>
+              <div class="error-fld" *ngIf="cardNumberIsInvalid">
+                {{ MESSAGES.cardNumberIsInvalid }}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label>MM / YY <sup>*</sup></label>
+                <div id="expiration-date" class="form-control hosted-field"></div>
+              </div>
+              <div class="error-fld" *ngIf="expirationDateIsRequired">
+                {{ MESSAGES.required }}
+              </div>
+
+              <div class="error-fld" *ngIf="expirationDateIsInvalid">
+                {{ MESSAGES.expirationDateIsInvalid }}
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="half-wdth">
+                <div class="form-group">
+                  <label>CVV <sup>*</sup></label>
+                  <div id="cvv" class=" hosted-field form-control"></div>
+                  <!--                  <label>CVC <sup>*</sup></label>-->
+                  <!--                  <input class="form-control" type="text" placeholder="">-->
+                </div>
+                <div class="error-fld" style="font-size: 12px;" *ngIf="cvvIsRequired">
+                  {{ MESSAGES.required }}
+                </div>
+
+                <div class="error-fld" style="font-size: 12px;" *ngIf="cvvIsInvalid">
+                  {{ MESSAGES.cvvIsInvalid }}
+                </div>
+              </div>
+
+              <div class="half-wdth position-relative fr-styl mr-0">
+                <div class="crt-ques-sec">
+                  <p>What’s This?</p>
+                  <div class="cvc-img"></div>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="col-sm-12">
+              <div class="form-group submit text-center">
+                <button class="ps-btn ps-btn--black" (click)="tokenizeUserDetails()" *ngIf="!isSubmitting">Submit
+                </button>
+                <button class="ps-btn ps-btn--black" disabled *ngIf="isSubmitting">
+                  <app-spinner></app-spinner>
+                </button>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--    </form>-->
+  </div>
+
+</div>

@@ -1,0 +1,359 @@
+<div class="frm-wrap">
+
+    <div class="div-floatfull accnt-profl">
+        <!-- data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" -->
+        <form class="ps-form--checkout" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ps-form__billings">
+                        <h4 class="ps-form__heading">{{ title }}</h4>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!-- <div class="form-group">
+                                    <label>Nickname: <sup>*</sup></label>
+                                    <input class="form-control" formControlName="nickname" type="text" placeholder="Nickname">
+                                </div>
+                                <ng-template [ngIf]="form.get('nickname').dirty || form.get('nickname').touched">
+                                    <div class="error-fld" *ngIf="form.get('nickname').hasError('required')">{{ MESSAGES.required }}</div>
+                                    <div class="error-fld" *ngIf="form.get('nickname').hasError('maxlength')">{{ MESSAGES.nicknameMaxLength }}</div>
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                              <div class="input-field" [class.active]="id">
+
+                                                  <label for="ire1">Nickname *</label>
+                                                  <!-- <input type="text" id="em" name="uemail" value="" data-placeholder="Search Reviews" class="form-control frmEle" /> -->
+                                                  <input class="form-control frmEle" id="ire1" formControlName="nickname" type="text" data-placeholder="Nickname">
+
+                                              </div>
+                                            </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('nickname').dirty || form.get('nickname').touched">
+                                        <div class="error-fld" *ngIf="form.get('nickname').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <div class="error-fld" *ngIf="form.get('nickname').hasError('maxlength')">{{ MESSAGES.nicknameMaxLength }}</div>
+                                    </ng-template>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-6">
+                                <!-- <div class="form-group">
+                                    <label>First Name <sup>*</sup></label>
+                                    <input class="form-control" type="text" formControlName="first_name" placeholder="First Name">
+                                </div>
+                                <ng-template [ngIf]="form.get('first_name').dirty || form.get('first_name').touched">
+                                    <div class="error-fld" *ngIf="form.get('first_name').hasError('required')">{{ MESSAGES.required }}</div>
+                                    <div class="error-fld" *ngIf="form.get('first_name').hasError('maxlength')">{{ MESSAGES.firstNameMaxlength }}</div>
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                            <div class="input-field" [class.active]="id">
+
+                                                <label for="ire2">First Name *</label>
+                                                <input class="form-control frmEle" type="text" id="ire2" formControlName="first_name" data-placeholder="First Name">
+
+                                            </div>
+                                          </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('first_name').dirty || form.get('first_name').touched">
+                                        <div class="error-fld" *ngIf="form.get('first_name').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <div class="error-fld" *ngIf="form.get('first_name').hasError('maxlength')">{{ MESSAGES.firstNameMaxlength }}</div>
+                                    </ng-template>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="col-sm-6">
+                                <!-- <div class="form-group">
+                                    <label>Last Name <sup>*</sup></label>
+                                    <input class="form-control" formControlName="last_name" type="text" placeholder="Last Name">
+                                </div>
+                                <ng-template [ngIf]="form.get('last_name').dirty || form.get('last_name').touched">
+                                    <div class="error-fld" *ngIf="form.get('last_name').hasError('required')">{{ MESSAGES.required }}</div>
+                                    <div class="error-fld" *ngIf="form.get('last_name').hasError('maxlength')">{{ MESSAGES.lastNameMaxlength }}</div>
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                          <div class="input-field" [class.active]="id">
+
+                                              <label for="ire3">Last Name *</label>
+                                              <input class="form-control frmEle" id="ire3" formControlName="last_name" type="text" data-placeholder="Last Name">
+
+                                          </div>
+                                        </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('last_name').dirty || form.get('last_name').touched">
+                                        <div class="error-fld" *ngIf="form.get('last_name').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <div class="error-fld" *ngIf="form.get('last_name').hasError('maxlength')">{{ MESSAGES.lastNameMaxlength }}</div>
+                                    </ng-template>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-12">
+                                <!-- <div class="form-group">
+                                    <label>Street Address <sup>*</sup></label>
+                                    <input class="form-control" formControlName="street" type="text" placeholder="Street Address">
+                                </div>
+                                <ng-template [ngIf]="form.get('street').dirty || form.get('street').touched">
+                                    <div class="error-fld" *ngIf="form.get('street').hasError('required')">{{ MESSAGES.required }}</div>
+                                    <div class="error-fld" *ngIf="form.get('street').hasError('maxlength')">{{ MESSAGES.streetMaxlength }}</div>
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                        <div class="input-field" [class.active]="id">
+
+                                            <label for="ire4">Street Address *</label>
+                                            <input class="form-control frmEle" id="ire4" formControlName="street" type="text" data-placeholder="Street Address">
+                                        </div>
+                                      </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('street').dirty || form.get('street').touched">
+                                        <div class="error-fld" *ngIf="form.get('street').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <div class="error-fld" *ngIf="form.get('street').hasError('maxlength')">{{ MESSAGES.streetMaxlength }}</div>
+                                    </ng-template>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-12">
+                                <!-- <div class="form-group">
+                                    <label>City <sup>*</sup></label>
+                                    <input class="form-control" formControlName="city" type="text" placeholder="City">
+                                </div>
+                                <ng-template [ngIf]="form.get('city').dirty || form.get('city').touched">
+                                    <div class="error-fld" *ngIf="form.get('city').hasError('required')">{{ MESSAGES.required }}</div>
+                                    <div class="error-fld" *ngIf="form.get('city').hasError('maxlength')">{{ MESSAGES.cityMaxlength }}</div>
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                      <div class="input-field" [class.active]="id">
+
+                                          <label for="ire5">City *</label>
+                                          <input class="form-control frmEle" id="ire5" formControlName="city" type="text" data-placeholder="City">
+                                      </div>
+                                    </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('city').dirty || form.get('city').touched">
+                                        <div class="error-fld" *ngIf="form.get('city').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <div class="error-fld" *ngIf="form.get('city').hasError('maxlength')">{{ MESSAGES.cityMaxlength }}</div>
+                                    </ng-template>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col-sm-12">
+                                <!-- <div class="form-group">
+                                    <label>State <sup>*</sup></label>
+                                    <select class="ps-select form-control" formControlName="state">
+                    <option appFirstOption title="State"></option>
+                    <option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</option>
+                  </select>
+                                </div>
+                                <ng-template [ngIf]="form.get('state').dirty || form.get('state').touched">
+                                    <div class="error-fld" *ngIf="form.get('state').hasError('required')">{{ MESSAGES.required }}</div>
+
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                    <div class="input-field" [class.active]="id">
+
+                                        <label for="ire6">Select State *</label>
+                                        <select class="ps-select form-control frmEle" id="ire6" formControlName="state">
+                                          <option appFirstOption title="State"></option>
+                                          <option *ngFor="let state of states" [value]="state.abbreviation">{{ state.name }}</option>
+                                        </select>
+                                    </div>
+                                  </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('state').dirty || form.get('state').touched">
+                                        <div class="error-fld" *ngIf="form.get('state').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <!--                  <div class="error-fld" *ngIf="form.get('state').hasError('maxlength')">{{ MESSAGES.cityMaxlength }}</div>-->
+                                    </ng-template>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-12">
+                                <!-- <div class="form-group">
+                                    <label>Zip Code <sup>*</sup></label>
+                                    <input mask="00000" [validation]="false" class="form-control" formControlName="postal_code" type="text" placeholder="Zip Code">
+                                </div>
+                                <ng-template [ngIf]="form.get('postal_code').dirty || form.get('postal_code').touched">
+                                    <div class="error-fld" *ngIf="form.get('postal_code').hasError('required')">{{ MESSAGES.required }}</div>
+                                    <div class="error-fld" *ngIf="form.get('postal_code').hasError('minlength')">{{ MESSAGES.zipMinLength }}</div>
+                                    <div class="error-fld" *ngIf="form.get('postal_code').hasError('maxlength')">{{ MESSAGES.zipMaxLength }}</div>
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                  <div class="input-field" [class.active]="id">
+
+                                      <label for="ire7">Zip Code *</label>
+                                      <input mask="00000" [validation]="false" class="form-control frmEle" id="ire7" formControlName="postal_code" type="text" data-placeholder="Zip Code">
+                                  </div>
+                                </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('postal_code').dirty || form.get('postal_code').touched">
+                                        <div class="error-fld" *ngIf="form.get('postal_code').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <div class="error-fld" *ngIf="form.get('postal_code').hasError('minlength')">{{ MESSAGES.zipMinLength }}</div>
+                                        <div class="error-fld" *ngIf="form.get('postal_code').hasError('maxlength')">{{ MESSAGES.zipMaxLength }}</div>
+                                    </ng-template>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-sm-6">
+                                <!-- <div class="form-group">
+                                    <label>Email <sup>*</sup></label>
+                                    <input class="form-control" formControlName="email" type="text" placeholder="Email">
+                                </div>
+                                <ng-template [ngIf]="form.get('email').dirty || form.get('email').touched">
+                                    <div class="error-fld" *ngIf="form.get('email').hasError('required')">{{ MESSAGES.required }}</div>
+                                    <div class="error-fld" *ngIf="form.get('email').hasError('email')">{{ MESSAGES.email }}</div>
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                              <div class="input-field" [class.active]="id">
+
+                                                  <label for="ire8">Email *</label>
+                                                  <input class="form-control frmEle" id="ire8"  formControlName="email" type="text" data-placeholder="Email">
+                                              </div>
+                                            </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('email').dirty || form.get('email').touched">
+                                        <div class="error-fld" *ngIf="form.get('email').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <div class="error-fld" *ngIf="form.get('email').hasError('email')">{{ MESSAGES.email }}</div>
+                                    </ng-template>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-sm-6">
+                                <!-- <div class="form-group">
+                                    <label>Phone <sup>*</sup></label>
+                                    <input mask="000-000-0000" class="form-control" type="text" formControlName="phone_no" placeholder="Phone">
+                                </div>
+                                <ng-template [ngIf]="form.get('phone_no').dirty || form.get('phone_no').touched">
+                                    <div class="error-fld" *ngIf="form.get('phone_no').hasError('required')">{{ MESSAGES.required }}</div>
+                                    <div class="error-fld" *ngIf="form.get('phone_no').hasError('minlength')">{{ MESSAGES.phoneMinLength }}</div>
+                                </ng-template> -->
+
+
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                    <div class="form-group floating">
+                                        <div class="input-field-wrap">
+                                            <span>
+                                            <div class="input-field" [class.active]="id">
+
+                                                <label for="ire9">Phone *</label>
+                                                <input mask="000-000-0000" class="form-control frmEle" id="ire9" type="text" formControlName="phone_no" data-placeholder="Phone">
+
+                                            </div>
+                                          </span>
+                                        </div>
+
+
+                                    </div>
+                                    <ng-template [ngIf]="form.get('phone_no').dirty || form.get('phone_no').touched">
+                                        <div class="error-fld" *ngIf="form.get('phone_no').hasError('required')">{{ MESSAGES.required }}</div>
+                                        <div class="error-fld" *ngIf="form.get('phone_no').hasError('minlength')">{{ MESSAGES.phoneMinLength }}</div>
+                                    </ng-template>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col-sm-12">
+
+
+                                <div class="form-group submit text-center">
+                                    <app-submit-button [isSubmitting]="isSubmitting"></app-submit-button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</div>

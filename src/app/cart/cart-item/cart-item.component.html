@@ -1,0 +1,40 @@
+
+<td>
+  <div class="ps-product--sidebar">
+    <div class="ps-product__thumbnail">
+      <a class="ps-product__overlay" [routerLink]="'/product/' + cartProduct?.product?.sku"></a>
+      <img *ngIf="cartProduct?.product" appHideBrokerImage [src]="cartProduct?.product?.image.url" alt="">
+      <img *ngIf="cartProduct?.kit" appHideBrokerImage [src]="cartProduct?.kit?.image | imageUrl" alt="">
+  </div>
+    <div class="ps-product__content">
+      <a *ngIf="cartProduct?.product" class="ps-product__title" [routerLink]="'/product/' + cartProduct?.product?.sku">{{ cartProduct?.product?.name | titlecase }}</a>
+      <a *ngIf="cartProduct?.kit" class="ps-product__title" [routerLink]="'/kit/' + cartProduct?.kit?.id">{{ cartProduct?.kit?.name | titlecase }}</a>
+    </div>
+  </div>
+</td>
+<td><strong>{{ cartProduct?.price | currency }}</strong></td>
+<td>
+  <div class="form-group--number">
+    <button class="up" (click)="increase()"></button>
+    <button class="down" (click)="decrease()"></button>
+    <input
+      class="form-control"
+      type="text"
+      [(ngModel)]="quantity"
+      (focusout)="onChangeQty($event)"
+      (keyup.enter)="onChangeQty($event)"
+      placeholder="1" >
+  </div>
+</td>
+<td>
+  <p><strong>{{ cartProduct?.total_price | currency }}</strong></p>
+</td>
+<td>
+  <a
+    class="ps-icon"
+    appRemoveCartProduct
+    [cartProduct]="cartProduct"
+    (removing)="onRemoving($event)"
+    href="javascript:"
+  ><i *ngIf="!isRemoving" class="icon-cross"></i><app-spinner *ngIf="isRemoving"></app-spinner></a>
+</td>

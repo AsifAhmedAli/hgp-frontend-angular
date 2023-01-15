@@ -1,0 +1,16 @@
+<div class="ps-product__content">
+  <a
+    appRemoveCartProduct
+    [cartProduct]="cartProduct"
+    (removing)="onRemoving($event)"
+    href="javascript:"
+    class="ps-product__remove"
+  ><i *ngIf="!isRemoving" class="icon-cross"></i><app-spinner *ngIf="isRemoving"></app-spinner></a>
+  <a *ngIf="cartProduct?.product" class="ps-product__title" (click)="closeCartSidebar()" [routerLink]="'/product/' + cartProduct?.product?.sku">
+    {{ cartProduct?.product?.name | titlecase }}
+  </a>
+  <a *ngIf="cartProduct?.kit" class="ps-product__title" (click)="closeCartSidebar()" [routerLink]="'/kit/' + cartProduct?.kit?.id">
+    {{ cartProduct?.kit?.name | titlecase }}
+  </a>
+  <p> Qty: {{ cartProduct?.quantity }}</p><span class="ps-product__price">{{ cartProduct?.total_price | currency }}</span>
+</div>

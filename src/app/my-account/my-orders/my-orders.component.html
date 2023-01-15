@@ -1,0 +1,124 @@
+<div class="div-floatfull">
+  <div class="order-wrap">
+    <div class="div-floatfull accnt-ord">
+      <div class="div-floatfull accrd-up">
+        <div class="row">
+          <div class="col-md-3"> <!-- data-aos="fade-right" data-aos-duration="500" data-aos-once="true" -->
+            <h4 class="ps-form__heading">{{ title }}</h4>
+          </div>
+          <div class="col-md-9"> <!-- data-aos="fade-left" data-aos-duration="500" data-aos-once="true" -->
+            <div class="pull-right">
+              <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+                <div class="selct-bx1">
+                  <div class="form-group">
+                    <ng-select2
+                      class="ps-select"
+                      [placeholder]="'Search By'"
+                      [allowClear]="true"
+                      [options]="{multiple: false}"
+                      [data]="searchByData"
+                      formControlName="searchBy"
+                    ></ng-select2>
+                  </div>
+                  <ng-template [ngIf]="formSubmitted">
+                    <div class="error-fld" *ngIf="searchForm.get('searchBy').hasError('required')">{{ MESSAGES.required }}</div>
+                  </ng-template>
+                </div>
+                <div class="selct-bx2">
+                  <div class="slectinpt">
+                    <div class="form-group">
+                      <input class="form-control" type="text" placeholder="" formControlName="term">
+                    </div>
+                    <ng-template [ngIf]="formSubmitted">
+                      <div class="error-fld" *ngIf="searchForm.get('term').hasError('required')">{{ MESSAGES.required }}</div>
+                    </ng-template>
+                  </div>
+                  <div class="slectbtn">
+                    <div class="form-group submit">
+                      <app-submit-button [isSubmitting]="isSubmitting" [fullWidth]="false" submit="Search"></app-submit-button>
+                      <a href="javascript:void(0)" class="ml-2 restbtn" (click)="onReset()">Reset</a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="div-floatfull ord-tbl"> <!-- data-aos="fade-up" data-aos-duration="500" data-aos-once="true" -->
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th>Date <a
+                    routerLink="/my-account/orders"
+                    [queryParams]="{attribute: 'created_at', direction: getSortDirection(queryParams?.direction)}"
+                    queryParamsHandling="merge">
+                    <app-sort-icon></app-sort-icon></a></th>
+                  <th>Order Number <a
+                    routerLink="/my-account/orders"
+                    [queryParams]="{attribute: 'id', direction: getSortDirection(queryParams?.direction)}"
+                    queryParamsHandling="merge">
+                    <app-sort-icon></app-sort-icon></a></th>
+                  <th>Tracking# <a
+                    routerLink="/my-account/orders"
+                    [queryParams]="{attribute: 'tracking_number', direction: getSortDirection(queryParams?.direction)}"
+                    queryParamsHandling="merge">
+                    <app-sort-icon></app-sort-icon></a></th>
+                  <th>Price <a
+                    routerLink="/my-account/orders"
+                    [queryParams]="{attribute: 'total', direction: getSortDirection(queryParams?.direction)}"
+                    queryParamsHandling="merge">
+                    <app-sort-icon></app-sort-icon></a></th>
+                  <th>Status <a
+                    routerLink="/my-account/orders"
+                    [queryParams]="{attribute: 'status', direction: getSortDirection(queryParams?.direction)}"
+                    queryParamsHandling="merge">
+                    <app-sort-icon></app-sort-icon></a></th>
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngIf="!dataNotFound && orders.length === 0"><td colspan="6"><app-loader></app-loader></td></tr>
+
+                <!-- Not found starts -->
+                <tr *ngIf="dataNotFound" class="text-left">
+                  <td colspan="6">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <app-data-not-found text="No data found." description="If you would like to add new item " link="/products" linkText="shop here"></app-data-not-found>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Not found ends -->
+
+                <tr *ngFor="let order of orders" app-my-order-single-item [order]="order"></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="paginatedRecords?.last_page > 1">
+          <div class="col-md-6 col-sm-4 col-xs-12">
+            <div class="tbl-pang-txt">
+              <p>{{ paginatedRecords?.from }} - {{ paginatedRecords?.to }} of {{ paginatedRecords?.total }}</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-8 col-xs-12">
+            <div class="pull-right ord-pagn">
+              <app-dashboard-pagination
+                *ngIf="paginatedRecords?.last_page"
+                [currentPage]="currentPage"
+                [lastPage]="paginatedRecords?.last_page"
+                link="/my-account/orders"
+              ></app-dashboard-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

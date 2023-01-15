@@ -1,0 +1,8 @@
+<div class="clor-dd">
+  <span>{{ option?.name }} <span *ngIf="option?.is_required" class="text-danger">*</span></span>
+  <select (change)="onChange($event)">
+    <option appFirstOption [title]="option?.name"></option>
+    <option *ngFor="let value of option?.values" [value]="value?.id">{{ value?.label }}{{ getPrice(value.price, value.price_type) }}</option>
+  </select>
+</div>
+<div class="error-fld" *ngIf="requiredError">{{ MESSAGES.required }}</div>

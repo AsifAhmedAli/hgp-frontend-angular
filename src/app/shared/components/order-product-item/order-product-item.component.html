@@ -1,0 +1,19 @@
+<div class="prdt-info-list" *ngIf="item">
+  <div class="prdt-img-txt">
+    <a [routerLink]="'/product/' + item?.product?.sku">
+      <img appHideBrokerImage [src]="item?.product?.image.url" alt="product" class="img-fluid" />
+    </a>
+    <div class="pdrt-txt">
+      <h4>{{ item?.product?.name | titlecase }}</h4>
+<!--      <p><app-cart-item-variants [item]="item"></app-cart-item-variants></p>-->
+    </div>
+  </div>
+
+  <div class="qty">
+    <span>{{ item?.quantity }}</span>
+  </div>
+
+  <div class="price">
+    <span>{{ item?.total_price | currency }}</span>
+  </div>
+</div>

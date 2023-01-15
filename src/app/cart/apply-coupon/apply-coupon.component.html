@@ -1,0 +1,15 @@
+<div class="form-group">
+  <label>Discount Code</label>
+  <div class="form-group__content">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Enter your code"
+      [(ngModel)]="code"
+      (ngModelChange)="onCodeChange()"
+      (keyup.enter)="apply()">
+    <a href="javascript:" (click)="apply()" *ngIf="!isApplying">Apply</a>
+    <a href="javascript:" [class.no-pointer]="isApplying" *ngIf="isApplying"><app-spinner></app-spinner></a>
+  </div>
+</div>
+<div class="error-fld" *ngIf="errorMessage">{{ errorMessage }}</div>

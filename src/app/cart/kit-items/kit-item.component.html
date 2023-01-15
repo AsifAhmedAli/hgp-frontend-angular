@@ -1,0 +1,51 @@
+<tbody>
+  <tr>
+  <td>
+    <div class="div-float inc-item-wrapper" *ngIf="kitProducts.length">
+      <div class="div-float inc-item-inner">
+
+        <!-- Header Starts -->
+        <div class="div-float inc-header text-left">
+          <h3>Included Items</h3>
+        </div>
+        <!-- Header Ends -->
+
+        <!-- Bottom Section Starts -->
+        <div class="div-float inc-btm-wrap">
+          <div class="div-float inc-btm-scroll">
+
+            <!-- Bottom Inner Starts -->
+            <div class="div-float inc-btm-inn">
+
+              <!-- Repeatable Row Starts -->
+              <div class="row" *ngFor="let product of kitProducts">
+                <div class="col-md-8 text-left">
+                  <div class="sku-number">
+                    <strong>SKU:</strong> {{product?.sku}}
+                  </div>
+                  <div class="div-float item-details">
+                    {{product?.name}}<br />
+                    Net,
+                  </div>
+                </div>
+                <div class="col-md-4 align-self-end">
+                  <div class="item-qty">
+                    <strong>Qty:</strong> {{product.quantity}}
+                  </div>
+                </div>
+              </div>
+              <!-- Repeatable Row Ends -->
+
+            </div>
+            <!-- Bottom Inner Starts -->
+
+          </div>
+        </div>
+        <!-- Bottom Section Ends -->
+
+      </div>
+    </div>
+  </td>
+</tr>
+
+</tbody>

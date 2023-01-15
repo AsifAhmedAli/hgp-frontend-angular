@@ -1,0 +1,2 @@
+<button *ngIf="!isSubmitting" type="submit" class="ps-btn ps-btn--black">{{ submit }}</button>
+<button *ngIf="isSubmitting" type="button" disabled class="ps-btn ps-btn--black"><app-spinner></app-spinner></button>

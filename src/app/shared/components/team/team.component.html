@@ -1,0 +1,65 @@
+<!-- Team Section -->
+<section *ngIf="teams.length">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="creater-sec video-section">
+          <div class="creater-sec-tp">
+            <h4 class="tit-up text-center" [innerHTML]="title"></h4>
+          </div>
+          <div class="creater-sec-two d-none">
+            <div class="creater-sec-two-lft">
+              <div class="fondr-sec">
+                <span class="blue-color">{{ teams[activeIndex].designation }}</span>
+                <h5>{{ teams[activeIndex].name }}</h5>
+              </div>
+              <div class="trophy-sec">
+                <p appBackgroundImage
+                   [path]="teams[activeIndex].achievement_icon">{{ teams[activeIndex].achievement_text }}</p>
+              </div>
+              <div class="trophy-txt">
+                <p>{{ teams[activeIndex].description }}</p>
+              </div>
+              <a href="#" (click)="redirectTo(ctaUrl)" *ngIf="ctaText">{{ ctaText }}</a>
+            </div>
+          </div>
+          <div class="teams-sec-hm">
+            <div class="teams-abst"></div>
+
+              <!-- Testimonials Slider Starts -->
+              <div class="div-float team-slider">
+                <ngx-slick-carousel class="carousel"
+                #slickModal="slick-carousel"
+                [config]="communitySlider" style="width: 100%;">
+                    <!-- Slides Starts -->
+                    <div class="hm-tem-bx slide" *ngFor="let team of teams; let i=index" ngxSlickItem>
+                      <a href="javascript:;" (click)="activeIndex = i">
+                        <div class="tem-bg" appBackgroundImage [path]="team.profile_image">
+                          <span>{{ team.name }}</span>
+                        </div>
+                      </a>
+                      <div class="shdw-tem"></div>
+                    </div>
+                    <!-- Slides Ends -->
+                </ngx-slick-carousel>
+              </div>
+              <!-- Testimonials Slider Ends -->
+
+         <!--
+          <div class="hm-tem-bx" *ngFor="let team of teams; let i=index">
+            <a href="javascript:;" (click)="activeIndex = i">
+              <div class="tem-bg" appBackgroundImage [path]="team.profile_image">
+                <span>{{ team.name }}</span>
+              </div>
+            </a>
+            <div class="shdw-tem"></div>
+          </div>
+          -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

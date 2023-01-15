@@ -1,0 +1,138 @@
+<div class="frm-wrap2">
+
+  <div class="div-floatfull accnt-profl">
+    <app-loader *ngIf="!isPageProcessingDone"></app-loader>
+    <div class="row" *ngIf="isPageProcessingDone">
+      <div class="col-md-12">
+
+        <div class="div-floatfull address-up">
+          <h4 class="ps-form__heading pull-left">{{ title }}</h4> <!--  data-aos-once="true"  data-aos="fade-right" data-aos-duration="500" -->
+          <a routerLink="add" class="pull-right underline">Add Address</a> <!-- data-aos-once="true" data-aos="fade-left" data-aos-duration="500" -->
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row"  *ngIf="isPageProcessingDone">
+
+      <!-- Not found starts -->
+      <div *ngIf="!addressBooks || !addressBooks.length" class="col-md-12">
+        <app-data-not-found text="No address found." description="If you would like to add new address" link="/my-account/address-book/add" linkText="click here"></app-data-not-found>
+      </div>
+      <!-- Not found ends -->
+
+      <div [class.col-md-7]="i % 2 == 0" [class.col-md-5]="i % 2 != 0" *ngFor="let address of addressBooks; let i=index" > <!-- data-aos="fade-up" data-aos-duration="500" data-aos-once="true" -->
+        <div class="row">
+
+          <div class="col-md-5 col-sm-4">
+            <label class="smi-bold fnt-15">Nickname:</label>
+          </div>
+
+          <div class="col-md-7 col-sm-8">
+            <p class="regul fnt-15">{{ address.nickname }}</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-5 col-sm-4">
+            <label class="smi-bold fnt-15">Name:</label>
+          </div>
+
+          <div class="col-md-7 col-sm-8">
+            <p class="regul fnt-15">{{ address.first_name + ' ' + address.last_name}}</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-5 col-sm-4">
+            <label class="smi-bold fnt-15">Street address:</label>
+          </div>
+
+          <div class="col-md-7 col-sm-8">
+            <p class="regul fnt-15">{{ address.street }}</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-5 col-sm-4">
+            <label class="smi-bold fnt-15">City:</label>
+          </div>
+
+          <div class="col-md-7 col-sm-8">
+            <p class="regul fnt-15">{{ address.city }}</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-5 col-sm-4">
+            <label class="smi-bold fnt-15">State:</label>
+          </div>
+
+          <div class="col-md-7 col-sm-8">
+            <p class="regul fnt-15">{{ showFullStateName(address.state) }}</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-5 col-sm-4">
+            <label class="smi-bold fnt-15">Zip:</label>
+          </div>
+
+          <div class="col-md-7 col-sm-8">
+            <p class="regul fnt-15">{{ address.postal_code}}</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-5 col-sm-4">
+            <label class="smi-bold fnt-15">Email:</label>
+          </div>
+
+          <div class="col-md-7 col-sm-8">
+            <p class="regul fnt-15">{{ address.email }}</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-5 col-sm-4">
+            <label class="smi-bold fnt-15">Phone:</label>
+          </div>
+
+          <div class="col-md-7 col-sm-8">
+            <p class="regul fnt-15">{{ address.phone_no }}</p>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <a [routerLink]="['edit', address.id]" class="smi-bold fnt-15 edtbtn">Edit</a>
+            <span class="smi-bold fnt-15 edtbtn pl-2 pr-2">|</span>
+            <a href="javascript:void(0)" (click)="onDelete(address.id)" class="smi-bold fnt-15 edtbtn">Delete</a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

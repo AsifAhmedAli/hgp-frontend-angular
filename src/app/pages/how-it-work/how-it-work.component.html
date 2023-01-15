@@ -1,0 +1,301 @@
+<div class="about-main hiw-mew" *ngIf="isPageProcessingIsdDone">
+  <div class="container">
+    <div class="row" *ngIf="page">
+      <div class="col-md-12">
+        <div class="about-tp-bg">
+          <div
+            class="about-tp-bginnr"
+            appBackgroundImage
+            [path]="page?.banner_image"
+          >
+            <div class="ps-page--default">
+              <div class="ps-page__header">
+                <h3>{{ page?.name }}</h3>
+                <app-breadcrumb page="howItWorks"></app-breadcrumb>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-clearfix></app-clearfix>
+    <!-- hit-second section -->
+    <div class="hiw-secnd-sec">
+      <div class="hiw-icon1"></div>
+      <div class="hiw-secnd-sec-innr">
+        <div class="hiw-secnd-left">
+          <div
+            class="hiw-secnd-leftInnr"
+            appBackgroundImage
+            [path]="page?.banner_left_image"
+          ></div>
+        </div>
+        <div class="hiw-secnd-rgt">
+          <div class="hiw-secnd-rgt-frrgt">
+            <div class="hiw-secnd-rgt-innr">
+              <h3>{{ page?.banner_title }}</h3>
+              <p [innerHTML]="page?.banner_description"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- hit-second section -->
+  </div>
+
+  <app-clearfix></app-clearfix>
+
+  <div class="hiw-third-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="hiw-third-tit">
+            <h4>{{ page?.section_1_title }}</h4>
+            <p [innerHTML]="page?.section_1_description"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="hiw-third-bx-rw">
+            <div class="hiw-third-bx">
+              <div class="hiw-third-bxInnr">
+                <div class="hiw-third-bxInnrTp">
+                  <div
+                    *ngIf="page?.step_1_image"
+                    class="hiw-third-bxInnrTpbg"
+                    appBackgroundImage
+                    [path]="page?.step_1_image"
+                  >
+                    <div class="hiw-stp">
+                      <p>Step 1</p>
+                    </div>
+                  </div>
+
+                  <!--if image not found then show placehodler image-->
+                </div>
+                <div class="hiw-third-bxInnrBT">
+                  <h5>{{ page?.step_1_title }}</h5>
+                  <p>{{ page?.step_1_description }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="hiw-third-bx">
+              <div class="hiw-third-bxInnr">
+                <div class="hiw-third-bxInnrTp">
+                  <div
+                    class="hiw-third-bxInnrTpbg"
+                    *ngIf="page?.step_2_image"
+                    appBackgroundImage
+                    [path]="page?.step_2_image"
+                  >
+                    <div class="hiw-stp">
+                      <p>Step 2</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="hiw-third-bxInnrBT">
+                  <h5>{{ page?.step_2_title }}</h5>
+                  <p>{{ page?.step_2_description }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="hiw-third-bx">
+              <div class="hiw-third-bxInnr mr-0 bf-none">
+                <div class="hiw-third-bxInnrTp">
+                  <div
+                    class="hiw-third-bxInnrTpbg"
+                    *ngIf="page?.step_3_image"
+                    appBackgroundImage
+                    [path]="page?.step_3_image"
+                  >
+                    <div class="hiw-stp">
+                      <p>Step 3</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="hiw-third-bxInnrBT">
+                  <h5>{{ page?.step_3_title }}</h5>
+                  <p>{{ page?.step_3_description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-clearfix></app-clearfix>
+
+  <div class="hiw-forth-sec">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="frth-sec-txt">
+            <div [innerHTML]="page?.section_2_description"></div>
+            <a
+              href="javascript:void(0)"
+              (click)="redirectTo(page?.section_2_cta_link)"
+              class="new-custm-btn"
+              >{{ page?.section_2_cta_title }}</a
+            >
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="frth-sec-img">
+            <img
+              [alt]="page?.section_2_description"
+              *ngIf="page?.section_2_image"
+              [src]="page?.section_2_image | imageUrl"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-clearfix></app-clearfix>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="hiw-ftv-sec">
+          <div class="hiw-ftv-sec-rw">
+            <div class="hiw-ftv-secLft">
+              <div
+                class="hiw-ftv-secLftInnr"
+                style="background-image: url('assets/_img/hiw-image.png')"
+              ></div>
+            </div>
+            <div class="hiw-ftv-secRgt">
+              <h4>{{ page?.section_3_title }}</h4>
+              <div [innerHTML]="page?.section_3_description"></div>
+              <button
+                style="width: 200px"
+                type="button"
+                class="new-custm-btn"
+                *ngIf="page?.section_3_cta_text"
+                (click)="redirectTo(page.section_4_cta_url)"
+              >
+                {{ page.section_3_cta_text }}
+              </button>
+            </div>
+          </div>
+          <app-clearfix></app-clearfix>
+          <div class="hiw-ftv-sec-rw">
+            <div class="hiw-ftv-secRgt hiw-fith-nw frth-sec-txt">
+              <h4>{{ page?.section_4_title }}</h4>
+              <div [innerHTML]="page?.section_4_description"></div>
+              <button
+                style="width: 200px"
+                type="button"
+                class="new-custm-btn"
+                *ngIf="page?.section_4_cta_text"
+                (click)="redirectTo(page.section_4_cta_url)"
+              >
+                {{ page.section_4_cta_text }}
+              </button>
+            </div>
+            <div class="hiw-fith-nw-rgt">
+              <div class="hiw-small-rw">
+                <div class="hiw-whtdot"></div>
+                <div
+                  class="hiw-small-bx1"
+                  *ngIf="page?.section_4_first_image"
+                  appBackgroundImage
+                  [path]="page?.section_4_first_image"
+                ></div>
+              </div>
+              <div class="hiw-small-rw">
+                <div class="hiw-curve2"></div>
+                <div
+                  class="hiw-small-bx1 hiw-small-bx2"
+                  *ngIf="page?.section_4_second_image"
+                  appBackgroundImage
+                  [path]="page?.section_4_second_image"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="hiw-fqs-sec">
+          <div class="faq-srch">
+            <h3>{{ page?.help_section_title }}</h3>
+            <div class="srch-fldnew">
+              <div class="position-relative z-11">
+                <input
+                  type="text"
+                  [placeholder]="page?.help_section_placeholder"
+                  id="new-srch"
+                  (keyup)="onQuery($event)"
+                />
+                <button class="bannr-btn" (click)="onResetSearch()"></button>
+              </div>
+            </div>
+            <app-spinner *ngIf="searchLoading"></app-spinner>
+          </div>
+
+          <div class="faq-rgt-accord">
+            <app-data-not-found
+              [dataNotFound]="NoFaqFound"
+              [text]="MESSAGES.noFAQFound"
+            ></app-data-not-found>
+            <div id="accordion" *ngIf="faqs.length">
+              <ng-template ngFor [ngForOf]="faqs" let-faq let-i="index">
+                <app-faq-item [faq]="faq" [index]="i"></app-faq-item>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- guideline -->
+  <section class="guideline-main">
+    <div class="guide-circle"></div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="guideline">
+            <div class="guideline-txt">
+              <h4>{{ page?.book_title }}</h4>
+              <a
+                *ngIf="showBookDownloadButton"
+                [href]="page?.upload_book[0]?.download_link | imageUrl"
+                target="_blank"
+                >{{ page?.download_book_title }}</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="grow-book">
+            <div class="guide-circle2"></div>
+            <div class="grow-book-img">
+              <img
+                *ngIf="page?.book_image"
+                [src]="page?.book_image | imageUrl"
+                [alt]="page?.book_title"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- <app-clearfix></app-clearfix> -->

@@ -1,0 +1,160 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <div class="detl-srchflds-bx w-100 mr-0">
+        <div class="form-group floating">
+            <div class="input-field-wrap">
+                <span>
+                  <div class="input-field">
+                      
+                      <label for="rf1">First Name *</label>
+                      
+                      <input autocomplete="off" class="form-control frmEle" id="rf1" type="text" data-placeholder="First Name *" formControlName="firstName">
+                  </div>
+              </span>
+            </div>
+
+
+        </div>
+        <ng-template [ngIf]="registerForm.get('firstName').dirty || registerForm.get('firstName').touched">
+            <div class="error-fld" *ngIf="registerForm.get('firstName').hasError('required')">{{ MESSAGES.required }}</div>
+            <div class="error-fld" *ngIf="registerForm.get('firstName').hasError('maxlength')">{{ MESSAGES.firstNameMaxField }}</div>
+        </ng-template>
+
+    </div>
+
+
+    <div class="detl-srchflds-bx w-100 mr-0">
+        <div class="form-group floating">
+            <div class="input-field-wrap">
+                <span>
+                <div class="input-field">
+                    
+                    <label for="rf2">Last Name *</label>
+                    
+                  
+                    <input autocomplete="off" class="form-control frmEle" id="rf2" type="text" data-placeholder="Last Name *" formControlName="lastName">
+                </div>
+            </span>
+            </div>
+
+
+        </div>
+        <ng-template [ngIf]="registerForm.get('lastName').dirty || registerForm.get('lastName').touched">
+            <div class="error-fld" *ngIf="registerForm.get('lastName').hasError('required')">{{ MESSAGES.required }}</div>
+            <div class="error-fld" *ngIf="registerForm.get('lastName').hasError('maxlength')">{{ MESSAGES.lastNameMaxField }}</div>
+        </ng-template>
+
+    </div>
+
+
+    <div class="detl-srchflds-bx w-100 mr-0">
+        <div class="form-group floating">
+            <div class="input-field-wrap">
+                <span>
+              <div class="input-field">
+                  
+                  <label for="rf3">Email Address *</label>
+                  <input autocomplete="off" class="form-control frmEle" id="rf3" type="email" formControlName="email" data-placeholder="Email Address *">
+              </div>
+          </span>
+            </div>
+
+
+        </div>
+        <ng-template [ngIf]="registerForm.get('email').dirty || registerForm.get('email').touched">
+            <div class="error-fld" *ngIf="registerForm.get('email').hasError('required')">{{ MESSAGES.required }}</div>
+            <div class="error-fld" *ngIf="registerForm.get('email').hasError('email')">{{ MESSAGES.email }}</div>
+            <div class="error-fld" *ngIf="registerForm.get('email').hasError('emailAlreadyTaken')">{{ MESSAGES.emailTaken }}</div>
+            <div class="error-fld" *ngIf="registerForm.get('email').hasError('maxlength')">{{ MESSAGES.generalMaxLength }}</div>
+        </ng-template>
+
+    </div>
+
+
+    <div class="detl-srchflds-bx w-100 mr-0">
+        <div class="form-group floating">
+            <div class="input-field-wrap">
+                <span>
+            <div class="input-field">
+                
+                <label for="rf4">Phone *</label>
+                
+                <input autocomplete="off" mask="000-000-0000" id="rf4" class="form-control frmEle" type="text" data-placeholder="Phone *" formControlName="phone">
+            </div>
+        </span>
+            </div>
+
+
+        </div>
+        <ng-template [ngIf]="registerForm.get('phone').dirty || registerForm.get('phone').touched">
+            <div class="error-fld" *ngIf="registerForm.get('phone').hasError('required')">{{ MESSAGES.required }}</div>
+            <div class="error-fld" *ngIf="registerForm.get('phone').hasError('minlength')">{{ MESSAGES.phoneMinLength }}</div>
+            <div class="error-fld" *ngIf="registerForm.get('phone').hasError('maxlength')">{{ MESSAGES.phoneMaxLength }}</div>
+        </ng-template>
+
+    </div>
+
+
+    <div class="detl-srchflds-bx w-100 mr-0">
+        <div class="form-group floating">
+            <div class="input-field-wrap">
+                <span>
+            <div class="input-field">
+                
+                <label for="rf5">Password *</label>
+                
+                
+
+                <input class="form-control regPass passShow frmEle" id="rf5" type="password" data-placeholder="Password *" formControlName="password" autocomplete="current-password">
+                <span toggle=".regPass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            </div>
+            </span>
+        </div>
+
+
+    </div>
+    <ng-template [ngIf]="registerForm.get('password').dirty || registerForm.get('password').touched">
+        <div class="error-fld" *ngIf="registerForm.get('password').hasError('required')">{{ MESSAGES.required }}</div>
+        <div class="error-fld" *ngIf="registerForm.get('password').hasError('minlength')">{{ MESSAGES.minPasswordLength }}</div>
+        <!--    <div class="error-fld" *ngIf="registerForm.get('password').hasError('maxlength')">{{ MESSAGES.maxPasswordLength }}</div>-->
+        <div class="error-fld" *ngIf="!registerForm.get('password').hasError('minlength') && (registerForm.get('password').hasError('hasNumber') || registerForm.get('password').hasError('hasCapitalCase') || registerForm.get('password').hasError('hasSmallCase'))">{{ MESSAGES.passwordAdvanceValidation }}</div>
+    </ng-template>
+
+    </div>
+
+
+    <div class="detl-srchflds-bx w-100 mr-0">
+        <div class="form-group floating">
+            <div class="input-field-wrap">
+                <span>
+          <div class="input-field">
+              
+              <label for="rf6">Confirm Password *</label>
+              
+
+
+                <input class="form-control confirmPass passShow frmEle" id="rf6" type="password" data-placeholder="Confirm Password *" formControlName="password_confirmation">
+                <span toggle=".confirmPass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            </div>
+            </span>
+        </div>
+
+
+    </div>
+    <ng-template [ngIf]="registerForm.get('password_confirmation').dirty || registerForm.get('password_confirmation').touched">
+        <div class="error-fld" *ngIf="registerForm.get('password_confirmation').hasError('required')">{{ MESSAGES.required }}</div>
+        <div class="error-fld" *ngIf="!registerForm.get('password_confirmation').hasError('required') && registerForm.get('password_confirmation').value != registerForm.get('password').value && registerForm.get('password_confirmation').touched">{{ MESSAGES.confirm_password }}</div>
+    </ng-template>
+
+    </div>
+
+
+
+    <div class="ps-form__desc">
+        <p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</p>
+    </div>
+    <div class="form-group submit text-center">
+        <!--    <button class="ps-btn ps-btn&#45;&#45;fullwidth ps-btn&#45;&#45;black" type="submit">Register</button>-->
+        <app-submit-button [isSubmitting]="isSubmitting" submit="Register"></app-submit-button>
+    </div>
+</form>

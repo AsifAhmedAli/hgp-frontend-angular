@@ -1,0 +1,16 @@
+<div class="ps-page--default">
+  <div class="container">
+    <div class="ps-page__header">
+      <h3 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="200" data-aos-offset="0">My Account</h3>
+      <app-breadcrumb [page]="page"></app-breadcrumb>
+    </div>
+
+    <div class="btn-wrap">
+      <app-my-account-header></app-my-account-header>
+
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
+  </div>
+</div>
+
+<app-clearfix></app-clearfix>

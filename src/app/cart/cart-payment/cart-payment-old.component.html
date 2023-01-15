@@ -1,0 +1,88 @@
+<figure class="ps-block__payment-methods">
+  <app-loader *ngIf="!token"></app-loader>
+  <div class="ps-radio" *ngIf="token">
+    <input class="form-control" type="radio" id="payment-method-1" name="paymentMethod" value="credit" (change)="onChangeCheckbox($event)"/>
+    <label for="payment-method-1">Credit Card</label>
+  </div>
+  <div style="display: none" [class.show]="token && paymentMethod === 'credit'">
+    <div *ngIf="savedCards.length">
+      <select class="ps-select form-control" (change)="onChange($event.target)">
+        <option appFirstOption title="Payment Method"></option>
+        <option *ngFor="let card of savedCards" [selected]="card?.default" [value]="card?.token">
+          {{ card?.maskedNumber }} ({{ card?.cardholderName | titlecase }}) <ng-template [ngIf]="card?.default"> - Default</ng-template>
+        </option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+     <div class="mt-5 mb-5">
+        <span [class.show]="payFrom === 'other'" [class.hidden]="payFrom !== 'other'" id="cardForm">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                  <input maxlength="150" [(ngModel)]="cardholdersName" class="qa-crd-nam cname form-control" name="cardholderName" placeholder="Name on Card *"
+                         type="text"/>
+              </div>
+              <div class="error-fld" *ngIf="cardholdersName === ''">{{ MESSAGES.required }}</div>
+<!--              <div class="error-fld" *ngIf="cardNameIsRequired">{{ MESSAGES.required }}</div>-->
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <div id="card-number" class="hosted-field form-control"></div>
+              </div>
+               <div class="error-fld" *ngIf="cardNumberIsRequired">
+                  {{ MESSAGES.required }}
+                </div>
+                <div class="error-fld" *ngIf="cardNumberIsInvalid">
+                  {{ MESSAGES.cardNumberIsInvalid }}
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group" >
+                <div id="expiration-date" class="hosted-field form-control"></div>
+              </div>
+               <div class="error-fld" *ngIf="expirationDateIsRequired">
+                    {{ MESSAGES.required }}
+                  </div>
+
+                  <div class="error-fld" *ngIf="expirationDateIsInvalid">
+                    {{ MESSAGES.expirationDateIsInvalid }}
+                  </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div id="cvv" class="hosted-field form-control"></div>
+              </div>
+                <div class="error-fld" style="font-size: 12px;" *ngIf="cvvIsRequired">
+                  {{ MESSAGES.required }}
+                </div>
+
+                <div class="error-fld" style="font-size: 12px;" *ngIf="cvvIsInvalid">
+                  {{ MESSAGES.cvvIsInvalid }}
+                </div>
+            </div>
+          </div>
+        </span>
+
+        <div>
+          <button *ngIf="!isSubmitting" type="button" class="ps-btn ps-btn--fullwidth ps-btn--black" (click)="tokenizeUserDetails()">CONTINUE</button>
+          <button *ngIf="isSubmitting" type="button" class="ps-btn ps-btn--fullwidth ps-btn--black" disabled><app-spinner></app-spinner></button>
+        </div>
+     </div>
+  </div>
+  <div class="ps-radio" *ngIf="token">
+    <input class="form-control" type="radio" id="payment-method-2" name="paymentMethod" value="paypal" (change)="onChangeCheckbox($event)"/>
+    <label for="payment-method-2">Paypal</label>
+  </div>
+  <div style="display: none" [class.show]="token && paymentMethod === 'paypal'">
+    <div>
+      <button class="pointer paypalBtn" [disabled]="payPalSubmitting || isSubmitting" (click)="checkoutWithPayPal()">
+        <img *ngIf="!isSubmitting" src="assets/_img/paypal.png" alt="paypal payment" />
+        <app-loader *ngIf="isSubmitting"></app-loader>
+      </button>
+      <span class="ml-2" *ngIf="!isSubmitting">The safer, easier way to pay</span>
+    </div>
+  </div>
+  <p *ngIf="token && cart?.billing_address_first_name">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our<a href="#"> privacy policy.</a></p>
+</figure>

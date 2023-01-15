@@ -1,0 +1,54 @@
+<div id="searchField" class="wc-search div-float"> <!--  style="display: none;" -->
+
+  <div class="srch-fld div-float" style="width: 94%; margin-left: 3%;">
+    <a class="srch-close closi" href="javascript:" onclick="closeSearch()" (click)="hits = []"><i class="fa fa-times"></i></a>
+    <input type="text" #searchInput (keyup)="onQuery($event)" autocomplete="off" name="srch"
+           placeholder="Search Products or Blogs"/>
+    <button type="button" class=""> <img src="assets/_img/search-icon.png" class="img-fluid"/></button>
+
+  </div>
+  <div class="div-float srch-prdt-lower" [style.display]="noRecordFound ? 'block' : 'none'">
+    <div class="srch-prdt-row div-float">
+      No Record Found.
+    </div>
+  </div>
+
+  <div class="div-float srch-prdt-lower" style="display: block; text-align: center">
+    <app-spinner *ngIf="loading"></app-spinner>
+    <div class="srch-prdt-row div-float" [style.display]="hits.length > 0 ? 'block' : 'none'">
+
+        <ng-template ngFor [ngForOf]="hits" let-hit let-i="index"
+                     let-first="first">
+          <!--   display one product start -->
+          <div class="srch-prdt-bx" *ngIf="i < 5">
+
+            <!--if product -->
+
+            <a *ngIf="hit.type == 'product'; else blogSection" [routerLink]="['/product', hit?.sku]" onclick="closeSearch()" (click)="resetHits()">
+              <div class="srch-prdtimg">
+                <img appHideBrokerImage [alt]="hit?.name" [src]="hit?.image?.url" class="img-fluid"/>
+              </div>
+              <span *ngIf="hit?.name" [innerHTML]="hit?.name"></span>
+            </a>
+
+            <!--else blog section -->
+            <ng-template #blogSection>
+              <a *ngIf="hit.type == 'blog'" [routerLink]="['/blog', hit?.slug]" onclick="closeSearch()" (click)="resetHits()">
+                <div class="srch-prdtimg">
+                  <img appHideBrokerImage [alt]="hit?.name" [src]="hit?.image| imageUrl" class="img-fluid"/>
+                </div>
+                <span *ngIf="hit?.name" [innerHTML]="hit?.name"></span>
+              </a>
+            </ng-template>
+
+          </div>
+          <!--  display one product end  -->
+        </ng-template>
+    </div>
+
+
+  </div>
+  <div class="div-float" *ngIf="hits.length">
+    <a routerLink="search-details" [queryParams]="{query: query, sortBy: 'default'}" onclick="closeSearch();" (click)="resetHits()"  class="btn-shop">View All Items</a>
+  </div>
+</div>

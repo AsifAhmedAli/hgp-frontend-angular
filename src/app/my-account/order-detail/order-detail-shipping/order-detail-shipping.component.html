@@ -1,0 +1,8 @@
+<app-order-detail-title-content title="First Name" [content]="order?.shipping_first_name"></app-order-detail-title-content>
+<app-order-detail-title-content title="Last Name" [content]="order?.shipping_last_name"></app-order-detail-title-content>
+<app-order-detail-title-content title="Street Address" [content]="order?.shipping_address_1"></app-order-detail-title-content>
+<app-order-detail-title-content title="City" [content]="order?.shipping_city"></app-order-detail-title-content>
+<app-order-detail-title-content title="State" [content]="state"></app-order-detail-title-content>
+<app-order-detail-title-content title="Zip Code" [content]="order?.shipping_zip"></app-order-detail-title-content>
+<app-order-detail-title-content title="Email" [content]="order?.shipping_address_email" *ngIf="order?.is_different_billing != '0'"></app-order-detail-title-content>
+<app-order-detail-title-content title="Phone" [content]="order?.shipping_address_phone" *ngIf="order?.is_different_billing != '0'"></app-order-detail-title-content>

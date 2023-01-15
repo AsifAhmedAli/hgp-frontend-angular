@@ -1,0 +1,17 @@
+<ng-template [ngIf]="product && isAuthenticated">
+  <a href="javascript:void(0)" *ngIf="product?.is_favorite_count === 0 && !processing" title="Add to Favorite" (click)="addToFavorite()" class="sldr-wshbtn">
+    <span *ngIf="showText">Add to Wishlist </span>
+  </a>
+  <a href="javascript:void(0)" *ngIf="product?.is_favorite_count > 0 && !processing" title="Remove From Favorite" (click)="removeFromFavorite()"  class="sldr-wshbtn active">
+    <span *ngIf="showText">Remove From Wishlist</span>
+  </a>
+  <a href="javascript:" *ngIf="processing">
+    <app-spinner></app-spinner>
+  </a>
+</ng-template>
+
+<ng-template [ngIf]="product && !isAuthenticated">
+  <a class="sldr-wshbtn" href="javascript:void(0)" (click)="onUnAuthenticated()">
+    <span *ngIf="showText">Add to Wishlist </span>
+  </a>
+</ng-template>

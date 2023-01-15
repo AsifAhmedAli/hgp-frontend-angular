@@ -1,0 +1,204 @@
+<div class="ps-page--default ps-page--contact">
+  <!--style="padding: 0px 15px 100px;" -->
+  <div class="ps-page__header bg--top" style="padding: 0">
+    <!-- appBackgroundImage [path]="'assets/_img/contact-bg1.jpg'" -->
+    <div class="container">
+      <h3>{{ title }}</h3>
+      <!-- <app-breadcrumb page="contactUs"></app-breadcrumb> -->
+    </div>
+  </div>
+  <div class="ps-page__content">
+    <div class="container">
+      <div class="ps-contact">
+        <div class="ps-section__left">
+          <form
+            class="ps-form--contact"
+            [formGroup]="contactUsForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <!-- Floating Label Structure Ends -->
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="detl-srchflds-bx w-100 mr-0">
+                  <div class="form-group floating">
+                    <div class="input-field-wrap">
+                      <span>
+                        <div class="input-field">
+                          <label for="contctN">Enter Name</label>
+                          <input
+                            class="form-control frmEle"
+                            id="contctN"
+                            type="text"
+                            data-placeholder="Enter Name"
+                            formControlName="name"
+                          />
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                  <ng-template
+                    [ngIf]="
+                      contactUsForm.get('name').dirty ||
+                      contactUsForm.get('name').touched
+                    "
+                  >
+                    <div
+                      class="error-fld"
+                      *ngIf="contactUsForm.get('name').hasError('required')"
+                    >
+                      {{ MESSAGES.required }}
+                    </div>
+                    <div
+                      class="error-fld"
+                      *ngIf="contactUsForm.get('name').hasError('maxlength')"
+                    >
+                      {{ MESSAGES.contactUsNameMaxLength }}
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="detl-srchflds-bx w-100 mr-0">
+                  <div class="form-group floating">
+                    <div class="input-field-wrap">
+                      <span>
+                        <div class="input-field">
+                          <label for="cem">Enter Email</label>
+
+                          <input
+                            class="form-control frmEle"
+                            id="cem"
+                            type="email"
+                            data-placeholder="Enter Email"
+                            formControlName="email"
+                          />
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                  <ng-template
+                    [ngIf]="
+                      contactUsForm.get('email').dirty ||
+                      contactUsForm.get('email').touched
+                    "
+                  >
+                    <div
+                      class="error-fld"
+                      *ngIf="contactUsForm.get('email').hasError('required')"
+                    >
+                      {{ MESSAGES.required }}
+                    </div>
+                    <div
+                      class="error-fld"
+                      *ngIf="contactUsForm.get('email').hasError('email')"
+                    >
+                      {{ MESSAGES.email }}
+                    </div>
+                    <div
+                      class="error-fld"
+                      *ngIf="contactUsForm.get('email').hasError('maxlength')"
+                    >
+                      {{ MESSAGES.generalMaxLength }}
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+
+            <div class="detl-srchflds-bx w-100 mr-0 txtara-flot">
+              <div class="form-group floating">
+                <div class="input-field-wrap">
+                  <span>
+                    <div class="input-field">
+                      <label for="ctxt">Enter Your Message"</label>
+                      <textarea
+                        class="form-control frmEle"
+                        id="ctxt"
+                        rows="6"
+                        data-placeholder="Enter Your Message"
+                        formControlName="message"
+                      ></textarea>
+                    </div>
+                  </span>
+                </div>
+              </div>
+              <ng-template
+                [ngIf]="
+                  contactUsForm.get('message').dirty ||
+                  contactUsForm.get('message').touched
+                "
+              >
+                <div
+                  class="error-fld"
+                  *ngIf="contactUsForm.get('message').hasError('required')"
+                >
+                  {{ MESSAGES.required }}
+                </div>
+              </ng-template>
+            </div>
+
+            <div class="form-group submit text-center">
+              <button
+                (keydown.enter)="onSubmit()"
+                type="submit"
+                class="ps-btn ps-btn--black"
+                [disabled]="isSubmitting"
+              >
+                {{ isSubmitting ? "Processing..." : "Send message" }}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="ps-section__right cr-align">
+          <ul class="ps-list--social">
+            <li>
+              <a [href]="getSettingValue('site.facebook')" target="_blank"
+                ><i class="fa fa-facebook"></i
+              ></a>
+            </li>
+            <li>
+              <a [href]="getSettingValue('site.twitter')" target="_blank"
+                ><i class="fa fa-twitter"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                [href]="getSettingValue('site.youtube')"
+                target="_blank"
+                href="javascript:void(0)"
+                ><i class="fa fa-youtube-play"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                [href]="getSettingValue('site.instagram')"
+                target="_blank"
+                href="javascript:void(0)"
+                ><i class="fa fa-instagram"></i
+              ></a>
+            </li>
+          </ul>
+          <figure>
+            <figcaption>Headquaters</figcaption>
+            <p>{{ getSettingValue("site.address") }}</p>
+          </figure>
+          <figure>
+            <figcaption>Get in Touch</figcaption>
+            <aside>
+              <p><strong class="text-uppercase">Phone Number</strong></p>
+              <p>{{ getSettingValue("site.contact_number") }}</p>
+            </aside>
+            <aside>
+              <p><strong class="text-uppercase">Email</strong></p>
+              <p>
+                <a [href]="'mailto:' + getSettingValue('site.email')">{{
+                  getSettingValue("site.email")
+                }}</a>
+              </p>
+            </aside>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

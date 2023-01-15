@@ -1,0 +1,21 @@
+<div  class="category-items mr-0 ml-0 float-left" style="margin-bottom: 40px;">
+    <a [routerLink]="'/blog/' + blog?.slug">
+        <div class="category-items-img float-left">
+            <div class="category-img">
+                <img appHideBrokerImage [alt]="blog.name" [src]="blog.image | imageUrl"/>
+            </div>
+        </div>
+        <span>{{ blog?.name | excerpt:65 }}</span>
+        <div class="ps-product__sku mt-3" style="visibility: hidden">No SKU</div>
+    </a>
+
+    <div class="sldr-pric-tags" style="visibility: hidden">
+        <h4>
+            <span>No Price</span>
+        </h4>
+    </div>
+
+    <div class="sldr-dd-wshlst" style="justify-content: flex-end">
+        <a [routerLink]="'/blog/' + blog?.slug" class="blue-color">Blog Details</a>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="custm-mega-menu" id="mega-menu">
+  <div class="custm-mega-menu-innr">
+    <div class="mega-menu-rgt">
+      <h2 class="mbtm" *ngIf="smallKit">
+        <a
+          [routerLink]="'/kit/' + smallKit.id"
+          (click)="hidePopup()"
+          class="tit-lnk"
+          >Shop Kits</a
+        >
+      </h2>
+      <a
+        *ngIf="smallKit"
+        (click)="goToKitDetail('/kit/' + smallKit.id)"
+        [routerLink]="'/kit/' + smallKit.id"
+        class="mm-image-link"
+      >
+        <div class="shop-kits-sec">
+          <div class="tab-innr-cont-rgt-innr">
+            <img [src]="smallKit?.image | imageUrl" class="img-fluid" />
+          </div>
+        </div>
+      </a>
+      <a routerLink="/products" class="mega_menu_a" (click)="hidePopup()"
+        >View All Products</a
+      >
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'Roobert';
+    src: url('Roobert-Medium.eot');
+    src: url('Roobert-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Roobert-Medium.woff2') format('woff2'),
+        url('Roobert-Medium.woff') format('woff'),
+        url('Roobert-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('Roobert-Heavy.eot');
+    src: url('Roobert-Heavy.eot?#iefix') format('embedded-opentype'),
+        url('Roobert-Heavy.woff2') format('woff2'),
+        url('Roobert-Heavy.woff') format('woff'),
+        url('Roobert-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('Roobert-Regular.eot');
+    src: url('Roobert-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Roobert-Regular.woff2') format('woff2'),
+        url('Roobert-Regular.woff') format('woff'),
+        url('Roobert-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('Roobert-SemiBold.eot');
+    src: url('Roobert-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Roobert-SemiBold.woff2') format('woff2'),
+        url('Roobert-SemiBold.woff') format('woff'),
+        url('Roobert-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('Roobert-Bold.eot');
+    src: url('Roobert-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Roobert-Bold.woff2') format('woff2'),
+        url('Roobert-Bold.woff') format('woff'),
+        url('Roobert-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('Roobert-Light.eot');
+    src: url('Roobert-Light.eot?#iefix') format('embedded-opentype'),
+        url('Roobert-Light.woff2') format('woff2'),
+        url('Roobert-Light.woff') format('woff'),
+        url('Roobert-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'abril_textregular';
+    src: url('abril_text_regular-webfont.eot');
+    src: url('abril_text_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('abril_text_regular-webfont.woff2') format('woff2'),
+         url('abril_text_regular-webfont.woff') format('woff'),
+         url('abril_text_regular-webfont.ttf') format('truetype'),
+         url('abril_text_regular-webfont.svg#abril_textregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+            <!--expend first faq ques-->
+            <!-- achor used without href to full fil requirement QA stop browser scroll on click -->
+            <a *ngIf="index == 0; else questionBlock" class="btn btn-link" data-toggle="collapse"
+                    [attr.data-target]="'#faq' + faq.id"
+                    aria-expanded="true" [attr.aria-controls]="'faq'+faq.id">
+                {{faq.question}}
+            </a>
+
+            <ng-template #questionBlock>
+                <!-- achor used without href to full fil requirement QA stop browser scroll on click -->
+                <a class="btn btn-link" data-toggle="collapse"
+                        [attr.data-target]="'#faq' + faq.id"
+                        aria-expanded="false" [attr.aria-controls]="'faq'+faq.id">
+                    {{faq.question}}
+                </a>
+            </ng-template>
+        </h5>
+    </div>
+    <!--expend first faq ans-->
+    <div *ngIf="index == 0; else answerBlock" [id]="'faq'+faq.id" class="collapse show"
+         aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body" [innerHTML]="faq.answer">
+        </div>
+    </div>
+
+    <ng-template #answerBlock>
+        <div [id]="'faq'+faq.id" class="collapse"
+             aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body" [innerHTML]="faq.answer">
+            </div>
+        </div>
+    </ng-template>
+</div>

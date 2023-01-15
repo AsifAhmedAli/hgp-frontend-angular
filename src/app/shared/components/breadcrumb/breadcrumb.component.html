@@ -1,0 +1,7 @@
+<ul class="ps-breadcrumb" > <!-- data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="100" data-aos-offset="0" -->
+  <li><a routerLink="/">Home</a></li>
+  <li *ngFor="let crumb of crumbs">
+    <a *ngIf="crumb?.path" [routerLink]="crumb?.path" [queryParams]="crumb.params">{{ crumb?.title }}</a>
+    <ng-template [ngIf]="!crumb?.path">{{ crumb?.title }}</ng-template>
+  </li>
+</ul>

@@ -1,0 +1,5 @@
+<ul class="ps-pagination">
+  <li *ngIf="currentPage > 1" class="ps-pagination__back"><a [routerLink]="link" queryParamsHandling="merge" [queryParams]="{page: (+currentPage - 1)}"><i class="icon-chevron-left"></i></a></li>
+  <li *ngFor="let page of pages" routerLinkActive="active"><a [routerLink]="link" queryParamsHandling="merge" [queryParams]="{page: page}"><span>{{ page }}</span></a></li>
+  <li *ngIf="currentPage < pages.length" class="ps-pagination__next"><a [routerLink]="link" queryParamsHandling="merge" [queryParams]="{page: (+currentPage + 1)}"><i class="icon-chevron-right"></i></a></li>
+</ul>

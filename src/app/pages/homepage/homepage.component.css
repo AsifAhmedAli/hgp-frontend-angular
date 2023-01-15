@@ -1,0 +1,22 @@
+.serch-loder {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.show-less {
+  height: 9.5rem;
+  overflow: hidden;
+  padding: 1rem;
+}
+.showMoreBtn {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.pointer {
+  cursor: pointer;
+}

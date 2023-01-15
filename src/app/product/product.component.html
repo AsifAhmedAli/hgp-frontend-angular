@@ -1,0 +1,350 @@
+<div class="ps-page ps-page--product-detail">
+  <div class="container">
+    <div class="ps-page__header">
+      <app-custom-breadcrumb [crumbs]="crumbs"></app-custom-breadcrumb>
+    </div>
+    <app-loader *ngIf="!product"></app-loader>
+    <div class="ps-product--detail" *ngIf="product">
+      <div class="ps-product__header">
+        <div class="ps-product__thumbnail" data-vertical="false">
+          <!-- data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" -->
+          <figure>
+            <div class="ps-wrapper">
+              <div class="ps-product__gallery" data-arrow="true" id="lightgallery">
+
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                  <div ngxSlickItem *ngFor="let image of media; let i = index" class="slide">
+                    <a [href]="image?.src">
+                      <table>
+                        <tr>
+                          <td>
+                            <img [src]="image?.src" alt="">
+                          </td>
+                        </tr>
+                      </table>
+                    </a> <!-- (click)="openLightbox(i)" -->
+                  </div>
+                </ngx-slick-carousel>
+              </div>
+            </div>
+          </figure>
+          <div class="ps-product__variants" data-item="4" data-md="3" data-sm="3" data-arrow="false">
+            <ngx-slick-carousel class="carousel" [config]="slickThumbConfig">
+              <div ngxSlickItem *ngFor="let image of media; let i = index" class="slide">
+                <div class="item"><a (click)="slickModal.slickGoTo(i)">
+                  <table>
+                    <tr>
+                      <td>
+                        <img [src]="image?.src" alt="">
+                      </td>
+                    </tr>
+                  </table>
+                </a></div>
+              </div>
+            </ngx-slick-carousel>
+          </div>
+        </div>
+        <div class="ps-product__info">
+
+          <!-- data-aos="fade-left" data-aos-duration="1000" data-aos-once="true" -->
+          <div class="ps-product__info-header position-relative">
+            <div class="brand-ico-img" *ngIf="product.logo && product.logo != ''">
+              <img [src]="product.logo | imageUrl" alt="Brand Logo" />
+            </div>
+          </div>
+          <div class="ps-product__info-header">
+            <h4>
+              <span class="" style="display: inline-block" style="color: #999;">Brand: </span>
+              <span><a [routerLink]="['/products']" [queryParams]="{'brands': product?.brand?.value}" class="yelo-hovr">
+                  {{ product?.brand?.value }} </a></span>
+            </h4>
+
+            <h2 class="ps-product__title">{{ product?.name }}</h2>
+            <!-- <h4>
+              <span class="badge badge-secondary" style="display: inline-block">Brand: </span>
+              <span><a [routerLink]="['/products']" [queryParams]="{'brands': product.brand.value}" class="yelo-hovr"> {{ product.brand.value }} </a></span>
+            </h4> -->
+
+            <div class="mt-5">
+              <span class="ps-product__sku" *ngIf="product?.sku">SKU: {{ product?.sku }}</span>
+              <div class="stock" *ngIf="product?.model">
+                <span>Model Number:</span>
+                <span> {{ product?.model }}</span>
+              </div>
+            </div>
+            <h4 class="ps-product__price" [innerHTML]="product?.retailPrice | currency"
+                *ngIf="product.retailPrice != 0"></h4>
+            <h4 *ngIf="product.isdiscontinued && product.is_in_stock"><span
+              class="badge badge-secondary">Discontinued</span> </h4>
+          </div>
+
+          <div class="ps-product__desc text-center" *ngIf="product?.family?.items?.length > 1">
+            <app-product-option class="text-left" *ngIf="!optionsLoader" [family]="product.family" [sku]="sku"
+                                (optionsSelected)="onOptionSelection($event)"></app-product-option>
+            <app-spinner *ngIf="optionsLoader"></app-spinner>
+          </div>
+
+          <div class="ps-product__shopping">
+            <figure class="align-btn-txt">
+              <div class="form-group--number" *ngIf="product.is_in_stock">
+                <button class="up" (click)="increaseQty()"></button>
+                <button class="down" (click)="decreaseQty()"></button>
+                <input class="form-control" type="text" placeholder="0" [(ngModel)]="quantity">
+              </div>
+              <a *ngIf="product.is_in_stock" class="ps-btn ps-btn--black" href="javascript:" appAddToCart
+                 [product]="product" [qty]="quantity" (adding)="onAddingToCart($event)" (added)="onAddedToCart()">
+                <ng-template [ngIf]="!isAddingToCart">
+                  Add to Cart
+                </ng-template>
+                <app-spinner *ngIf="isAddingToCart"></app-spinner>
+              </a>
+              <button *ngIf="!product.is_in_stock" class="ps-btn outstck-btns" type="button">Out of Stock</button>
+              <!-- <a *ngIf="!product.is_in_stock disable" class="ps-btn ps-btn--black" href="javascript:">Out of Stock</a> -->
+              <app-add-product-to-favorite [product]="product"></app-add-product-to-favorite>
+            </figure>
+
+
+
+
+            <div class="wrning-icon-main">
+              <div class="wraning-icon navbar" *ngIf="product.is_prop65_warning">
+                <div class="dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown"></a>
+                  <div class="dropdown-menu prodct-toltip">
+                    <h6>Prop 65 Warning</h6>
+                    <p>Warning: Cancer and reproductive harm. <a href="https://www.p65warnings.ca.gov/"
+                                                                 target="_blank">https://www.p65warnings.ca.gov/</a></p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="wraning-icon navbar" *ngIf="product.warranty"
+                   style="background-image: url('/assets/_img/warranty_icon.jpg')">
+                <div class="dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown"></a>
+                  <div class="dropdown-menu prodct-toltip wrnt-drop">
+                    <h6>Warranty</h6>
+                    <p>{{ product.warranty }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="wraning-icon navbar" *ngIf="product.is_fcc"
+                   style="background-image: url('/assets/_img/fcc_icon.jpg'); background-position: 40% center;">
+                <div class="dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown"></a>
+                  <div class="dropdown-menu prodct-toltip">
+                    <h6>Federal Communications Commission</h6>
+                    <p>The<span style="font-weight: bold;"> FCC</span> mark is a <span style="font-weight: bold;">
+                        certification</span> mark employed on electronic products manufactured or sold in the United
+                      States which certifies that the electromagnetic interference from the device is under limits
+                      approved by the Federal Communications Commission for its application.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="wraning-icon navbar" *ngIf="product.is_csa"
+                   style="background-image: url('/assets/_img/csa_icon.png')">
+                <div class="dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown"></a>
+                  <div class="dropdown-menu prodct-toltip">
+                    <h6>Canadian Standards Association</h6>
+                    <p>The Canadian Standards Association (CSA) is a nonprofit association serving business, industry,
+                      government and consumers in Canada and the global marketplace. Among many other activities, CSA
+                      (<a href="https://csa.ca/" class="external-link" rel="nofollow"
+                          style="text-decoration: underline;"><i>www.csa.ca</i></a>) develops standards that enhance
+                      public safety.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md-2 text-center">
+                  <i class="custo-calendar-cls fa fa-calendar"></i>
+                </div>
+                <div class="col-md-10">
+                  <p class="grow-pro-specialist">Consultant with a GrowPro Specialist</p>
+                  <p class="virtual-consultation">Start a virtual consultation now</p>
+                </div>
+              </div>
+
+
+
+
+            </div>
+
+            <app-clearfix></app-clearfix>
+          </div>
+          <div class="ps-product__specification">
+            <p *ngIf="product?.category">
+              <strong>CATEGORY:</strong>
+              <a [routerLink]="['/products']" [queryParams]="{'categories': product.category.short_name}">{{
+                product.category.name }}</a>
+            </p>
+            <span [innerHTML]="product?.description | sanitizer"></span>
+          </div>
+          <div class="ps-product__rating">
+            <!-- <ngx-stars [readonly]="true" [initialStars]="product?.rating" [color]="Colors.starsColor"></ngx-stars> -->
+            <span class="review-count">{{ product?.reviews?.length }} {{ 'Review' | singularPlural:
+              product?.reviews?.length }}</span>
+          </div>
+          <div class="ps-product__sharing">
+            <ul class="ps-list--social">
+              <li><a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + shareURL" target="_blank"
+                     title="Facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a [href]="'https://twitter.com/intent/tweet?text=' + shareURL" target="_blank" title="Twitter"><i
+                class="fa fa-twitter"></i></a></li>
+              <li><a target="_blank" title="Pintrest"
+                     [href]="'https://www.pinterest.com/pin/create/button/?url=' + shareURL + '&media=' + product.image.url"><i
+                class="fa fa-pinterest-p"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="ps-product__content ps-tab-root">
+        <!-- data-aos="fade-up" data-aos-duration="1000" -->
+        <div class="container">
+          <ul class="ps-tab-list">
+            <li [class.active]="fragment === 'description'"><a [routerLink]="currentPath"
+                                                               fragment="description">Description</a>
+            </li>
+            <li [class.active]="fragment === 'reviews'"><a [routerLink]="currentPath" fragment="reviews">Reviews<sup
+              style="font-size: 65%;"> ( {{ product?.reviews?.length }} )</sup></a></li>
+            <li [class.active]="fragment === 'additional-information'"><a [routerLink]="currentPath"
+                                                                          fragment="additional-information">Additional
+              Information</a></li>
+            <li [class.active]="fragment === 'specifications'"><a [routerLink]="currentPath"
+                                                                  fragment="specifications">Specifications</a></li>
+          </ul>
+          <div class="ps-tabs">
+            <div class="ps-tab" [class.active]="fragment === 'description'">
+              <div class="row mb-5">
+                <div class="col-md-12 ">
+                  <div class="ps-document" [innerHTML]="product?.webdescription | sanitizer"></div>
+                </div>
+              </div>
+            </div>
+            <div class="ps-tab" [class.active]="fragment === 'reviews'">
+              <div class="ps-product__review">
+                <h4>{{ product?.reviews?.length }} {{ 'Review' | singularPlural: product?.reviews?.length }}
+                  for {{ product?.name | titlecase }}</h4>
+                <div *ngFor="let review of product.reviews; trackBy: trackReviewById"
+                     class="ps-block--comment ps-block--comment-review">
+                  <div class="ps-block__content pl-0">
+                    <!-- <ngx-stars [readonly]="true" [initialStars]="review?.rating" [color]="Colors.starsColor">
+                    </ngx-stars> -->
+                    <h5>{{ review?.reviewer_name }} <span> - {{ review?.created_at | date: 'MM-d-yy' }}</span></h5>
+                    <p>{{ review?.comment }}</p>
+                  </div>
+                </div>
+              </div>
+              <form class="ps-form--product-review" [formGroup]="addRatingForm" (ngSubmit)="onAddReview()">
+                <div class="ps-form__header">
+                  <h4>Add a review</h4>
+                  <p>Your email address will not be published. Required fields are marked *</p>
+                </div>
+                <div class="form-group">
+                  <label>Your rating<sup>*</sup></label>
+                  <!-- <ngx-stars (ratingOutput)="onRatingSet($event)" [initialStars]="rating" [color]="Colors.starsColor">
+                  </ngx-stars> -->
+                </div>
+                <div class="error-fld rating-error" *ngIf="pleaseSelectRating">
+                  {{ messages.required }}
+                </div>
+                <div class="form-group">
+                  <label>Your Review:<sup>*</sup></label>
+                  <textarea class="form-control" rows="6" formControlName="review"></textarea>
+                </div>
+                <ng-template [ngIf]="addRatingForm.get('review').dirty || addRatingForm.get('review').touched">
+                  <div class="error-fld" *ngIf="addRatingForm.get('review').hasError('required')">
+                    {{ messages.required }}
+                  </div>
+                </ng-template>
+                <div class="form-group text-center">
+                  <!--                  <button class="ps-btn ps-btn&#45;&#45;black ">Submit</button>-->
+                  <app-user-panel-submit-button [isSubmitting]="isSubmitting" submit="Submit" class="fed-btn">
+                  </app-user-panel-submit-button>
+
+                </div>
+              </form>
+            </div>
+            <div class="ps-tab" [class.active]="fragment === 'additional-information'">
+              <div class="row">
+                <div class="col-md-12">
+                  <div align="left" class="prdt-pdf-sec text-center">
+                    <div *ngFor="let document of product.documents" class="pdf-outer m-0">
+                      <a [href]="document.url" target="_blank">
+                        <div class="pdf-bx m-0">
+                          <img src="assets/_img/new-pdf-Icon.png" alt="" class="img-fluid">
+
+                        </div>
+                      </a>
+                      <a [href]="document.url" target="_blank" class="mt-3">
+                        <div class="pdf-bx m-0">
+                          <span>Download {{ document.docName }}</span>
+                        </div>
+                      </a>
+
+                    </div>
+                    <app-data-not-found *ngIf="product.documents.length === 0"></app-data-not-found>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ps-tab" [class.active]="fragment === 'specifications'">
+              <div class="row">
+                <div class="col-md-12">
+                  <div align="left" class="prdt-pdf-sec"></div>
+                  <div class="spec-chart table-responsive mt-5">
+
+                    <table class="table table-striped">
+                      <tbody>
+                      <ng-template ngFor [ngForOf]="product.specifications" let-spec
+                                   [ngForTrackBy]="trackProductAttributeById">
+                        <tr
+                          *ngIf="!(spec.dataType == 6 && spec.value == '0') && !(spec.dataType == 3 && +spec.value === 0) ">
+                          <td width="300">{{ spec.attribute }}</td>
+                          <td width="300">
+                            <span *ngIf="spec.dataType == 3">{{ spec.value | number: '1.2-2' }}</span>
+                            <span *ngIf="spec.dataType == 5">{{ spec.value }} {{ (spec.attribute).toLocaleLowerCase()
+                            == 'rated wattage' ? 'W' : ((spec.attribute).toLocaleLowerCase() == 'voltage' ? 'V' :
+                              '') }}</span>
+                            <span *ngIf="spec.dataType == 6"><i class="fa fa-check"></i></span>
+                            <span *ngIf="spec.dataType == 7" [innerHTML]="spec.value"></span>
+                          </td>
+                          <td></td>
+                        </tr>
+                      </ng-template>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="product && product?._related?.length" class="ps-related-products">
+  <h3>Related Products</h3>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="related-slider">
+          <ngx-slick-carousel class="category-slider div-float" #slickModal="slick-carousel"
+                              [config]="relatedSliderConfig">
+            <div ngxSlickItem *ngFor="let relatedProduct of product._related" class="category-items  post-slider">
+              <app-product-item *ngIf="relatedProduct.related" [product]="relatedProduct.related"></app-product-item>
+            </div>
+          </ngx-slick-carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

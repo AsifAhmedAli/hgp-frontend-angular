@@ -1,0 +1,47 @@
+
+<div class="category-items ncat-item mr-0 ml-0 float-left mb-100">
+  <!-- <div class="detail-brand-ico-img" *ngIf="product.logo && product.logo != ''">
+    <img [src]="product.logo | imageUrl" alt="Brand Logo" />
+  </div> -->
+  <div class="ncat-topsec">
+    <a [routerLink]="'/product/' + product?.sku">
+        <div class="category-items-img float-left">
+            <div class="category-img" *ngIf="product.featured_image && currentUrl == '/'">
+              <img appHideBrokerImage [alt]="product?.name" [src]="product?.featured_image | imageUrl"/>
+            </div>
+          <div class="category-img" *ngIf="!product.featured_image && currentUrl == '/'">
+            <img appHideBrokerImage [alt]="product?.name" [src]="product?.image?.url"/>
+          </div>
+          <div class="category-img" *ngIf="currentUrl != '/'">
+            <img appHideBrokerImage [alt]="product?.name" [src]="product?.image?.url"/>
+          </div>
+        </div>
+        <span>{{ product?.name | excerpt:65 }}</span>
+        <div class="ps-product__sku mt-3">SKU: {{ product?.sku }}</div>
+    </a>
+
+    <div class="brand-logos mt-3">
+      <a routerLink="/kit/6"><img *ngIf="product.logo"  [src]="product.logo  | imageUrl" alt="Brand Logo" (mouseleave)="resetTitle($event, product.logo1_tooltip)" (mouseenter)="changeTitle($event)" [title]="product.logo1_tooltip ? product.logo1_tooltip : ''" /></a>
+      <a routerLink="/kit/4"><img *ngIf="product.logo2" [src]="product.logo2 | imageUrl" alt="Brand Logo" (mouseleave)="resetTitle($event, product.logo2_tooltip)" (mouseenter)="changeTitle($event)" [title]="product.logo2_tooltip ? product.logo2_tooltip : ''" /></a>
+      <a routerLink="/kit/5"><img *ngIf="product.logo3" [src]="product.logo3 | imageUrl" alt="Brand Logo" (mouseleave)="resetTitle($event, product.logo3_tooltip)" (mouseenter)="changeTitle($event)" [title]="product.logo3_tooltip ? product.logo3_tooltip : ''" /></a>
+    </div>
+
+    <a [routerLink]="'/product/' + product?.sku">
+      <div class="sldr-pric-tags">
+        <h4>
+          <span *ngIf="product?.price?.retailPrice;">{{ product?.price?.retailPrice | currency }}</span>
+        </h4>
+        <ng-template #elseTemplate>
+          <h4>
+            $ 0.00
+          </h4>
+        </ng-template>
+      </div>
+    </a>
+  </div>
+
+    <div class="sldr-dd-wshlst">
+      <app-add-product-to-favorite [product]="product"></app-add-product-to-favorite>
+      <a [routerLink]="'/product/' + product?.sku" class="blue-color">Details</a>
+    </div>
+</div>

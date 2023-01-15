@@ -1,0 +1,58 @@
+<!-- Team Section -->
+<section *ngIf="videos.length">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="creater-sec video-section">
+          <div class="creater-sec-tp">
+            <h4 class="tit-up text-center" [innerHTML]="title"></h4>
+          </div>
+          <div class="creater-sec-two d-none">
+            <div class="creater-sec-two-lft">
+              <div class="fondr-sec">
+                <span class="blue-color">{{ videos[activeIndex].id }}</span>
+              </div>
+              <div class="trophy-sec">
+                <p appBackgroundImage
+                   [path]="videos[activeIndex].thumbnail | imageUrl"></p>
+              </div>
+              <a href="#" (click)="openModal(videos[activeIndex].video_link)" ></a>
+            </div>
+          </div>
+          <div class="teams-sec-hm">
+            <div class="teams-abst"></div>
+
+              <!-- Testimonials Slider Starts -->
+              <div class="div-float team-slider">
+                <ngx-slick-carousel class="carousel"
+                #slickModal="slick-carousel"
+                [config]="communitySlider" style="width: 100%;">
+                    <!-- Slides Starts -->
+                    <div class="hm-tem-bx slide" *ngFor="let video of videos; let i=index" ngxSlickItem>
+                      <a href="javascript:void(0);" (click)="openModal(video.video_link)">
+                        <div class="tem-bg" appBackgroundImage [path]="video.thumbnail"></div>
+                      </a>
+                      <div class="shdw-tem"></div>
+                    </div>
+                    <!-- Slides Ends -->
+                </ngx-slick-carousel>
+              </div>
+              <!-- Testimonials Slider Ends -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" id="video_iframe" class="btn btn-primary d-none" data-toggle="modal" data-target=".video-iframe"></button>
+
+  <div class="modal fade video-iframe" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" [innerHTML]="videoIframe | sanitizer">
+      </div>
+    </div>
+  </div>
+
+</section>

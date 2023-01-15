@@ -1,0 +1,12 @@
+<div class="clor-dd prodct-optnnew" *ngIf="showOptions">
+  <label for="options">Options: </label>
+  <select (change)="onChangeFamily($event)" id="options">
+    <ng-template ngFor [ngForOf]="family.items" let-item>
+      <option *ngIf="item.is_continued" [value]="item.sku" [selected]="sku == item.sku">
+        {{ item.unitSize }}
+        <ng-template [ngIf]="item.unitSize"> - </ng-template>
+        {{ item.sku }}
+      </option>
+    </ng-template>
+  </select>
+</div>

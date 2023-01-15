@@ -1,0 +1,82 @@
+<div class="ps-page">
+  <div class="ps-shop ps-shop--sidebar">
+    <div class="container">
+        <div class="ps-shop__container">
+          <div class="ps-shop__sidebar">
+            <app-product-filters
+              *ngIf="categories?.length || brands?.length"
+              [categories]="categories"
+              [brands]="brands"
+              (onFilters)="onFilter($event)"
+              [queryParams]="queryParams"
+            ></app-product-filters>
+          </div>
+          <div class="ps-shop__wrapper">
+            <div class="ps-shop__header" *ngIf="products.length">
+              <div class="ps-shop__left"><!-- data-aos="fade-right" data-aos-duration="500" -->
+                <h1 *ngIf="selectedBrand">{{ selectedBrand }}</h1>
+                <app-custom-breadcrumb *ngIf="crumb.length" [crumbs]="crumb"></app-custom-breadcrumb>
+              </div>
+              <div class="ps-shop__right"> <!-- data-aos="fade-left" data-aos-duration="500" -->
+                <p *ngIf="counter"> {{ counter }} {{ 'Product' | singularPlural: counter }} Found</p>
+                <div class="ps-shop__actions">
+                  <div class="ps-shop__filter" style="display: none;"><a class="ps-shop__filter-toggle" href="#">Filter<i class="fa fa-angle-down"></i></a></div>
+                  <div class="ps-shop__sorting"><span>Sort By</span>
+                    <select class="ps-select" (change)="onSortingChange($event)" style="color: #1B1B1B;
+                       border: none; font-weight: 700; padding: 5px 0;">
+                      <option [selected]="queryParams?.sort === option.value" *ngFor="let option of sortOptions" [value]="option.value">{{ option.title }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ps-shop__content">
+
+              <!-- Not Found Old Starts -->
+              <p *ngIf="!isLoading && dataNotFound" class="text-center" style="font-size: 20px;">No Product found</p>
+              <!-- Not Found Old Ends -->
+
+              <!-- Not found starts -->
+              <div class="row" *ngIf="!isLoading && dataNotFound" style="display: none;">
+                <div class="col-md-12">
+                  <div class="nt-fnd">
+                      <div class="alert alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">X</button>
+                        <div class="nt-fnd-txt-img">
+                          <div class="nt-fnd-img">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M7.99998 0C3.58001 0 0 3.58001 0 7.99998C0 12.42 3.58001 16 7.99998 16C12.42 16 16 12.42 16 7.99998C16 3.57997 12.42 0 7.99998 0ZM8.80001 12H7.19999V7.19999H8.80001V12ZM8.80001 5.59998H7.19999V3.99997H8.80001V5.59998Z" fill="#585858"/>
+                            </svg>
+                          </div>
+                          <div class="nt-fnd-txt">
+                            <h3>No Product found</h3>
+                            <p>Sample Text Here Sample Text Here Sample Text Here <a href="#">Sample Text Here</a> </p>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Not found ends -->
+
+              <div class="custom_info_div" *ngIf="showDescriptionText">
+                <span class="product-listing-text">{{getSettingValue('site.product_listing_text')}}</span>
+              </div>
+
+              <app-loader *ngIf="isLoading"></app-loader>
+              <div class="row" *ngIf="!dataNotFound">
+                <div *ngFor="let product of products; trackBy: trackById" class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 "><!-- data-aos="zoom-in" data-aos-duration="1000" -->
+                  <app-product-item [product]="product"></app-product-item>
+                  {{showDescription()}}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!dataNotFound && paginatedProducts?.last_page > paginatedProducts?.current_page" class="ps-shop__footer">
+              <a *ngIf="!discovering" class="ps-link--under" (click)="next()">Discover more</a>
+              <a *ngIf="discovering" class="ps-link--under"><app-spinner></app-spinner></a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

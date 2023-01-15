@@ -1,0 +1,2 @@
+<button *ngIf="!isSubmitting" type="submit" class="ps-btn ps-btn--black" [class.ps-btn--fullwidth]="fullWidth" style="width: 169px;">{{ submit }}</button>
+<button *ngIf="isSubmitting" type="button" disabled class="ps-btn ps-btn--black" [class.ps-btn--fullwidth]="fullWidth" style="width: 169px;"><app-spinner></app-spinner></button>

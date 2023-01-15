@@ -1,0 +1,57 @@
+<div class="frm-wrap2">
+
+  <div class="div-floatfull accnt-profl" > <!-- data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" -->
+    <app-loader *ngIf="!isPageProcessingDone"></app-loader>
+    <div class="row" *ngIf="isPageProcessingDone">
+      <div class="col-md-12">
+        <div class="div-floatfull address-up">
+          <h4 class="ps-form__heading pull-left">Payments</h4> <!-- data-aos-once="true"  data-aos="fade-right" data-aos-duration="500" -->
+          <a routerLink="add" class="pull-right underline" class="pull-right underline" >Add New Payment</a> <!-- data-aos-once="true" data-aos="fade-left" data-aos-duration="500" -->
+        </div>
+
+      </div>
+    </div>
+    <!-- if payment method not found start-->
+    <div class="row" *ngIf="dataNotFound">
+      <div class="col-md-12">
+        <h3 class="text-center">{{MESSAGES.noPaymentMethodFound}}</h3>
+      </div>
+    </div>
+    <!--  if payment method not found end -->
+
+    <!-- Not found starts -->
+    <div class="row" *ngIf="dataNotFound" style="display: none;">
+      <div class="col-md-12">
+        <div class="nt-fnd">
+            <div class="alert alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">X</button>
+              <div class="nt-fnd-txt-img">
+                <div class="nt-fnd-img">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.99998 0C3.58001 0 0 3.58001 0 7.99998C0 12.42 3.58001 16 7.99998 16C12.42 16 16 12.42 16 7.99998C16 3.57997 12.42 0 7.99998 0ZM8.80001 12H7.19999V7.19999H8.80001V12ZM8.80001 5.59998H7.19999V3.99997H8.80001V5.59998Z" fill="#585858"/>
+                  </svg>
+                </div>
+                <div class="nt-fnd-txt">
+                  <h3>{{MESSAGES.noPaymentMethodFound}}</h3>
+                  <p>Sample Text Here Sample Text Here Sample Text Here <a href="#">Sample Text Here</a> </p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- Not found ends -->
+
+    <div class="row" *ngIf="cards.length" > <!-- data-aos="fade-up" data-aos-duration="500" data-aos-once="true" -->
+      <div class="col-md-6" *ngFor="let card of cards">
+        <!--      card list start -->
+        <app-account-payment-item [card]="card" (onRemainingCards)="updateCards($event)"></app-account-payment-item>
+        <!--        card list end-->
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>

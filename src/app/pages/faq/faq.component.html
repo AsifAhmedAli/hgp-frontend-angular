@@ -1,0 +1,71 @@
+
+<div class="about-main faqs-mew">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="about-tp-bg">
+              <div class="about-tp-bginnr" style="background-image: none;">
+                <div class="faq-srch">
+                  <h3>How can we help?</h3>
+                  <div class="srch-fldnew">
+                    <div class="position-relative z-11">
+                      <input type="text" [placeholder]="MESSAGES.searchFaqs" (keyup)="onQuery($event)" id="new-srch"/>
+                      <button class="bannr-btn" (click)="onResetSearch()"></button>
+                    </div>
+                  </div>
+                  <app-spinner *ngIf="searchLoading"></app-spinner>
+
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="isPageProcessingIsdDone">
+      <div class="col-md-12">
+        <div class="faq-lowr-sec">
+          <!-- <app-clearfix></app-clearfix> -->
+          <div class="row">
+            <div class="col-lg-4 col-md-4">
+              <div class="faq-lft-lnks" >
+                <div class="faq-lft-tp">
+                    <h3 class="heading">FAQs CATEGORIES</h3>
+                    <a href="javascript:void(0);" class="faq-shw-mobl">
+                      <i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+                <div class="faq-lft-btm">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist" *ngIf="faqCategories.length">
+                    <li class="nav-item" *ngFor="let category of faqCategories; let i = index">
+                      <a  [class.active]="fragment == category.slug" class="nav-link close-cotgry-tb" id="faq1-tab" data-toggle="tab" href="#faq1" role="tab" aria-controls="faq1" aria-selected="true" [routerLink]="currentPath" fragment="{{category.slug}}">{{category.name}}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+              <div class="faq-rgt-accord">
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="faq1" role="tabpanel" aria-labelledby="faq1-tab">
+                    <app-data-not-found [dataNotFound]="dataNotFound" [text]="MESSAGES.noFAQFound"></app-data-not-found>
+                    <div id="accordion" *ngIf="faqs.length">
+                      <ng-template ngFor [ngForOf]="faqs" let-faq let-i="index" >
+                        <app-faq-item [faq]="faq" [index]="i"></app-faq-item>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <app-clearfix></app-clearfix>
+
+</div>

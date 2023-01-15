@@ -1,0 +1,150 @@
+<app-clearfix></app-clearfix>
+<div class="frm-wrap2 orderDetail-Wrap">
+  <div class="div-floatfull accnt-profl pb-0">
+    <app-loader *ngIf="!order"></app-loader>
+    <div class="clearfix"></div>
+
+    <div class="row" *ngIf="order">
+      <div class="col-md-6"> <!--  data-aos="fade-right" data-aos-duration="500" data-aos-once="true" -->
+        <div class="div-floatfull address-up">
+          <h4 class="ps-form__heading pull-left">{{ title }}</h4>
+        </div>
+        <div class="clearfix"></div>
+        <app-order-detail-title-content title="Date" [content]="order?.created_at | myDate"></app-order-detail-title-content>
+        <app-order-detail-title-content title="Order Number" [content]="order?.order_number"></app-order-detail-title-content>
+        <app-order-detail-title-content title="Status" [content]="order?.status | titlecase"></app-order-detail-title-content>
+      </div>
+
+      <!--<div class="col-md-6"> &lt;!&ndash; data-aos="fade-left" data-aos-duration="600" data-aos-once="true" &ndash;&gt;
+        <div class="div-floatfull address-up">
+          <h4 class="ps-form__heading pull-left">Payment</h4>
+        </div>
+        <div class="clearfix"></div>
+        <app-order-detail-title-content *ngIf="order?.last_four" title="Card Number" [content]="'ending in ' + order?.last_four"></app-order-detail-title-content>
+        <app-order-detail-title-content title="Name on Card" [content]="order?.card_holder_name"></app-order-detail-title-content>
+        <app-order-detail-title-content *ngIf="order?.expiration_year && order?.expiration_month" title="Exp. Date" [content]="order?.expiration_month + '/' + order?.expiration_year"></app-order-detail-title-content>
+        <app-order-detail-title-content
+          *ngIf="order?.type && order?.type === 'PayPalAccount'"
+          title="Paid Using"
+          content="PayPal"
+        ></app-order-detail-title-content>
+      </div>-->
+    </div>
+
+    <div *ngIf="order" class="row">
+      <div class="col-md-6"> <!-- data-aos="fade-right" data-aos-duration="500" data-aos-once="true" -->
+        <div class="div-floatfull address-up ord-secrw">
+          <h4 class="ps-form__heading pull-left">Billing</h4>
+        </div>
+        <div class="clearfix"></div>
+        <app-order-detail-billing [order]="order"></app-order-detail-billing>
+      </div>
+      <div class="col-md-6"> <!-- data-aos="fade-left" data-aos-duration="600" data-aos-once="true" -->
+        <div class="div-floatfull address-up ord-secrw">
+          <h4 class="ps-form__heading pull-left">Shipping</h4>
+        </div>
+        <div class="clearfix"></div>
+        <app-order-detail-shipping [order]="order"></app-order-detail-shipping>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div *ngIf="order" class="ps-page__content accont-ordr-setl">
+      <div class="ps-checkout">
+
+<!--        <form class="ps-form&#45;&#45;checkout">-->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="ps-form__billings"> <!-- data-aos="fade-up" data-aos-duration="800" data-aos-once="true" -->
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="prdt-info">
+                      <div class="prdt-info-list-hd for-colm">
+                        <div class="prdt-img-txt">
+                          <span style="font-weight: 600">PRODUCT</span>
+                        </div>
+
+                        <div class="qty">
+                          <span style="font-weight: 600">QTY</span>
+                        </div>
+
+                        <div class="price">
+                          <span style="font-weight: 600">PRICE</span>
+                        </div>
+
+                        <div class="price">
+                          <span style="font-weight: 600">TOTAL</span>
+                        </div>
+                      </div>
+
+                      <div *ngFor="let orderProduct of order?.products" class="prdt-info-list for-colm">
+                        <!--kit detail start-->
+                        <div class="prdt-img-txt" *ngIf="!orderProduct?.hydro_product_id">
+                          <a *ngIf="orderProduct?.kit" [routerLink]="'/kit/' + orderProduct?.kit?.id">
+                            <img appHideBrokerImage [src]="orderProduct?.kit?.image | imageUrl" [alt]="orderProduct?.kit?.name" class="img-fluid" />
+                          </a>
+                          <div class="pdrt-txt">
+                            <h4>{{ orderProduct?.kit.name | titlecase }}</h4>
+                          </div>
+                        </div>
+                        <!--kit detail end-->
+
+                        <!--product detail start-->
+                        <div class="prdt-img-txt" *ngIf="orderProduct?.hydro_product_id">
+                          <a *ngIf="!orderProduct?.product" href="javascript:void(0)">
+                            <img appHideBrokerImage [src]="orderProduct?.product?.image?.url" alt="product" class="img-fluid" />
+                          </a>
+                          <a *ngIf="orderProduct?.product" [routerLink]="'/product/' + orderProduct?.product?.sku">
+                            <img appHideBrokerImage [src]="orderProduct?.product?.image?.url" alt="product" class="img-fluid" />
+                          </a>
+                          <div class="pdrt-txt">
+                            <h4>{{ orderProduct?.product.name | titlecase }}</h4>
+                          </div>
+                        </div>
+                        <!--product detail end-->
+
+                        <div class="qty">
+                          <span>{{ orderProduct?.qty }}</span>
+                        </div>
+
+                        <div class="price">
+                          <span>{{ orderProduct?.unit_price | currency }}</span>
+                        </div>
+
+                        <div class="price">
+                          <span>{{  orderProduct?.line_total | currency}}</span>
+                        </div>
+                      </div>
+
+                      <div class="ps-block--checkout-order ordr-pdrt-final">
+                        <div class="ps-block__content">
+                          <figure class="ps-block__items">
+                                  <a href="javascript:"><strong >Subtotal </strong><small>{{ order?.sub_total | currency }}</small></a>
+                                  <a href="javascript:"><strong>Shipping</strong><small>{{ order?.shipping_cost | currency }}</small></a>
+                            <a href="javascript:"><strong>Tax</strong><small>{{ order?.tax | currency }}</small></a>
+                                  <a href="javascript:"><strong>Discount</strong><small>{{ order?.discount | currency }}</small></a>
+                          </figure>
+
+                          <figure style="border-bottom: none;">
+                            <div class="sbtotl">
+                              <strong class="float-left">TOTAL</strong>
+                              <small class="float-right">{{ order?.total | currency }}</small>
+                            </div>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+<!--        </form>-->
+      </div>
+    </div>
+  </div>
+
+
+</div>

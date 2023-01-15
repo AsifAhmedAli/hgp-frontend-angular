@@ -1,0 +1,5 @@
+<div class="div-floatfull" > <!-- data-aos="zoom-in" data-aos-delay="8000" data-aos-once="true" -->
+  <div class="four-btns div-floatfull">
+    <a *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active" class="ps-btn ps-btn--outline">{{ link.title }}</a>
+  </div>
+</div>

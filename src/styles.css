@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+.new-tag {
+  right: 20px;
+  left: unset !important;
+}
+
+.sale-tag {
+  background-color: darkred !important;
+}
+
+.no-pointer {
+  cursor: none;
+}
+
+.detail-icons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+
+.detail-icons li{
+  display: inline-block;
+}

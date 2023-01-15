@@ -1,0 +1,15 @@
+<div class="ps-page--default">
+    <app-loader *ngIf="!isPageProcessingComplete"></app-loader>
+    <div class="container" *ngIf="isPageProcessingComplete">
+        <div class="ps-page__header">
+            <h3 data-aos="fade-zoom-in">{{ pageTitle }}</h3>
+            <app-breadcrumb [page]="slug"></app-breadcrumb>
+        </div>
+
+
+        <!-- Content Page Starts -->
+        <div class="ps-page__content ps-contentPage" [innerHTML]="pageBody | sanitizer" ></div>
+        <!-- Content Page Ends -->
+
+    </div>
+</div>

@@ -1,0 +1,3 @@
+<app-order-billing-detail *ngIf="item && type === 'billing'" [item]="item"></app-order-billing-detail>
+<app-order-billing-detail *ngIf="item && !item?.is_different_billing && type === 'shipping'" [item]="item"></app-order-billing-detail>
+<app-order-shipping-detail *ngIf="item && item?.is_different_billing && type === 'shipping'" [item]="item"></app-order-shipping-detail>

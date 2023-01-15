@@ -1,0 +1,523 @@
+<div class="ps-page ps-page--product-detail ps-kit-main">
+  <div class="container">
+    <app-loader *ngIf="pageLoading"></app-loader>
+    <ng-template [ngIf]="!pageLoading">
+      <div class="ps-product--detail ps-kit-detail">
+        <div class="ps-product__header">
+          <div class="ps-product__thumbnail" data-vertical="false">
+            <figure>
+              <div class="ps-wrapper">
+                <div
+                  class="ps-product__gallery"
+                  data-arrow="true"
+                  id="lightgallery"
+                >
+                  <div class="kit-image">
+                    <div class="kit-image-wrap">
+                      <div class="kit-dot"></div>
+                      <img [src]="kit?.image | imageUrl" alt="" />
+                    </div>
+                  </div>
+
+                  <div class="tabs-lnk">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li
+                        class="nav-item"
+                        *ngFor="let item of kits; let i = index"
+                        [ngClass]="i == 2 ? 'shine-link mamba-link' : ''"
+                      >
+                        <a
+                          class="nav-link"
+                          [class.active]="kit.name == item.name"
+                          id="beginner-tab"
+                          data-toggle="tab"
+                          role="tab"
+                          aria-controls="beginner"
+                          aria-selected="true"
+                          (click)="onSelectKit(item)"
+                          >{{ item?.name }}</a
+                        >
+                      </li>
+                    </ul>
+                    <a
+                      class="talk-btn"
+                      routerLink="/contact-us"
+                      target="_blank"
+                    >
+                      <span>Talk to specialist</span>
+                    </a>
+                    <div class="strt-prce">
+                      <h6>
+                        Starting from
+                        <span
+                          ><span class="prce-icon">$</span
+                          >{{ kit?.price }}</span
+                        >
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </figure>
+          </div>
+          <div class="ps-product__info pt-0">
+            <div class="ps-product__info-header">
+              <h2 class="ps-product__title">
+                {{ kit?.name }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="33"
+                  height="33"
+                  viewBox="0 0 33 33"
+                >
+                  <image
+                    width="33"
+                    height="33"
+                    xlink:href="data:img/png;base64,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"
+                  />
+                </svg>
+              </h2>
+              <label>Greatness Personified, Automation Optimized</label>
+              <!-- <h4><i>{{ kit.mini_title }}</i></h4> -->
+              <h3>${{ kit?.price | number : "1.2-2" }}</h3>
+
+              <div class="select-variant">
+                <h5>Select Line <a routerLink="/compare">What’s the difference?</a></h5>
+                <div class="variant-options">
+                  <span
+                    class="kit-variant pointer"
+                    *ngFor="let item of kits; let i = index"
+                    [class.active]="kit.name == item.name"
+                    (click)="onSelectKit(item)"
+                    >{{ item?.name }}</span
+                  >
+                </div>
+              </div>
+
+              <div class="select-variant">
+                <h5>Select Size</h5>
+                <div class="variant-options">
+                  <span
+                    class="kit-variant pointer"
+                    [class.active]="kit.size === '5x5'"
+                    (click)="changeKitSize('5x5')"
+                    >5 X 5</span
+                  >
+                  <span
+                    class="kit-variant pointer"
+                    [class.active]="kit.size === '5x9'"
+                    (click)="changeKitSize('5x9')"
+                    >5 X 9</span
+                  >
+                  <span
+                    class="kit-variant pointer"
+                    [class.active]="kit.size === '10x10'"
+                    (click)="changeKitSize('10x10')"
+                    >10 X 10</span
+                  >
+                </div>
+              </div>
+              <div class="select-variant">
+                <div class="kit-crt-btn">
+                  <button
+                    appAddToCart
+                    [qty]="1"
+                    [kit]="kit"
+                    type="button"
+                    class="btn-shop"
+                    (adding)="isAdding = true"
+                    (added)="isAdding = false"
+                  >
+                    <ng-template [ngIf]="!isAdding">Add To Cart</ng-template>
+                    <ng-template [ngIf]="isAdding">
+                      <app-spinner></app-spinner>
+                    </ng-template>
+                  </button>
+                </div>
+              </div>
+
+              <div class="ps-product__rating mb-0">
+                <!--<ngx-stars [readonly]="true" [initialStars]="kit?.rating"
+                           [color]="Colors.starsColor"></ngx-stars>-->
+                <!--                <span class="review-count">{{ kit?.reviews?.length }} {{ 'Rating' | singularPlural: kit?.reviews?.length }}</span>-->
+              </div>
+
+              <!-- kit discription  -->
+              <!-- <div> {{kit?.short_description}} </div> -->
+              <!-- kit discription  -->
+
+              <div class="kit-li hdro-lft-rgt">
+                <ul>
+                  <li *ngFor="let feature of kit?.kit_features">
+                    {{ feature }}
+                  </li>
+                </ul>
+              </div>
+
+              <!-- <select (change)="changeKitSize($event)" class="ps-select form-control w-50">
+                                <option value="">Select Size</option>
+                                <option value="5x5" [selected]="kit.size == '5x5'">5x5</option>
+                                <option value="5x9" [selected]="kit.size == '5x9'">5x9</option>
+                                <option value="10x10" [selected]="kit.size == '10x10'">10x10</option>
+                            </select> -->
+
+              <div class="kit-accordian">
+                <accordion [isAnimated]="true" [closeOthers]="oneAtATime">
+                  <accordion-group heading="Included Items">
+                    <!-- Bottom Section Starts -->
+                    <div class="div-float inc-btm-wrap">
+                      <div class="div-float inc-btm-scroll">
+                        <div class="div-float inc-btm-inn">
+                          <div class="row" *ngFor="let product of products">
+                            <div class="col-md-8">
+                              <div class="sku-number">
+                                <strong>SKU:</strong> {{ product?.sku }}
+                              </div>
+                              <div class="div-float item-details">
+                                {{ product?.name }}<br />
+                                Net, {{ kit?.size }}
+                              </div>
+                            </div>
+                            <div class="col-md-4 align-self-end">
+                              <div class="item-qty">
+                                <strong>Qty:</strong>
+                                {{ product.pivot.quantity }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Bottom Inner Starts -->
+                      </div>
+                    </div>
+                    <!-- Bottom Section Ends -->
+                  </accordion-group>
+                  <accordion-group heading="Delivery">
+                    <p>Some content</p>
+                  </accordion-group>
+                  <accordion-group heading="Consultation">
+                    <p>Some content</p>
+                  </accordion-group>
+                </accordion>
+              </div>
+
+              <!-- <div class="kit-price">
+                                <p>Starting from <span class="kit-dllr">$</span> <span class="kit-prce">{{kit?.price | number:'1.2-2' }}</span></p>
+                            </div> -->
+
+              <!-- <div class="kit-crt-btn">
+                                <button appAddToCart [qty]="1" [kit]="kit" type="button" class="btn-shop" (adding)="isAdding = true" (added)="isAdding = false">
+                                  <ng-template [ngIf]="!isAdding">Add To Cart</ng-template>
+                                  <ng-template [ngIf]="isAdding">
+                                    <app-spinner></app-spinner>
+                                  </ng-template>
+                                </button>
+                            </div>
+                            <div class="kit-payment-options">
+                                <p>Payment Method</p>
+
+                                <div class="kit-payment">
+                                    <img src="assets/_img/py4.png" alt="VISA" class="img-fluid" />
+                                </div>
+
+                            </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- kit services -->
+      <div class="kit-services">
+        <div class="psl-main">
+          <div class="psl-img">
+            <img
+              src="assets/_img/psl1.png"
+              alt="Discrete Packaging"
+              class="img-fluid"
+            />
+            <div class="psl-cloud">
+              <img src="assets/_img/kit-cloud.png" class="img-fluid" alt="" />
+            </div>
+          </div>
+          <div class="psl-txt">
+            <h6>Discrete Packaging</h6>
+            <p>Guaranteed delivery</p>
+          </div>
+        </div>
+        <div class="psl-main psl-main2">
+          <div class="psl-img">
+            <img src="assets/_img/psl2.png" alt="Support" class="img-fluid" />
+            <div class="psl-cloud">
+              <img src="assets/_img/kit-cloud.png" class="img-fluid" alt="" />
+            </div>
+          </div>
+          <div class="psl-txt">
+            <h6>24/7 Grow Support</h6>
+            <p>Go from 0 to harvest</p>
+          </div>
+        </div>
+        <div class="psl-main psl-main3">
+          <div class="psl-img">
+            <img
+              src="assets/_img/psl3.png"
+              alt="50 States Legal"
+              class="img-fluid"
+            />
+            <div class="psl-cloud">
+              <img src="assets/_img/kit-cloud.png" class="img-fluid" alt="" />
+            </div>
+          </div>
+          <div class="psl-txt">
+            <h6>50 States Legal</h6>
+            <p>Bring your own seed</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bordr-yelow-rw">
+        <div class="bordr-width-yelo">
+          <span></span>
+        </div>
+        <div class="bordr-width-empty"></div>
+      </div>
+      <div class="bordr-width-empty"></div>
+      <div class="cust-reviews-main">
+        <div class="ps-product--detail">
+          <div class="container">
+            <ul class="ps-tab-list">
+              <li [class.active]="fragment === 'description'">
+                <a [routerLink]="currentPath" fragment="description"
+                  >Description</a
+                >
+              </li>
+              <li [class.active]="fragment === 'reviews'">
+                <a [routerLink]="currentPath" fragment="reviews">Reviews</a>
+              </li>
+            </ul>
+            <div class="ps-tabs">
+              <div
+                class="ps-tab"
+                [class.active]="fragment === 'description'"
+                [innerHTML]="kit?.description"
+              ></div>
+              <div class="ps-tab" [class.active]="fragment === 'reviews'">
+                <div class="ps-product__review">
+                  <div class="prd-desc-sec">
+                    <div class="accrd-mian">
+                      <div class="revw-ratng-sec floating">
+                        <div class="ps-product__rating flex-column">
+                          <div class="w-100 d-flex align-items-center">
+                            <div class="ngxstrs">
+                              <!-- <ngx-stars [readonly]="true" [initialStars]="kit?.rating" [color]="Colors.starsColor"></ngx-stars> -->
+                            </div>
+                            <span>{{ kit.rating }} / 5</span>
+                            <a
+                              href="javascript:void(0);"
+                              class="ps-btn ps-btn--black wrte-btn"
+                              >Write a Review</a
+                            >
+                          </div>
+
+                          <div class="revw-frm">
+                            <div class="form-group">
+                              <label>Your rating<sup>*</sup></label>
+                              <!-- <ngx-stars (ratingOutput)="onRatingSet($event)" [initialStars]="rating" [color]="Colors.starsColor"></ngx-stars> -->
+                              <span *ngIf="!pleaseSelectRating"
+                                >{{ rating }} / 5</span
+                              >
+                            </div>
+                            <div
+                              class="error-fld rating-error"
+                              *ngIf="pleaseSelectRating"
+                            >
+                              {{ messages.required }}
+                            </div>
+                            <h4>Write a Review</h4>
+                            <!--                                                        <p>Your email address will not be published. Required fields are marked *</p>-->
+
+                            <form
+                              [formGroup]="addRatingForm"
+                              (ngSubmit)="onAddReview()"
+                            >
+                              <div class="detl-srchflds-bx w-100 mr-0">
+                                <div class="form-group floating">
+                                  <div class="input-field-wrap">
+                                    <span>
+                                      <div
+                                        class="input-field"
+                                        [class.active]="reviewsInput"
+                                      >
+                                        <label for="txtid">Your Review *</label>
+                                        <!-- <input type="text" id="em" name="uemail" value="" data-placeholder="Search Reviews" class="form-control frmEle" /> -->
+                                        <textarea
+                                          id="txtid"
+                                          class="form-control frmEle"
+                                          [(ngModel)]="reviewsInput"
+                                          (focus)="reviewsInput = ' '"
+                                          (blur)="reviewsInput = null"
+                                          data-placeholder="Your Review *"
+                                          rows="6"
+                                          formControlName="review"
+                                        ></textarea>
+                                      </div>
+                                    </span>
+                                  </div>
+                                </div>
+                                <ng-template
+                                  [ngIf]="
+                                    addRatingForm.get('review').dirty ||
+                                    addRatingForm.get('review').touched
+                                  "
+                                >
+                                  <div
+                                    class="error-fld"
+                                    *ngIf="
+                                      addRatingForm
+                                        .get('review')
+                                        .hasError('required')
+                                    "
+                                  >
+                                    {{ messages.required }}
+                                  </div>
+                                </ng-template>
+                              </div>
+
+                              <div class="detl-srchflds floating">
+                                <div class="detl-srchflds-bx w-100 mr-0">
+                                  <!--                                                            <button class="rb-custum ps-btn ps-btn&#45;&#45;black ml-0">Submit</button>-->
+                                  <app-user-panel-submit-button
+                                    [isSubmitting]="isSubmitting"
+                                    submit="Submit"
+                                    class="fed-btn"
+                                  ></app-user-panel-submit-button>
+
+                                  <div class="attch-prdct">
+                                    <label for="files">Attachments</label>
+                                    <input
+                                      id="files"
+                                      style="visibility: hidden"
+                                      type="file"
+                                      (change)="onAttachment($event)"
+                                      accept="image/*"
+                                    />
+                                    <img [src]="attachment" />
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="avrg-tp floating">
+                        <!--                            <h4>Average rating from 3 reviews</h4>-->
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="detl-srchflds floating">
+                        <div class="detl-srchflds-bx w-100 mr-0">
+                          <div class="form-group floating">
+                            <div class="input-field-wrap">
+                              <span>
+                                <div
+                                  class="input-field"
+                                  [class.active]="searchKeyword"
+                                >
+                                  <label for="em">Search Reviews</label>
+                                  <input
+                                    type="text"
+                                    id="em"
+                                    name="uemail"
+                                    (focus)="searchKeyword = ' '"
+                                    (blur)="searchKeyword = null"
+                                    [(ngModel)]="searchKeyword"
+                                    (keyup)="onSearch($event)"
+                                    data-placeholder="Search Reviews"
+                                    class="form-control frmEle"
+                                  />
+                                  <button class="dtl-srchbtn">
+                                    <svg
+                                      width="18"
+                                      height="18"
+                                      viewBox="0 0 18 18"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M16.4898 18C16.4143 17.9243 16.3388 17.7729 16.1877 17.6972C14.602 16.1072 13.0918 14.593 11.5061 13.0031C11.4305 12.9273 11.2795 12.7759 11.204 12.7002C7.57949 15.1987 3.5019 13.9116 1.46311 11.2617C-0.726711 8.38467 -0.424668 4.44769 2.1427 2.02493C4.71008 -0.473543 8.63664 -0.700678 11.4305 1.57066C14.0734 3.76629 15.0551 7.70327 12.7142 11.186C13.3938 11.8674 14.0734 12.5488 14.6775 13.1545C15.6592 14.1387 16.6408 15.123 17.6224 16.1072C17.698 16.1829 17.849 16.2586 18 16.4101C18 16.4858 18 16.5615 18 16.5615C17.5469 17.0158 17.0184 17.5457 16.5653 18C16.5653 18 16.5653 18 16.4898 18ZM11.8836 7.09758C11.8836 4.37198 9.6938 2.25206 7.05091 2.25206C4.33252 2.25206 2.21821 4.37198 2.21821 7.09758C2.21821 9.74747 4.33252 11.9431 7.05091 11.9431C9.6938 11.9431 11.8836 9.74747 11.8836 7.09758Z"
+                                        fill="black"
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="error-fld" style="display: none">
+                            This field is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="prd-rating-tbs floating">
+                        <div class="ps-product__rating">
+                          <div *ngFor="let review of kit?.reviews"></div>
+                        </div>
+                      </div>
+
+                      <div class="detls-thre-sec floating">
+                        <ng-template
+                          ngFor
+                          [ngForOf]="reviews"
+                          let-review
+                          let-i="index"
+                        >
+                          <div
+                            class="detls-thre-sec-rw floating"
+                            *ngIf="i < showReviews"
+                          >
+                            <div class="detls-thre-lft">
+                              <!-- <ngx-stars [readonly]="true" [initialStars]="review?.rating" [color]="Colors.starsColor"></ngx-stars> -->
+                              <h5>{{ review.reviewer_name }}</h5>
+                              <span class="w-100 float-left">{{
+                                review.created_at | date : "M-dd-y"
+                              }}</span>
+
+                              <h4>{{ review.comment }}</h4>
+                            </div>
+                            <div class="detls-thre-mid" *ngIf="review.image">
+                              <div class="detls-thre-midinner">
+                                <img
+                                  [src]="review.image | imageUrl"
+                                  class="img-fluid"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                        <app-data-not-found
+                          text="No reviews found."
+                          *ngIf="!reviews.length"
+                          class="srch-revw"
+                        ></app-data-not-found>
+                        <div
+                          class="floating text-center mb-5"
+                          *ngIf="reviews.length && reviews.length > showReviews"
+                        >
+                          <app-user-panel-submit-button
+                            [isSubmitting]="loadReviews"
+                            submit="Load More"
+                            class="fed-btn"
+                            (click)="loadMore()"
+                          ></app-user-panel-submit-button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

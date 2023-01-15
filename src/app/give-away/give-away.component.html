@@ -1,0 +1,392 @@
+<div class="ps-page--default ps-page--contact">
+  <div class="logo text-center mt-4 mt-md-0">
+    <img src="./assets/_img/logo.jpeg" alt="HGP" />
+  </div>
+  <div class="ps-page__content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 m-auto">
+          <div class="ps-contact">
+            <form
+              [class.d-none]="submitted"
+              class="ps-form--contact"
+              [formGroup]="form"
+              (ngSubmit)="onSubmit()"
+            >
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="detl-srchflds-bx w-100 mr-0">
+                    <div class="form-group floating">
+                      <div class="input-field-wrap">
+                        <span>
+                          <div class="input-field">
+                            <label for="contctN">Enter Name</label>
+                            <input
+                              class="form-control frmEle"
+                              id="contctN"
+                              type="text"
+                              data-placeholder="Enter Name"
+                              formControlName="name"
+                            />
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <ng-template
+                      [ngIf]="
+                        form.get('name').dirty || form.get('name').touched
+                      "
+                    >
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('name').hasError('required')"
+                      >
+                        {{ MESSAGES.required }}
+                      </div>
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('name').hasError('maxlength')"
+                      >
+                        {{ MESSAGES.contactUsNameMaxLength }}
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="detl-srchflds-bx w-100 mr-0">
+                    <div class="form-group floating">
+                      <div class="input-field-wrap">
+                        <span>
+                          <div class="input-field">
+                            <label for="cem">Enter Email</label>
+                            <input
+                              class="form-control frmEle"
+                              id="cem"
+                              type="email"
+                              data-placeholder="Enter Email"
+                              formControlName="email"
+                            />
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <ng-template
+                      [ngIf]="
+                        form.get('email').dirty || form.get('email').touched
+                      "
+                    >
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('email').hasError('required')"
+                      >
+                        {{ MESSAGES.required }}
+                      </div>
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('email').hasError('email')"
+                      >
+                        {{ MESSAGES.email }}
+                      </div>
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('email').hasError('maxlength')"
+                      >
+                        {{ MESSAGES.generalMaxLength }}
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="detl-srchflds-bx w-100 mr-0">
+                    <div class="form-group floating">
+                      <div class="input-field-wrap">
+                        <span>
+                          <div class="input-field">
+                            <label for="contctInstagram"
+                              >Enter Instagram Handle</label
+                            >
+                            <input
+                              class="form-control frmEle"
+                              id="contctInstagram"
+                              type="text"
+                              data-placeholder="Enter Instagram handle"
+                              formControlName="instagramHandle"
+                            />
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <ng-template
+                      [ngIf]="
+                        form.get('instagramHandle').dirty ||
+                        form.get('instagramHandle').touched
+                      "
+                    >
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('instagramHandle').hasError('required')"
+                      >
+                        {{ MESSAGES.required }}
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="detl-srchflds-bx w-100 mr-0">
+                    <div class="form-group floating">
+                      <div class="input-field-wrap">
+                        <span>
+                          <div class="input-field">
+                            <label for="state">Select state</label>
+                            <select
+                              class="form-control frmEle"
+                              id="state"
+                              data-placeholder="Select state"
+                              formControlName="state"
+                            >
+                              <option value="AL">Alabama</option>
+                              <option value="AK">Alaska</option>
+                              <option value="AZ">Arizona</option>
+                              <option value="AR">Arkansas</option>
+                              <option value="CA">California</option>
+                              <option value="CO">Colorado</option>
+                              <option value="CT">Connecticut</option>
+                              <option value="DE">Delaware</option>
+                              <option value="DC">District Of Columbia</option>
+                              <option value="FL">Florida</option>
+                              <option value="GA">Georgia</option>
+                              <option value="HI">Hawaii</option>
+                              <option value="ID">Idaho</option>
+                              <option value="IL">Illinois</option>
+                              <option value="IN">Indiana</option>
+                              <option value="IA">Iowa</option>
+                              <option value="KS">Kansas</option>
+                              <option value="KY">Kentucky</option>
+                              <option value="LA">Louisiana</option>
+                              <option value="ME">Maine</option>
+                              <option value="MD">Maryland</option>
+                              <option value="MA">Massachusetts</option>
+                              <option value="MI">Michigan</option>
+                              <option value="MN">Minnesota</option>
+                              <option value="MS">Mississippi</option>
+                              <option value="MO">Missouri</option>
+                              <option value="MT">Montana</option>
+                              <option value="NE">Nebraska</option>
+                              <option value="NV">Nevada</option>
+                              <option value="NH">New Hampshire</option>
+                              <option value="NJ">New Jersey</option>
+                              <option value="NM">New Mexico</option>
+                              <option value="NY">New York</option>
+                              <option value="NC">North Carolina</option>
+                              <option value="ND">North Dakota</option>
+                              <option value="OH">Ohio</option>
+                              <option value="OK">Oklahoma</option>
+                              <option value="OR">Oregon</option>
+                              <option value="PA">Pennsylvania</option>
+                              <option value="RI">Rhode Island</option>
+                              <option value="SC">South Carolina</option>
+                              <option value="SD">South Dakota</option>
+                              <option value="TN">Tennessee</option>
+                              <option value="TX">Texas</option>
+                              <option value="UT">Utah</option>
+                              <option value="VT">Vermont</option>
+                              <option value="VA">Virginia</option>
+                              <option value="WA">Washington</option>
+                              <option value="WV">West Virginia</option>
+                              <option value="WI">Wisconsin</option>
+                              <option value="WY">Wyoming</option>
+                            </select>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <ng-template
+                      [ngIf]="
+                        form.get('state').dirty || form.get('state').touched
+                      "
+                    >
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('state').hasError('required')"
+                      >
+                        {{ MESSAGES.required }}
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="detl-srchflds-bx w-100 mr-0">
+                    <div class="form-group floating">
+                      <div class="input-field-wrap">
+                        <span>
+                          <div class="input-field">
+                            <label for="age">Enter Age</label>
+                            <input
+                              class="form-control frmEle"
+                              id="age"
+                              type="number"
+                              data-placeholder="Enter Age"
+                              formControlName="age"
+                            />
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <ng-template
+                      [ngIf]="form.get('age').dirty || form.get('age').touched"
+                    >
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('age').hasError('required')"
+                      >
+                        {{ MESSAGES.required }}
+                      </div>
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('age').hasError('min')"
+                      >
+                        Age must b 21+
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="detl-srchflds-bx w-100 mr-0">
+                    <div class="form-group floating">
+                      <div class="input-field-wrap">
+                        <span>
+                          <div class="input-field">
+                            <label for="describe"
+                              >Please select what best describes you
+                            </label>
+                            <select
+                              class="form-control frmEle"
+                              id="describe"
+                              formControlName="describe"
+                            >
+                              <option value="I am currently growing">
+                                I am currently growing
+                              </option>
+                              <option
+                                value="I have never grown before but I want to grow my own"
+                              >
+                                I have never grown before but I want to grow my
+                                own
+                              </option>
+                              <option
+                                value="I have no interest in growing my own"
+                              >
+                                I have no interest in growing my own
+                              </option>
+                              <option value="I purchase from dispensaries">
+                                I purchase from dispensaries
+                              </option>
+                              <option
+                                value="I am NOT interested in grow equipment"
+                              >
+                                I am NOT interested in grow equipment
+                              </option>
+                            </select>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <ng-template
+                      [ngIf]="
+                        form.get('describe').dirty ||
+                        form.get('describe').touched
+                      "
+                    >
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('describe').hasError('required')"
+                      >
+                        {{ MESSAGES.required }}
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div
+                  class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 m-auto"
+                >
+                  <div class="detl-srchflds-bx w-100 mr-0">
+                    <div class="form-group floating">
+                      <div class="input-field-wrap">
+                        <span>
+                          <div class="input-field">
+                            <label for="interest"
+                              >Please select one that best describes your
+                              interest in our brands
+                            </label>
+                            <select
+                              class="form-control frmEle"
+                              id="interest"
+                              formControlName="interest"
+                            >
+                              <option value="I am an influencer">
+                                I am an influencer
+                              </option>
+                              <option value="I am a grower and need equipment">
+                                I am a grower and need equipment
+                              </option>
+                              <option
+                                value="I am media & new and like your story"
+                              >
+                                I am media & new and like your story
+                              </option>
+                              <option value="I am a potential partner brand">
+                                I am a potential partner brand
+                              </option>
+                              <option
+                                value="I am a potential accredited investor"
+                              >
+                                I am a potential accredited investor.
+                              </option>
+                            </select>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <ng-template
+                      [ngIf]="
+                        form.get('interest').dirty ||
+                        form.get('interest').touched
+                      "
+                    >
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('interest').hasError('required')"
+                      >
+                        {{ MESSAGES.required }}
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group submit text-center">
+                <button
+                  (keydown.enter)="onSubmit()"
+                  type="submit"
+                  class="ps-btn ps-btn--black"
+                  [disabled]="isSubmitting"
+                >
+                  {{ isSubmitting ? "Processing..." : "Submit" }}
+                </button>
+              </div>
+            </form>
+            <div class="text-center" *ngIf="submitted">
+              <h3>Thank you <br /></h3>
+              <p>Your request submitted successfully!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

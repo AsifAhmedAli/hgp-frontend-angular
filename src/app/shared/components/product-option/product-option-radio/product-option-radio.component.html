@@ -1,0 +1,15 @@
+<div class="pdrt-filtr-main">
+  <div class="optional-acces">
+    <h5>{{ option?.name }} <span *ngIf="option?.is_required" class="text-danger">*</span></h5>
+
+    <div class="optional-acces-type" *ngFor="let value of option?.values">
+      <!-- <h6></h6> -->
+      <label class="container-box ">{{ value?.label }}{{ getPrice(value.price, value.price_type, '- Add') }}
+        <input type="radio" [name]="'option' + option?.id" [value]="value?.id" (change)="onChange($event)">
+        <span class="checkmark"></span>
+      </label>
+    </div>
+
+  </div>
+</div>
+<div class="error-fld" *ngIf="requiredError">{{ MESSAGES.required }}</div>

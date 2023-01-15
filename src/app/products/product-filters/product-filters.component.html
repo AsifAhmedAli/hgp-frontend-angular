@@ -1,0 +1,46 @@
+
+<!-- catrgy and sub cartgy structure -->
+<aside class="widget widget_shop widget_shop-filter">
+  <h3 class="widget-title">Categories</h3>
+
+  <div class="fltr-bdr">
+  <div class="widget__colors pt-0">
+    <div class="main-fltr" *ngFor="let category of categories">
+      <div class="ps-color mb-3 black">
+        <span class="ps-color__left"><i>{{ category.name }}</i></span>
+        <span class="ps-color__right ps-checkbox">
+            <input type="checkbox" (click)="onSelectCategory($event, category)" value="{{category.name}}" [checked]="category.checked" id="{{category.id}}" />
+                <label style="padding-left: 20px;" class="fnt-15" for="{{category.id}}"><span style="visibility: hidden;">-</span></label>
+            </span>
+      </div>
+      <div class="sub-fltr" *ngIf="category.childs.length">
+        <div class="ps-color mb-3 black" *ngFor="let childCategory of category.childs">
+          <span class="ps-color__left"><i>{{childCategory.name}}</i></span>
+          <span class="ps-color__right ps-checkbox">
+              <input type="checkbox" (click)="onSelectCategory($event, childCategory)" value="{{childCategory.name}}" [checked]="childCategory.checked" id="{{childCategory.id}}" />
+              <label style="padding-left: 20px;" class="fnt-15" for="{{childCategory.id}}"><span style="visibility: hidden;">-</span></label>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</aside>
+
+<aside class="widget widget_shop widget_shop-filter">
+  <h3 class="widget-title">Brands</h3>
+  <div class="fltr-bdr">
+  <div class="widget__colors pt-0">
+    <div class="ps-color mb-3 black" *ngFor="let brand of brands">
+      <span class="ps-color__left"><i>{{ brand.name }}</i></span>
+      <span class="ps-color__right ps-checkbox">
+        <input type="checkbox" (click)="onSelectBrand($event, brand)" value="{{brand.name}}" [checked]="brand.checked" name="defaultfqqhg2m11" id="{{brand.name}}" />
+        <label style="padding-left: 20px;" class="fnt-15" for="{{brand.name}}"><span style="visibility: hidden;">-</span></label>
+      </span>
+    </div>
+  </div>
+</div>
+</aside>
+
+

@@ -1,0 +1,83 @@
+<div class="ps-page--default ps-page--blog">
+    <div class="ps-page__header blog-hero">
+        <!-- data-aos="zoom-in" data-aos-duration="500" -->
+        <div class="container" *ngIf="isPageProcessingComplete">
+            <h3 class="text-uppercase text-white">{{ title }}</h3>
+            <!-- data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="100"
+          data-aos-offset="0" -->
+            <ul class="ps-breadcrumb blog-bread">
+                <!-- data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="200"
+          data-aos-offset="0" -->
+                <li><a routerLink="/" class="text-white">Home</a></li>
+                <li class="text-white">Blog</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ps-blog ps-blog--grid">
+        <div class="container">
+
+            <div class="ps-blog__content">
+                <app-loader *ngIf="!isPageProcessingComplete"></app-loader>
+                <div class="row" *ngIf="blogs && isPageProcessingComplete">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let blog of blogs">
+                        <div class="ps-post">
+                            <!-- data-aos="zoom-out" data-aos-duration="1000" -->
+                            <div class="ps-post__thumbnail">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="position-relative blg-rdus">
+                                                    <img appHideBrokerImage *ngIf="blog?.thumbnail_image" [src]="blog?.thumbnail_image | imageUrl" [alt]="blog?.title">
+
+                                                    <a class="ps-post__overlay" [routerLink]="blog?.slug"></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div class="ps-post__content">
+                                <a class="ps-post__title" [routerLink]="blog?.slug" *ngIf="blog?.name">
+                  {{blog.name | shortString:CONSTANTS.blogExcerptListingTitle}}
+                </a>
+                                <p *ngIf="blog.published_at" class="ps-post__meta"><a [routerLink]="blog?.slug" style="display: none;">DIY</a> {{blog.published_at | date}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-center" *ngIf="dataNotFound && isPageProcessingComplete">{{Messages.noBlogFound}}</h3>
+            <!-- Not found starts -->
+            <div class="row" *ngIf="dataNotFound && isPageProcessingComplete" style="display: none;">
+              <div class="col-md-12">
+                <div class="nt-fnd">
+                    <div class="alert alert-dismissible">
+                      <button type="button" class="close" data-dismiss="alert">X</button>
+                      <div class="nt-fnd-txt-img">
+                        <div class="nt-fnd-img">
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.99998 0C3.58001 0 0 3.58001 0 7.99998C0 12.42 3.58001 16 7.99998 16C12.42 16 16 12.42 16 7.99998C16 3.57997 12.42 0 7.99998 0ZM8.80001 12H7.19999V7.19999H8.80001V12ZM8.80001 5.59998H7.19999V3.99997H8.80001V5.59998Z" fill="#585858"/>
+                            </svg>
+                        </div>
+                        <div class="nt-fnd-txt">
+                          <h3>{{Messages.noBlogFound}}</h3>
+                          <p>Sample Text Here Sample Text Here Sample Text Here <a href="#">Sample Text Here</a> </p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- Not found ends -->
+
+            <div class="ps-blog__footer" *ngIf="paginatedRecords?.last_page > 1">
+                <app-blog-pagination *ngIf="paginatedRecords?.last_page" [currentPage]="currentPage" [lastPage]="paginatedRecords?.last_page" link="/blog"></app-blog-pagination>
+            </div>
+        </div>
+    </div>
+</div>

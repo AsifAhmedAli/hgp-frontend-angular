@@ -1,0 +1,815 @@
+<ng-template [ngIf]="homepageData">
+  <app-clearfix></app-clearfix>
+
+  <!-- hero section starts -->
+  <section class="hero-mian">
+    <div class="container-fluid">
+      <!-- Banner 01 Starts -->
+      <!-- Main Class "container" -->
+      <!-- <div class="hero" appBackgroundImage [path]="homepageData?.featureCategories[currentCategoryIndex]?.banner_image">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="bannr-srch">
+        <h2>{{ homepageData?.homepage?.banner_text}}</h2>
+        <div class="srch-fldnew">
+          <div class="position-relative z-11">
+          <input type="text" name="home_page_search" #searchInput (keyup)="onQuery($event)" placeholder="Search Products or Blogs" id="new-srch"/>
+          <button class="bannr-btn"></button>
+        </div>
+          <div class="search-open-bx">
+
+              <div class="search-open-bxinnr">
+                  <div class="srch-bx-innr2">
+                    <div *ngIf="loading" class="serch-loder">
+                      <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                    </div>
+                    <div class="serch-notfnd"*ngIf="noRecordFound">
+                      <p  class="text-center w-100" >{{MESSAGES.noResultFound}}</p>
+                    </div>
+                    <ng-template [ngIf]="!loading && !noRecordFound" ngFor [ngForOf]="hits" let-hit let-i="index"
+                                 let-first="first">
+
+                      <div  class="srch-bx-rw" *ngIf="hit.type == 'product'; else blogSection">
+                        <a *ngIf="hit?.sku"  [routerLink]="['/product', hit?.sku]"  onclick="closeSearch(); hits = []" >
+                          <div class="srch-bx-rwImg">
+                            <img appImageNotFound [alt]="hit?.name" [src]="hit?.image?.url" class="img-fluid"/>
+
+                          </div>
+                          <div class="srch-bx-rwtxt">
+                            <span *ngIf="hit?.brand?.value"> {{ hit?.brand?.value }}</span>
+                            <h2 *ngIf="hit?.name" [innerHTML]="hit?.name | excerpt:100"></h2>
+                          </div>
+                        </a>
+                      </div>
+                      <ng-template #blogSection>
+                        <div class="srch-bx-rw" *ngIf="hit.type == 'blog'">
+                          <a  *ngIf="hit?.slug" [routerLink]="['/blog', hit?.slug]"  onclick="closeSearch(); hits = []" >
+                            <div class="srch-bx-rwImg">
+                              <img *ngIf="hit?.image; else blogImageNotFound"   [alt]="hit?.image" [src]="hit?.image | imageUrl" class="img-fluid"/>
+                              <ng-template #blogImageNotFound>
+                                <img  [alt]="hit?.name" src="assets/_img/image-not-found.jpg" class="img-fluid"/>
+                              </ng-template>
+                            </div>
+                            <div class="srch-bx-rwtxt">
+                              <span> Blog</span>
+                              <h2 *ngIf="hit?.name" [innerHTML]="hit?.name | excerpt:100"></h2>
+                            </div>
+                          </a>
+                        </div>
+                      </ng-template>
+
+
+                    </ng-template>
+
+
+
+                  </div>
+                  <a *ngIf="hits.length" routerLink="search-details" [queryParams]="{query: query, page: 0, sortBy: 'default'}" onclick="closeSearch();" (click)="resetHits()"  class="btn-shop position-sticky">View All</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" *ngIf="homepageData?.sliderProducts.length">
+    <div class="col-md-12">
+      <div class="hero-vertical-item div-float">
+        <div class="thre-slds">
+          <div [ngClass]="{'second-basewht': i == 1, 'first-basewht': i != 1 }" *ngFor="let product of homepageData.sliderProducts; let i=index">
+            <ng-template [ngIf]="i < 3">
+              <a [routerLink]="['/product', product?.sku]">
+                <div class="sldr-base">
+
+                  <div class="banner-outer-bx" [attr.aria-label]="product.name" data-microtip-position="right" role="tooltip"
+                       data-microtip-size="medium">
+
+                       <div class="position-relative banner-dots-set">
+                        <span class="left-spn"></span>
+                        <img [src]="product.featured_image | imageUrl" appBackgroundImage/>
+                        <span class="right-spn"></span>
+                      </div>
+                  </div>
+
+                </div>
+                <div class="basewhtinnr"></div>
+              </a>
+            </ng-template>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+      <!-- Banner 01 Ends -->
+
+      <!-- Banner 02 Starts -->
+      <div
+        class="hero"
+        appBackgroundImage
+        [path]="
+          homepageData?.featureCategories[currentCategoryIndex]?.banner_image
+        "
+      >
+        <div class="row">
+          <div class="col-md-7">
+            <div class="hgp-nbanner">
+              <h1
+                [innerHTML]="homepageData.homepage.banner_title | sanitizer"
+              ></h1>
+              <div class="home-ban-content w-100">
+                <p
+                  *ngIf="homepageData.homepage.banner_text"
+                  [innerHTML]="homepageData.homepage.banner_text"
+                ></p>
+              </div>
+              <div
+                class="d-flex justify-content-center align-items-center mt-4"
+              >
+                <a
+                  href="javascript:void(0)"
+                  (click)="
+                    redirectTo(homepageData.homepage.banner_cta_url_1, $event)
+                  "
+                  class="btn-shop"
+                  >{{ homepageData.homepage.banner_cta_text_1 }}</a
+                >
+                <a
+                  href="javascript:void(0)"
+                  (click)="redirectTo(homepageData.homepage.banner_cta_url_2)"
+                  class="spek-btn"
+                  >{{ homepageData.homepage.banner_cta_text_2 }}</a
+                >
+              </div>
+            </div>
+            <!-- <div class="banner-search">
+              <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div> -->
+          </div>
+          <div class="col-md-5">
+            <div class="hgpnb-img">
+              <div class="hgpnb-imgInnr">
+                <div class="hgpnb2">
+                  <a href="/kit/6">
+                    <img src="/assets/_img/newbanner.png" class="img-fluid" />
+                  </a>
+                </div>
+                <div class="nbaner-dots"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Banner 02 Ends -->
+    </div>
+  </section>
+  <!-- hero section ends -->
+  <app-clearfix></app-clearfix>
+
+  <!--  <section *ngIf="homepageData?.featureProducts.length">-->
+  <!--    <div class="container">-->
+  <!--      <div class="row">-->
+  <!--        <div class="col-md-12">-->
+  <!--          <div class="slder-nwt-sec">-->
+  <!--            <a href="javascript:void(0)" *ngFor="let category of homepageData.featureCategories; let i=index"-->
+  <!--               (click)="currentCategoryIndex = i">{{ category.hydro_category.name }}</a>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </section>-->
+
+  <!--  <app-clearfix></app-clearfix>-->
+
+  <!-- <section *ngIf="homepageData?.featureCategories.length">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="promot-bnner">
+            <a [href]="homepageData.featureCategories[currentCategoryIndex].promotional_banner_image_url"
+               target="_blank">
+              <img [src]="homepageData.featureCategories[currentCategoryIndex].promotional_banner_image | imageUrl"/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-clearfix></app-clearfix>-->
+
+  <!-- Sub Banner Section Starts -->
+  <section class="subslider-wrap">
+    <!-- Top Bar Starts -->
+    <div class="div-float subslider-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul>
+              <li *ngFor="let slider of kitSliders; let i = index">
+                <a
+                  id="slider-{{ i }}"
+                  class="sliderTitle"
+                  (click)="slickGotoSlide(i, slider?.id)"
+                  href="#"
+                  [ngClass]="
+                    kitId
+                      ? kitId === slider?.id
+                        ? 'active'
+                        : ''
+                      : i === 0
+                      ? 'active'
+                      : ''
+                  "
+                  >{{ slider?.name }}</a
+                >
+              </li>
+              <!-- <li><a href="#media-popup">Play Video</a></li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Top Bar Ends -->
+
+    <!-- Popup Starts -->
+    <div class="iframe-popup" id="media-popup">
+      <div class="cusPop-wrap">
+        <span class="custom-close-pop"></span>
+        <iframe
+          id="hippoVideo"
+          width="760"
+          height="430"
+          src=""
+          frameborder="0"
+          scrolling="no"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+    <!-- Popup Ends -->
+
+    <!-- Bottom Slider Starts -->
+    <div class="div-float subslider-cover">
+      <ngx-slick-carousel
+        class="div-float subslider-track"
+        #slickModal="slick-carousel"
+        [config]="subsliderConfig"
+      >
+        <!-- Slider Item Starts -->
+        <div
+          ngxSlickItem
+          class="subslider-items float-left"
+          *ngFor="let slider of kitSliders; let i = index"
+        >
+          <div class="subslider-item-inner div-float">
+            <a (click)="redirectTo(slider.cta_url, $event)">
+              <img
+                [src]="slider.image | imageUrl"
+                alt=""
+                class="img-fluid w-100"
+              />
+            </a>
+          </div>
+        </div>
+        <!-- Slider Item Ends -->
+      </ngx-slick-carousel>
+    </div>
+    <!-- Bottom Slider Ends -->
+  </section>
+  <app-clearfix></app-clearfix>
+  <!-- Sub Banner Section Ends -->
+
+  <section class="mb-5 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="feart-sec div-float text-center">
+            <h4 class="tit-up pl-5 pr-5">
+              {{ homepageData.homepage.featured_section_title }}
+            </h4>
+            <p
+              style="font-size: 16px"
+              [innerHTML]="homepageData.homepage.featured_section_text"
+            ></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-clearfix></app-clearfix>
+
+  <!-- Testimonial New Slider Starts -->
+  <section *ngIf="testimonials.length">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="div-float textimonial-text-slider-wrap">
+            <ngx-slick-carousel
+              class="div-float text-slider"
+              #slickModal="slick-carousel"
+              [config]="testimonialTextSliderConfig"
+            >
+              <!-- Slider Item Starts -->
+              <div
+                ngxSlickItem
+                class="text-testimonial-items float-left"
+                *ngFor="let testimonial of testimonials"
+              >
+                <div class="text-inner div-float">
+                  <div class="div-float expand-content">
+                    <p
+                      class="testimonial-slider show-less"
+                      [innerHTML]="testimonial?.detail"
+                    ></p>
+                    <a
+                      *ngIf="testimonial?.detail.length > 186"
+                      class="showMoreBtn"
+                      href="javascript:void(0);"
+                    >
+                      SEE MORE
+                    </a>
+                  </div>
+                  <div class="div-float rate-btm-wrap">
+                    <div class="star-wrap div-float">
+                      <div class="star-bg-grey">
+                        <div
+                          class="star-percent"
+                          [ngStyle]="{ width: testimonial?.rating }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="rating-text">
+                      <h3>{{ testimonial?.name }}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Slider Item Ends -->
+            </ngx-slick-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <app-clearfix></app-clearfix>
+  <!-- Testimonial New Slider Ends -->
+
+  <!-- Category new section starts -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="feart-sec div-float text-center">
+            <span class="cagtsub-head">{{
+              homepageData.homepage.featured_products_mini_title
+            }}</span>
+            <h3 class="hom-title">
+              {{ homepageData.homepage.featured_products_title }}
+            </h3>
+          </div>
+
+          <div class="sldr-pls-add-sec div-float">
+            <div class="sldr-product">
+              <div class="category-slider div-float">
+                <ngx-slick-carousel
+                  class="category-slider post-slider div-float"
+                  #slickModal="slick-carousel"
+                  [config]="categorySliderConfig"
+                >
+                  <div
+                    ngxSlickItem
+                    *ngFor="let product of homepageData.featureProducts"
+                    class="category-items float-left"
+                  >
+                    <app-product-item [product]="product"></app-product-item>
+                  </div>
+                </ngx-slick-carousel>
+              </div>
+            </div>
+
+            <div class="add-blues">
+              <div class="add-blues-innr">
+                <h4>Get started today with expert advice</h4>
+                <a routerLink="/contact-us">Talk to a specialist</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Category section ends -->
+
+  <app-clearfix></app-clearfix>
+  <app-clearfix></app-clearfix>
+
+  <!-- Packages Section starts -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tbs-grey div-float">
+            <div class="tabs-lnk new-tab-settings">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="beginner-tab"
+                    data-toggle="tab"
+                    href="#beginner"
+                    role="tab"
+                    aria-controls="beginner"
+                    aria-selected="true"
+                    (click)="currentPackagePrice = smallKit?.price"
+                    >{{ smallKit?.name }}</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="medium-tab"
+                    data-toggle="tab"
+                    href="#medium"
+                    role="tab"
+                    aria-controls="medium"
+                    aria-selected="false"
+                    (click)="currentPackagePrice = mediumKit?.price"
+                    >{{ mediumKit?.name }}</a
+                  >
+                </li>
+                <!-- <li class="nav-item shine-link mamba-link">
+                  <a class="nav-link active" id="expert-tab" data-toggle="tab" href="#expert" role="tab" aria-controls="expert"
+                     aria-selected="false" (click)="currentPackagePrice = largeKit?.price;">{{largeKit?.name}}</a>
+                </li> -->
+                <li class="nav-item">
+                  <a
+                    class="nav-link talk-btn active"
+                    id="expert-tab"
+                    data-toggle="tab"
+                    href="#expert"
+                    role="tab"
+                    aria-controls="expert"
+                    aria-selected="false"
+                    (click)="currentPackagePrice = largeKit?.price"
+                    >{{ largeKit?.name }}</a
+                  >
+                </li>
+              </ul>
+              <!-- <a class="talk-btn" routerLink="{{ homepageData?.homepage?.package_cta_link }}" target="_blank">
+                <span [innerHTML]="homepageData?.homepage?.package_cta_title"></span>
+              </a> -->
+              <div class="strt-prce">
+                <h6>
+                  Starting from
+                  <span
+                    ><span class="prce-icon">$</span
+                    >{{ currentPackagePrice }}</span
+                  >
+                </h6>
+              </div>
+            </div>
+
+            <div class="tabs-contctsec compare-tabs" *ngIf="smallKit">
+              <div class="tab-content" id="myTabContent">
+                <div
+                  class="tab-pane fade"
+                  id="beginner"
+                  role="tabpanel"
+                  aria-labelledby="beginner-tab"
+                >
+                  <div class="tab-innr-cont">
+                    <div class="tab-innr-cont-lft">
+                      <h3>{{ smallKit?.title }}</h3>
+                      <h4>
+                        <i>{{ smallKit.mini_title }}</i>
+                      </h4>
+                      <p [innerHTML]="smallKit?.short_description"></p>
+                      <!-- Large Logo Starts -->
+                      <div class="brand-logos-large">
+                        <img
+                          src="assets/_img/proline-large-logo.png"
+                          class="img-fluid"
+                          alt="Proline Kit"
+                        />
+                      </div>
+                      <!-- Large Logo Ends -->
+                      <ul>
+                        <li *ngFor="let feature of smallKit?.features">
+                          {{ feature }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="tab-innr-cont-rgt">
+                      <div class="tab-innr-cont-rgt-innr">
+                        <img
+                          [src]="smallKit?.image | imageUrl"
+                          class="img-fluid"
+                        />
+                      </div>
+                      <div class="buy-moreInfo">
+                        <!-- <a [routerLink]="['/kit', smallKit.id]" class="kit-pckg-info">View Detail</a>
+                        <button appAddToCart [qty]="1" [kit]="smallKit" type="button" class="btn-shop"
+                                (adding)="isAdding = true" (added)="isAdding = false">
+                          <ng-template [ngIf]="!isAdding">Buy Now</ng-template>
+                          <ng-template [ngIf]="isAdding">
+                            <app-spinner></app-spinner>
+                          </ng-template>
+                        </button> -->
+
+                        <a [routerLink]="['/kit', smallKit.id]" class="btn-shop"
+                          >View Details</a
+                        >
+                        <a routerLink="/compare" class="btn-shop compare-btn">
+                          Compare
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="medium"
+                  role="tabpanel"
+                  aria-labelledby="medium-tab"
+                >
+                  <div class="tab-innr-cont">
+                    <div class="tab-innr-cont-lft">
+                      <h3>{{ mediumKit?.title }}</h3>
+                      <h4>
+                        <i>{{ mediumKit.mini_title }}</i>
+                      </h4>
+                      <p [innerHTML]="mediumKit?.description"></p>
+                      <!-- Large Logo Starts -->
+                      <div class="brand-logos-large">
+                        <img
+                          src="assets/_img/veteran-large-logo.png"
+                          class="img-fluid"
+                          alt="Veteran Kit"
+                        />
+                      </div>
+                      <!-- Large Logo Ends -->
+                      <ul>
+                        <li *ngFor="let feature of mediumKit?.features">
+                          {{ feature }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="tab-innr-cont-rgt">
+                      <div class="tab-innr-cont-rgt-innr">
+                        <img
+                          [src]="mediumKit?.image | imageUrl"
+                          class="img-fluid"
+                        />
+                      </div>
+                      <div class="buy-moreInfo">
+                        <!-- <a [routerLink]="['/kit', mediumKit.id]" class="kit-pckg-info">View Detail</a>
+                        <button appAddToCart [qty]="1" [kit]="mediumKit" type="button" class="btn-shop"
+                                (adding)="isAdding2 = true" (added)="isAdding2 = false">
+                          <ng-template [ngIf]="!isAdding2">Buy Now</ng-template>
+                          <ng-template [ngIf]="isAdding2">
+                            <app-spinner></app-spinner>
+                          </ng-template>
+                        </button> -->
+
+                        <a
+                          [routerLink]="['/kit', mediumKit.id]"
+                          class="btn-shop"
+                          >View Details</a
+                        >
+                        <a routerLink="/compare" class="btn-shop compare-btn">
+                          Compare
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade show active"
+                  id="expert"
+                  role="tabpanel"
+                  aria-labelledby="expert-tab"
+                >
+                  <div class="tab-innr-cont">
+                    <div class="tab-innr-cont-lft">
+                      <h3>{{ largeKit?.title }}</h3>
+                      <h4>
+                        <i>{{ largeKit.mini_title }}</i>
+                      </h4>
+
+                      <p [innerHTML]="largeKit?.description"></p>
+                      <!-- Large Logo Starts -->
+                      <div class="brand-logos-large">
+                        <img
+                          src="assets/_img/mamba-large-logo.png"
+                          class="img-fluid"
+                          alt="Manba Kit"
+                        />
+                      </div>
+                      <!-- Large Logo Ends -->
+                      <ul>
+                        <li *ngFor="let feature of largeKit?.features">
+                          {{ feature }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="tab-innr-cont-rgt">
+                      <div class="tab-innr-cont-rgt-innr">
+                        <img
+                          [src]="largeKit?.image | imageUrl"
+                          class="img-fluid"
+                        />
+                      </div>
+                      <div class="buy-moreInfo">
+                        <!-- <a [routerLink]="['/kit', largeKit.id]" class="kit-pckg-info">View Detail</a> -->
+                        <!-- <button appAddToCart [qty]="1" [kit]="largeKit" type="button" class="btn-shop"
+                                (adding)="isAdding3 = true" (added)="isAdding3 = false">
+                          <ng-template [ngIf]="!isAdding3">Buy Now</ng-template>
+                          <ng-template [ngIf]="isAdding3">
+                            <app-spinner></app-spinner>
+                          </ng-template>
+                        </button> -->
+                        <a [routerLink]="['/kit', largeKit.id]" class="btn-shop"
+                          >View Details</a
+                        >
+                        <a routerLink="/compare" class="btn-shop compare-btn">
+                          Compare
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Packages Section ends -->
+
+  <app-clearfix></app-clearfix>
+
+  <!-- How it works Section -->
+  <section *ngIf="homepageData?.homepage?.how_it_work_title">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="hw-it-wrk">
+            <div
+              class="hw-itimg"
+              appBackgroundImage
+              [path]="homepageData?.homepage?.how_it_work_left_image"
+            >
+              <div class="hw-itimg-dots"></div>
+            </div>
+
+            <div class="hw-txtsec">
+              <h4>{{ homepageData?.homepage?.how_it_work_title }}</h4>
+              <span
+                [innerHTML]="homepageData?.homepage?.how_it_work_description"
+              ></span>
+              <a
+                href="javascript:void(0)"
+                (click)="
+                  redirectTo(homepageData?.homepage?.how_it_work_cta_link)
+                "
+                class="btn-shop"
+                >{{ homepageData?.homepage?.how_it_work_cta_title }}</a
+              >
+
+              <div class="hw-abslt-sec">
+                <div class="curve-blck"></div>
+                <div
+                  class="hw-abslt-bx"
+                  appBackgroundImage
+                  [path]="homepageData?.homepage?.how_it_work_right_image"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- How it works Section End -->
+
+  <app-clearfix></app-clearfix>
+
+  <!-- Team Section -->
+  <app-videos
+    [videos]="homepageData?.videos"
+    [title]="homepageData?.homepage?.video_title"
+  ></app-videos>
+
+  <app-clearfix></app-clearfix>
+
+  <!-- Bottom Section -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pro-growing-wrap">
+            <div class="pro-growing-left">
+              <div class="text-center doenlod-bok">
+                <img
+                  *ngIf="homepageData.homepage.bottom_section_book_cover_image"
+                  [src]="
+                    homepageData?.homepage?.bottom_section_book_cover_image
+                      | imageUrl
+                  "
+                />
+              </div>
+
+              <a
+                *ngIf="showBookDownloadButton"
+                [href]="homepageData.homepage?.bottom_section_download_book"
+                target="_blank"
+                >{{ homepageData.homepage.bottom_section_book_title }}</a
+              >
+            </div>
+            <div class="pro-growing-center text-center">
+              <img
+                [src]="homepageData?.homepage?.bottom_center_image | imageUrl"
+                class="img-fluid"
+              />
+              <h3
+                [innerHTML]="homepageData?.homepage?.bottom_section_title"
+              ></h3>
+              .
+              <p *ngIf="homepageData?.homepage?.bottom_section_mini_title">
+                {{ homepageData?.homepage?.bottom_section_mini_title }}
+              </p>
+              <div class="grow-shdw"></div>
+            </div>
+            <div class="pro-growing-right">
+              <div
+                [innerHTML]="homepageData?.homepage?.bottom_section_description"
+              ></div>
+              <a
+                [href]="homepageData?.homepage?.bottom_section_cta_link"
+                target="_blank"
+                class="btn-shop"
+                >{{ homepageData?.homepage?.bottom_section_cta_title }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews -->
+  <section class="customr-sec div-float" *ngIf="homepageData?.reviews.length">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="div-float text-center">
+            <h3
+              class="blue-color"
+              [innerHTML]="homepageData?.homepage?.review_section_title"
+            ></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="blg-sldr-wrap">
+      <div class="blg-sldr-wrapInnr">
+        <ngx-slick-carousel
+          class="category-slider post-slider div-float"
+          #slickModal="slick-carousel"
+          [config]="blogSliderConfig"
+        >
+          <div
+            ngxSlickItem
+            *ngFor="let review of homepageData?.reviews"
+            class="category-items float-left"
+          >
+            <div class="blg-sldr-bx">
+              <div class="blg-sldrBtxt">
+                <p>{{ review?.comment }}</p>
+              </div>
+
+              <div class="nme-str-upp">
+                <p>{{ review?.reviewer_name }}</p>
+                <div class="ratng-str">
+                  <!-- <ngx-stars [initialStars]="review?.rating" [readonly]="true" [color]="Colors.starsColor"></ngx-stars> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+  </section>
+  <!-- Customer Reviews -->
+
+  <app-clearfix></app-clearfix>
+</ng-template>

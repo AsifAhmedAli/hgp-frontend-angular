@@ -1,0 +1,10 @@
+<div *ngIf="item" class="order-dtl">
+  <app-order-bill-ship-detail-item *ngIf="item?.last_four" title="Card Number" [content]="'ending in ' + item?.last_four"></app-order-bill-ship-detail-item>
+  <app-order-bill-ship-detail-item title="Name on Card" [content]="item?.card_holder_name"></app-order-bill-ship-detail-item>
+  <app-order-bill-ship-detail-item *ngIf="item?.expiration_year && item?.expiration_month" title="Exp. Date" [content]="item?.expiration_month + '/' + item?.expiration_year"></app-order-bill-ship-detail-item>
+  <app-order-bill-ship-detail-item
+    *ngIf="item?.type && item?.type === 'PayPalAccount'"
+    title="Paid Using"
+    content="PayPal"
+  ></app-order-bill-ship-detail-item>
+</div>

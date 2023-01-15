@@ -1,0 +1,45 @@
+<a *ngIf="cartProduct?.product" class="flx-clm" [routerLink]="'/product/' + cartProduct?.product?.sku">
+    <div class="contry-erre-set">
+        <strong>
+          <div class="sum-img">
+            <img appHideBrokerImage *ngIf="cartProduct?.product?.image" [src]="cartProduct?.product?.image?.url" [alt]="cartProduct?.product?.name" />
+          </div>
+          <div class="sum-pname">
+            {{ cartProduct?.product?.name }}
+            <span>x {{ cartProduct?.quantity }}</span>
+          </div>
+        </strong>
+        <small>{{ cartProduct?.total_price | currency }}</small>
+    </div>
+    <small class="error-fld d-block clear-fix mt-0 pb-0 text-left" *ngIf="cartProduct.isRestricted">{{ MESSAGES.restrictedProduct }}</small>
+    <small class="error-fld d-block clear-fix mt-0 pb-0 text-left" *ngIf="cartProduct.isRestrictedKit">{{ MESSAGES.restrictedKit }}</small>
+</a>
+<a *ngIf="cartProduct?.kit" class="flx-clm" [routerLink]="'/kit/' + cartProduct?.kit?.id">
+  <div class="contry-erre-set">
+    <strong>
+      <div class="sum-img">
+        <img appHideBrokerImage *ngIf="cartProduct?.kit" [src]="cartProduct?.kit?.image | imageUrl" [alt]="cartProduct?.kit?.name" />
+      </div>
+      <div class="sum-pname">
+        {{ cartProduct?.kit?.name }}
+        <span>x {{ cartProduct?.quantity }}</span>
+      </div>
+    </strong>
+    <small>{{ cartProduct?.total_price | currency }}</small>
+  </div>
+  <small class="error-fld d-block clear-fix mt-0 pb-0 text-left" *ngIf="cartProduct.isRestricted">{{ MESSAGES.restrictedProduct }}</small>
+
+    <small class="error-fld d-block clear-fix mt-0 pb-0 text-left" *ngIf="cartProduct.isRestrictedKit">{{ MESSAGES.restrictedKit }}</small>
+</a>
+
+<span class="cross-sign-fr-prodct">
+  <a
+          appRemoveCartProduct
+          [cartProduct]="cartProduct"
+          (removing)="onRemoving($event)"
+          href="javascript:"
+  >
+   <i *ngIf="!isRemoving" class="icon-cross"></i><app-spinner
+          *ngIf="isRemoving"></app-spinner>
+  </a>
+</span>

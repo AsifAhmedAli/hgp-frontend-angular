@@ -1,0 +1,71 @@
+<div class="ps-page">
+  <div class="ps-shop">
+    <div class="container">
+      <div class="ps-shop__header">
+        <div class="ps-shop__left">
+          <h1>{{ queryParams?.query }}</h1>
+          <ul class="ps-breadcrumb">
+            <li><a routerLink="/">Home</a></li>
+            <li>Search Results</li>
+          </ul>
+        </div>
+        <div class="ps-shop__right">
+          <p> {{ total }} Results Found</p>
+          <div class="ps-shop__actions">
+            <div class="ps-shop__filter" style="display: none;"><a class="ps-shop__filter-toggle" href="#">Filter<i class="fa fa-angle-down"></i></a></div>
+            <div class="ps-shop__sorting"><span>Sort By</span>
+              <select class="ps-select" (change)="onSortingChange($event)" style="color: #1B1B1B; border: none; font-weight: 700; padding: 5px 0;">
+                <option [selected]="queryParams?.sortBy === option.value" *ngFor="let option of sortOptions" [value]="option.value">{{ option.title }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ps-shop__content">
+
+        <!-- Data Not Found Old Starts -->
+        <p *ngIf="dataNotFound" class="text-center" style="font-size: 20px;">No Record Found</p>
+        <!-- Data Not Found Old Ends -->
+
+        <!-- Not found starts -->
+        <div class="row" *ngIf="dataNotFound" style="display: none;">
+          <div class="col-md-12">
+            <div class="nt-fnd">
+                <div class="alert alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert">X</button>
+                  <div class="nt-fnd-txt-img">
+                    <div class="nt-fnd-img">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.99998 0C3.58001 0 0 3.58001 0 7.99998C0 12.42 3.58001 16 7.99998 16C12.42 16 16 12.42 16 7.99998C16 3.57997 12.42 0 7.99998 0ZM8.80001 12H7.19999V7.19999H8.80001V12ZM8.80001 5.59998H7.19999V3.99997H8.80001V5.59998Z" fill="#585858"/>
+                      </svg>
+                    </div>
+                    <div class="nt-fnd-txt">
+                      <h3>No Record Found</h3>
+                      <p>Sample Text Here Sample Text Here Sample Text Here <a href="#">Sample Text Here</a> </p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- Not found ends -->
+
+        <app-loader *ngIf="isLoading"></app-loader>
+        <div class="row" *ngIf="!dataNotFound">
+          <div *ngFor="let item of hits; trackBy: trackById" class="col-xl-3 col-lg-4 col-md-3 col-sm-6 col-6 ">
+            <app-product-item *ngIf="item.type == 'product';else showBlog" [product]="item"></app-product-item>
+            <ng-template #showBlog>
+            <app-blog-item *ngIf="item.type == 'blog'" [blog]="item"></app-blog-item>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="ps-shop__footer" *ngIf="!isLoading">
+        <a *ngIf="!discovering && page + 1 < nbPages" class="ps-link--under" (click)="onDiscoverMore()">Discover more</a>
+        <a *ngIf="discovering" class="ps-link--under"><app-spinner></app-spinner></a>
+      </div>
+
+<!--      <div class="ps-shop__footer"><a class="ps-link&#45;&#45;under" href="javacript:void(0)" (click)="onDiscoverMore()" *ngIf="nbPages > 1">Discover more</a></div>-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="ps-page">
+  <div class="ps-shop">
+    <div class="container">
+      <div class="ps-shop__header" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine"
+           data-aos-once="true">
+        <div class="ps-shop__left">
+          <h1>Manufacturers</h1>
+          <ul class="ps-breadcrumb">
+            <li><a router>Home</a></li>
+            <li>Manufacturers</li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="ps-shop__content">
+        <app-loader *ngIf="!isPageProcessingComplete"></app-loader>
+        <div class="row" *ngIf="isPageProcessingComplete">
+          <p *ngIf="dataNotFound" class="text-center" style="font-size: 20px;">No Manufacturer found</p>
+          <div class="col-xl-3 col-lg-4 col-md-3 col-sm-6 col-6" *ngFor="let brand of brands">
+            <div class="ps-product ps-manu" data-aos="zoom-in" data-aos-duration="1000" data-aos-once="true">
+
+              <div class="ps-product__thumbnail">
+                <table>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <img style="transition: none;" class="ps-product__image" [src]="brand.logo.path"
+                           [alt]="brand.name"/>
+                      <!-- <img style="transition: none;" class="ps-product__image-alt" [src]="brand.logo.path"  [alt]="brand.name"/> -->
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <!--                <img class="ps-product__image-alt" [src]="brand.logo.path" [alt]="brand.name"/>-->
+                <a class="ps-product__overlay" [routerLink]="'/products/' + brand?.slug"
+                   queryParamsHandling="merge"
+                   [queryParams]="{type: 'brand'}"
+                   href="javascript:void(0)"></a>
+                <div class="ps-product__actions d-none"><a [routerLink]="'/products/' + brand?.slug"
+                                                           queryParamsHandling="merge"
+                                                           [queryParams]="{type: 'brand'}"
+                                                           href="javascript:void(0)"> View Products</a>
+                </div>
+              </div>
+              <div class="ps-product__content"><a [routerLink]="'/products/' + brand?.slug"
+                                                  queryParamsHandling="merge"
+                                                  [queryParams]="{type: 'brand'}"
+                                                  class="ps-product__title text-center"
+                                                  href="javascript:void(0)">{{brand.name}}</a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template [ngIf]="isPageProcessingComplete">
+        <div *ngIf="!dataNotFound && paginatedBrands?.last_page > paginatedBrands?.current_page"
+             class="ps-shop__footer">
+          <a *ngIf="!discovering" class="ps-link--under" (click)="next()">Discover more</a>
+          <a *ngIf="discovering" class="ps-link--under">
+            <app-spinner></app-spinner>
+          </a>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

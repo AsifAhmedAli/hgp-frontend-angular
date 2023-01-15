@@ -1,0 +1,26 @@
+<div class="ps-page--default">
+  <div class="container">
+    <div class="ps-page__header">
+      <h3 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="200" data-aos-offset="0">{{ title }}</h3>
+      <app-breadcrumb page="registerLogin"></app-breadcrumb>
+    </div>
+    <div class="ps-page__content" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="800" data-aos-offset="0">
+      <div class="ps-tab-root">
+        <div class="ps-form--auth">
+          <ul class="ps-tab-list">
+            <li [class.active]="fragment === 'tab-1'"><a routerLink="/login" fragment="tab-1">Login</a></li>
+            <li [class.active]="fragment === 'tab-2'"><a routerLink="/login" fragment="tab-2">Register</a></li>
+          </ul>
+          <div class="ps-tabs">
+            <div class="ps-tab" [class.active]="fragment === 'tab-1'">
+              <app-login-form></app-login-form>
+            </div>
+            <div class="ps-tab" [class.active]="fragment === 'tab-2'">
+              <app-register-form></app-register-form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
