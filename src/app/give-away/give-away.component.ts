@@ -21,6 +21,8 @@ export class GiveAwayComponent implements OnInit {
   isSubmitting: boolean;
   submitted: boolean;
   subscription: Subscription;
+  showTermsCondition: boolean;
+
   constructor(
     private fb: FormBuilder,
     private helpersService: HelpersService,
@@ -50,6 +52,7 @@ export class GiveAwayComponent implements OnInit {
       age: ["", [Validators.required, Validators.min(21)]],
       interest: ["", [Validators.required]],
       describe: ["", [Validators.required]],
+      hear: ["", [Validators.required]],
       follow: ["", [Validators.required, Validators.requiredTrue]],
     });
   }
@@ -68,10 +71,12 @@ export class GiveAwayComponent implements OnInit {
               "Your request has been submitted successfully.",
               "Thank You!"
             );
-            this.submitted = true;
             setTimeout(() => {
-              location.reload();
-            }, 7000);
+              window.open(
+                "https://www.instagram.com/homegrownpros.io/",
+                "__blank"
+              );
+            }, 200);
           },
           (error) => {
             this.submitted = false;

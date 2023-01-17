@@ -1,8 +1,61 @@
-label {
-  font-size: 12px;
+@media (max-width: 992px) {
+  label {
+    font-size: 11px;
+  }
 }
 .link {
-  text-decoration: underline;
-  margin-left: 2px;
-  color: #84bc2c;
+  text-decoration: underline !important;
+  margin-left: 1px;
+  color: #000;
+  font-weight: 600;
+}
+.pointer {
+  cursor: pointer;
+}
+a{
+  text-decoration: underline !important;
+}
+button:disabled {
+  pointer-events: none;
+  opacity: 0.1;
+}
+.bg {
+  background: url(../../assets/_img/home.png);
+  background-size: cover;
+  /* Add the blur effect */
+  filter: blur(48px);
+  -webkit-filter: blur(48px);
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.term-condition {
+  height: calc(100vh - 100px);
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  overflow: auto;
+}
+.close-icon {
+  position: absolute;
+  right: 25px;
+  z-index: 99;
+}
+.close-icon i {
+  font-size: 30px;
+  cursor: pointer;
+}
+h4 {
+  margin-bottom: 2px;
 }

@@ -1,12 +1,28 @@
-<div class="ps-page--default ps-page--contact">
-  <div class="logo text-center mt-4 mt-md-0">
-    <img src="./assets/_img/logo.jpeg" alt="HGP" />
-  </div>
-  <div class="ps-page__content">
+<div class="bg"></div>
+<ng-container *ngIf="!showTermsCondition">
+  <div class="py-md-5 py-4">
     <div class="container">
       <div class="row">
-        <div class="col-md-9 m-auto">
-          <div class="ps-contact">
+        <div class="col-md-10 m-auto">
+          <div class="row">
+            <div class="col-md-8 m-auto text-center">
+              <div class="giveaway text-center">
+                <img src="./assets/_img/giveaway.png" alt="GIVEAWAY" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 m-auto text-center">
+              <img src="./assets/_img/logo.png" width="250px" alt="HGP" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 m-auto">
+          <div class="py-md-4 py-3">
             <form
               [class.d-none]="submitted"
               class="ps-form--contact"
@@ -260,6 +276,53 @@
                       <div class="input-field-wrap">
                         <span>
                           <div class="input-field">
+                            <label for="hear"
+                              >How did you hear about our launch giveaway?
+                            </label>
+                            <select
+                              class="form-control frmEle"
+                              id="hear"
+                              formControlName="hear"
+                            >
+                              <option value="Email campaign">
+                                Email campaign
+                              </option>
+                              <option value="Instagram">Instagram</option>
+                              <option value="40 Tons Brand ">
+                                40 Tons Brand
+                              </option>
+                              <option value="Facebook">Facebook</option>
+                              <option value="Heard from a friend">
+                                Heard from a friend
+                              </option>
+                            </select>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <ng-template
+                      [ngIf]="
+                        form.get('describe').dirty ||
+                        form.get('describe').touched
+                      "
+                    >
+                      <div
+                        class="error-fld"
+                        *ngIf="form.get('describe').hasError('required')"
+                      >
+                        {{ MESSAGES.required }}
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="detl-srchflds-bx w-100 mr-0">
+                    <div class="form-group floating">
+                      <div class="input-field-wrap">
+                        <span>
+                          <div class="input-field">
                             <label for="describe"
                               >Please select what best describes you
                             </label>
@@ -310,10 +373,8 @@
                     </ng-template>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div
-                  class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 m-auto"
+                  class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 m-auto"
                 >
                   <div class="detl-srchflds-bx w-100 mr-0">
                     <div class="form-group floating">
@@ -371,22 +432,21 @@
               </div>
               <div class="row">
                 <div class="col-sm-12 text-center">
-                  <div class="form-group create-account">
-                    <div class="ps-checkbox">
+                  <div class="form-group create-account text-center">
+                    <div class="ps-checkbox text-center">
                       <input
                         class="form-control"
                         type="checkbox"
                         id="follow"
                         formControlName="follow"
                       />
-                      <label for="follow"
+                      <label class="text-center" for="follow"
                         >To Complete registration don’t forget to follow us
-                        instagram
+                        instagram<br/>
                         <a
-                          class="link"
-                          href="https://www.instagram.com/homegrownpros.io/"
-                          target="__blank"
-                          >Click here to follow</a
+                          class="link pointer"
+                          (click)="showTermsCondition = !showTermsCondition"
+                          >Click here to view rules and terms and conditions</a
                         >
                       </label>
                     </div>
@@ -410,19 +470,187 @@
                   (keydown.enter)="onSubmit()"
                   type="submit"
                   class="ps-btn ps-btn--black"
-                  [disabled]="isSubmitting"
+                  [disabled]="isSubmitting || !form.valid"
                 >
-                  {{ isSubmitting ? "Processing..." : "Submit" }}
+                  {{ isSubmitting ? "Processing..." : "Complete Registration" }}
                 </button>
               </div>
             </form>
-            <div class="text-center" *ngIf="submitted">
+            <!-- <div class="text-center" *ngIf="submitted">
               <h3>Thank you <br /></h3>
               <p>Your request submitted successfully!</p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>
+
+<ng-container *ngIf="showTermsCondition">
+  <div class="container">
+    <div class="term-condition">
+      <div
+        class="close-icon pointer"
+        (click)="showTermsCondition = !showTermsCondition"
+      >
+        <i class="fa fa-close"></i>
+      </div>
+      <h3>
+        Rules and terms and conditions: <br />
+        Launch Giveaway Homegrownpros.io
+      </h3>
+      <p>
+        This Schedule together with the Terms and Conditions constitute the
+        terms of entry for this Promotion. Please read the Terms and Conditions
+        attached to this Schedule.
+      </p>
+      <h4>Name of Promotion</h4>
+      <p>Launch day Giveaway www.homegrownpros.io</p>
+      <h4>Promoter</h4>
+      <p>
+        HomeGrown Pros, Inc. 400 Renaissance Center Drive Suite 2600 Detroit, MI
+        48243
+      </p>
+      <h4>Eligible Countries, States and Territories</h4>
+      <p>
+        Entry is open to any person residing in the United States of America
+        (excluding Puerto Rico, and the U.S. Territories and Possessions)
+      </p>
+      <h4>Entry Restrictions</h4>
+      <p>
+        Entrants must be 21 years of age or over. Employees and their immediate
+        families of the Promoters, Agencies and their related corporate bodies,
+        are not eligible to enter this Promotion.
+      </p>
+      <h4>Promotion Period</h4>
+      <p>
+        Entry into the Promotion commences on 18 January 2023 at 8:24 AM PST and
+        closes on 26 January 2023 at 8:24 PM PST
+      </p>
+      <h4>Entry Method</h4>
+      <p>
+        Visit the https://homegrownpros.io/ link during the Promotion Period and
+        complete the entry form completely. Entries are limited to one entry per
+        eligible entrant. Entry is free & without purchase.
+        <br />
+        When shared on instagram story or page, you must tag 3 friends and tag
+        @homegrownpros.io on instagram to receive 3 additional entries.
+        <br />
+        When shared on Instagram story or page must tag @homegrownpros.io to
+        receive additional entry.
+        <br />
+        The odds of winning a prize depends upon the total number of eligible
+        entries received during the Promotion Period.
+        <br />
+        One (1) daily winner will be drawn in each draw for eight (8) Draws and
+        will be selected randomly from a drawling online platform from all
+        eligible entries received up to the close date and time of the
+        applicable Draw fo sponsored prize (excluding grand prize Mambaline
+        Growkit final day)
+        <br />
+        If a prospective winner (and where applicable the prospective winner's
+        guest) is not able to accept their prize as stated, & in its entirety,
+        the prize will be forfeited, and no compensation will be given or paid
+        in lieu.
+      </p>
+      <h4>Maximum Number of Entries</h4>
+      <p>
+        Entry to the Promotion is limited to one (1) entry per eligible entrant
+        when completing the registration form on
+        <a href="https://homegrownpros.io/" target="__blank"
+          >https://homegrownpros.io/</a
+        >
+        For each draw, a winner will be drawn from the cumulative entries
+        received from the start of the Promotion Period. An eligible entrant may
+        enter one (1) time during the entire Promotion Period.
+      </p>
+      <h4>Website</h4>
+      <div>
+        <a href="https://homegrownpros.io/" target="__blank"
+          >https://homegrownpros.io/</a
+        >
+      </div>
+      <h4>Draw & Unclaimed Prize Draw Determination Dates</h4>
+      <p>
+        The Promotion is a game of chance. All eligible entries will be entered
+        into the applicable random computerized draw/s.
+        <br />
+        The random computerized draws will be conducted at 8:24 PM PST on each
+        day of giveaway.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Draw Dates</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Day 1 Draw:</td>
+            <td>19 January 2023</td>
+          </tr>
+          <tr>
+            <td>Day 2 Draw:</td>
+            <td>20 January 2023</td>
+          </tr>
+          <tr>
+            <td>Day 3 Draw:</td>
+            <td>21 January 2023</td>
+          </tr>
+          <tr>
+            <td>Day 4 Draw:</td>
+            <td>22 January 2023</td>
+          </tr>
+          <tr>
+            <td>Day 5 Draw:</td>
+            <td>23 January 2023</td>
+          </tr>
+          <tr>
+            <td>Day 6 Draw:</td>
+            <td>24 January 2023</td>
+          </tr>
+          <tr>
+            <td>Day 7 Draw:</td>
+            <td>25 January 2023</td>
+          </tr>
+          <tr>
+            <td>Day 8 Draw:</td>
+            <td>26 January 2023</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <h4>Other Rules Terms and Conditions:</h4>
+      <p>
+        The first eligible entry drawn in each Draw will be the winner
+        <br />
+        Daily Winners will be announced on Instagram @homegrownpros.io
+        <br />
+        Grand prize winner of Mambaline Growkit will be announced on 1/27/2023
+        <a href="https://homegrownpros.io/" target="__blank"
+          >https://homegrownpros.io/</a
+        >
+        <br />
+        All entries must complete registration form on homegrowpros.io
+        <br />
+        The Winner for the Grand prize Mamba line Growkit 5x5 has 24 hours to
+        claim by going onto www.homegrownpros.io
+        <br />
+        Winner of the Mambaline growkit grand prize is responsible for the
+        shipping cost MAX amount of $299.99 depending on state.
+        <br />
+        Must visit homegrownpros.io on <b> 1/27/22.</b>
+        <br />
+        The Promoter reserves the right to redraw in the event of an entrant/s
+        being unable to satisfy these promotion terms and conditions.
+      </p>
+      <h4>Number of Winners</h4>
+      <p>
+        There will be eight (8) winners in this Promotion, and one (1) winner on
+        each draw day.
+      </p>
+      <p>HomeGrown Pros, Inc. Reserves all right.</p>
+    </div>
+  </div>
+</ng-container>
