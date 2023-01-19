@@ -2,6 +2,12 @@
   label {
     font-size: 11px;
   }
+  .input-field-wrap .input-field.active label {
+    font-size: 11px !important;
+  }
+}
+.input-field-wrap .input-field.active label {
+  font-size: 16px;
 }
 .link {
   text-decoration: underline !important;
@@ -12,7 +18,7 @@
 .pointer {
   cursor: pointer;
 }
-a{
+a {
   text-decoration: underline !important;
 }
 button:disabled {
@@ -58,4 +64,16 @@ button:disabled {
 }
 h4 {
   margin-bottom: 2px;
+}
+.green {
+  color: #85c131;
+}
+.prefix{
+  font-weight: 700;
+  position: absolute;
+  left: 8px;
+  top: 13px;
+}
+.input-field-wrap .input-field label {
+  border-radius: 3px;
 }

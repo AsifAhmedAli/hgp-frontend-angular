@@ -1,11 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
-import {
-  Constants,
-  Messages,
-  ValidationMessages,
-} from "../shared/constants/constants";
+import { Constants, ValidationMessages } from "../shared/constants/constants";
 import { ApiService } from "../shared/services/api.service";
 import { HelpersService } from "../shared/services/helpers.service";
 declare const FloatLabel: any;
@@ -48,6 +44,7 @@ export class GiveAwayComponent implements OnInit {
         ],
       ],
       instagramHandle: ["", [Validators.required]],
+      number: ["", [Validators.required]],
       state: ["", [Validators.required]],
       age: ["", [Validators.required, Validators.min(21)]],
       interest: ["", [Validators.required]],
@@ -67,20 +64,18 @@ export class GiveAwayComponent implements OnInit {
           (response) => {
             this.isSubmitting = false;
             this.form.reset();
-            this.helpersService.success(
-              "Your request has been submitted successfully.",
-              "Thank You!"
-            );
             setTimeout(() => {
-              window.open(
-                "https://www.instagram.com/homegrownpros.io/",
-                "__blank"
-              );
-            }, 200);
+              window.location.href =
+                "https://www.instagram.com/homegrownpros.io/";
+            }, 4000);
+            this.helpersService.success(
+              "Redirecting to instagram, please follow and share giveaway post to complete registration."
+            );
           },
           (error) => {
             this.submitted = false;
             this.isSubmitting = false;
+            error.error.message = "Duplicate Email Address";
             this.helpersService.showResponseErrorMessage(error);
           }
         );
